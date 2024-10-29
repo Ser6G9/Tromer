@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
     public float speed;
+    public float rotationSpeed;
     public float xRange ;
     // Start is called before the first frame update
     void Start()
@@ -19,10 +20,21 @@ public class PlayerController : MonoBehaviour
     {
         // Controles de movimiento:
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.forward * -horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.back * -verticalInput * Time.deltaTime * speed);
+        // Calcular la dirección del movimiento
+        //transform.Translate(Vector3.forward * -horizontalInput * Time.deltaTime * speed); 
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        transform.Translate(Vector3.back * -verticalInput * Time.deltaTime * speed); // Movimiento diagonal debido a la perspectiva de la camara.
         transform.Translate(Vector3.left * -verticalInput * Time.deltaTime * speed);
+
+        if (horizontalInput > 0)
+        {
+            transform.LookAt(transform.position + new Vector3(verticalInput * -horizontalInput, 0, horizontalInput + verticalInput));
+            transform.Translate(Vector3.forward * -horizontalInput * Time.deltaTime * speed);
+        }
+        
+        /* ;
+        */
+        
     }
 }
