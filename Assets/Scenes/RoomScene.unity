@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalInput: 0
   horizontalInput: 0
-  speed: 10
+  speed: 6
   rotationSpeed: 100
   xRange: 0
 --- !u!1 &68473070
