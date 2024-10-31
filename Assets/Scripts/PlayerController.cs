@@ -29,5 +29,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(movement),rotationSpeed * Time.deltaTime);
         }
         
+        // Detectar el movimiento del raton:
+        /*float mouseX = Input.GetAxis("Mouse X");
+        Debug.Log(mouseX);*/
     }
 }
