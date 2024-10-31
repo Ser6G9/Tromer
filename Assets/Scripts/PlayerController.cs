@@ -21,13 +21,13 @@ public class PlayerController : MonoBehaviour
         // Controles de movimiento:
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        // Calcular la dirección del movimiento
-        transform.Translate(Vector3.forward * -horizontalInput * Time.deltaTime * speed); 
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.back * -verticalInput * Time.deltaTime * speed); // Movimiento diagonal debido a la perspectiva de la camara.
-        transform.Translate(Vector3.left * -verticalInput * Time.deltaTime * speed);
-
-       
-            //transform.LookAt(transform.position + new Vector3(verticalInput * -horizontalInput, 0, horizontalInput + verticalInput));
+        
+        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
+        transform.position += movement * speed * Time.deltaTime;
+        if (movement != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(movement),rotationSpeed * Time.deltaTime);
+        }
+        
     }
 }
