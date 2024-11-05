@@ -173,7 +173,6 @@ MonoBehaviour:
   horizontalInput: 0
   speed: 6
   rotationSpeed: 10
-  xRange: 0
 --- !u!54 &15571303
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -715,7 +714,6 @@ GameObject:
   - component: {fileID: 289726353}
   - component: {fileID: 289726352}
   - component: {fileID: 289726351}
-  - component: {fileID: 289726354}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -800,19 +798,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289726349}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &289726354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289726349}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c68c0593ea8d64da6441ecaeec1bfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 45
 --- !u!1 &441742802
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441742803}
+  - component: {fileID: 441742804}
   m_Layer: 0
   m_Name: Exterior
   m_TagString: Untagged
@@ -845,6 +831,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &441742804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441742802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c68c0593ea8d64da6441ecaeec1bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraList:
+  - {fileID: 963194225}
+  - {fileID: 1065075021}
+  room: {fileID: 547351917}
+  exterior: {fileID: 441742802}
 --- !u!1 &497939237
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 547351918}
+  - component: {fileID: 547351919}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -975,6 +979,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!114 &547351919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547351917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c68c0593ea8d64da6441ecaeec1bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraList:
+  - {fileID: 963194225}
+  - {fileID: 1065075021}
+  room: {fileID: 547351917}
+  exterior: {fileID: 441742802}
 --- !u!1 &563533495
 GameObject:
   m_ObjectHideFlags: 0
