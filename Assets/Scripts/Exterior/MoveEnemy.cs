@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Quaternion = System.Numerics.Quaternion;
+using UnityEngine.Serialization;
 
 public class MoveEnemy : MonoBehaviour
 {
     public float enemySpeed;
     public float rotationSpeed;
-    public int rutina;
-    public float cronometro;
-    public Quaternion angulo;
-    public float grado;
+    public int routine;
+    public float i;
     
     // Start is called before the first frame update
     void Start()
@@ -20,24 +18,49 @@ public class MoveEnemy : MonoBehaviour
 
     public void Comportamento_Enemigo()
     {
-        cronometro += 1 * Time.deltaTime;
-        if (cronometro >= 4)
+        i += 1 * Time.deltaTime;
+        if (i >= 4)
         {
-            rutina = Random.Range(0, 2);
-            cronometro = 0;
+            routine = Random.Range(0, 5);
+            i = 0;
         }
 
-        switch (rutina)
+        switch (routine)
         {
             case 0:
+                // No hace nada
                 break;
             case 1:
-                grado = Random.Range(0, 360);
-                transform.Rotate(0, grado,0);
-                rutina++;
+                // Se mueve hacia arriba
+                if (transform.position.x <= 50)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), rotationSpeed * Time.deltaTime);
+                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                }
                 break;
             case 2:
-                transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                // Se mueve hacia abajo
+                if (transform.position.x >= 0)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), rotationSpeed * Time.deltaTime);
+                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                }
+                break;
+            case 3:
+                // Se mueve hacia derecha
+                if (transform.position.z >= -25)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), rotationSpeed * Time.deltaTime);
+                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                }
+                break;
+            case 4:
+                // Se mueve hacia izquierda
+                if (transform.position.z <= 15)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), rotationSpeed * Time.deltaTime);
+                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                }
                 break;
         }
     }
@@ -46,7 +69,6 @@ public class MoveEnemy : MonoBehaviour
     void Update()
     {
         Comportamento_Enemigo();
-        // transform.Translate(0, 0, enemySpeed * Time.deltaTime);
         
     }
 }
