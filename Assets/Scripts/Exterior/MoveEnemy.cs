@@ -16,7 +16,7 @@ public class MoveEnemy : MonoBehaviour
         
     }
 
-    public void Comportamento_Enemigo()
+    public void Movimiento_Random()
     {
         i += 1 * Time.deltaTime;
         if (i >= 4)
@@ -34,7 +34,7 @@ public class MoveEnemy : MonoBehaviour
                 // Se mueve hacia arriba
                 if (transform.position.x <= 50)
                 {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), rotationSpeed * Time.deltaTime);
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                 }
                 break;
@@ -42,7 +42,7 @@ public class MoveEnemy : MonoBehaviour
                 // Se mueve hacia abajo
                 if (transform.position.x >= 0)
                 {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), rotationSpeed * Time.deltaTime);
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                 }
                 break;
@@ -50,7 +50,7 @@ public class MoveEnemy : MonoBehaviour
                 // Se mueve hacia derecha
                 if (transform.position.z >= -25)
                 {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), rotationSpeed * Time.deltaTime);
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                 }
                 break;
@@ -58,7 +58,7 @@ public class MoveEnemy : MonoBehaviour
                 // Se mueve hacia izquierda
                 if (transform.position.z <= 15)
                 {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), rotationSpeed * Time.deltaTime);
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                 }
                 break;
@@ -68,7 +68,7 @@ public class MoveEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Comportamento_Enemigo();
+        Movimiento_Random();
         
     }
 }
