@@ -40,4 +40,16 @@ public class ChangeCamera : MonoBehaviour
             exterior.gameObject.SetActive(true);
         }
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player") // "Player" es un Tag que se le ha asignado al player desde el inspector.
+        {
+            cameraList[0].gameObject.SetActive(false);
+            cameraList[1].gameObject.SetActive(true);
+            
+            room.gameObject.SetActive(false);
+            exterior.gameObject.SetActive(true);
+        }
+    }
 }
