@@ -9,16 +9,18 @@ namespace Exterior
     {
         public float enemySpeed;
         public Transform target;
+        private NavMeshAgent navMeshAgent;
         // Start is called before the first frame update
         void Start()
         {
-            GetComponent<NavMeshAgent>().destination = target.position;
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            
         }
     
         // Update is called once per frame
         void Update()
         {
-            GetComponent<NavMeshAgent>().destination = target.position;
+            navMeshAgent.destination = target.position;
         }
     }
 }

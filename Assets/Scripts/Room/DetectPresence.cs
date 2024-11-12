@@ -16,7 +16,7 @@ namespace Room
             elapsedTime = 0;
         }
         
-        private void OnTriggerOut(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             light.intensity += 0.1f;
             
