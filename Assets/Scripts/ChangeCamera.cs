@@ -5,43 +5,51 @@ using UnityEngine;
 public class ChangeCamera : MonoBehaviour
 {
     public GameObject[] cameraList;
-    public GameObject room;
-    public GameObject exterior;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
+    public GameObject roomMode;
+    public GameObject dronMode;
+
+    private void EnableRoomMode(bool state)
+    { // La camara 0 es la principal de Room
         cameraList[0].gameObject.SetActive(true);
-        cameraList[1].gameObject.SetActive(false);
-        room.gameObject.SetActive(true);
-        exterior.gameObject.SetActive(false);
+        roomMode.gameObject.SetActive(state);
+    }
+    private void EnableDronMode(bool state)
+    { // La camara 1 es la principal del modo Dron
+        cameraList[1].gameObject.SetActive(true);
+        dronMode.gameObject.SetActive(state);
     }
 
-    // Update is called once per frame
+    private void EnableAllExteriorCameras(bool state)
+    {
+        cameraList[2].gameObject.SetActive(state);
+        cameraList[3].gameObject.SetActive(state);
+        cameraList[4].gameObject.SetActive(state);
+    }
+    
+    void Start()
+    {
+        EnableRoomMode(true);
+        EnableDronMode(false);
+    }
+
     void Update()
     {
-        // Jugador pasa a Room y se deshabilita Exterior
+        // Jugador pasa a modo de juego Room y se deshabilita el modo Dron.
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            cameraList[0].gameObject.SetActive(true);
-            cameraList[1].gameObject.SetActive(false);
-            
-            room.gameObject.SetActive(true);
-            exterior.gameObject.SetActive(false);
+            EnableRoomMode(true);
+            EnableDronMode(false);
         }
         
-        // Jugador pasa a Exterior y se deshabilita Room
+        // Jugador pasa al modo Dron y se deshabilita el modo Room
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            cameraList[0].gameObject.SetActive(false);
-            cameraList[1].gameObject.SetActive(true);
-            
-            room.gameObject.SetActive(false);
-            exterior.gameObject.SetActive(true);
+            EnableRoomMode(false);
+            EnableDronMode(true);
         }
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // TODO: INTENTO de el sensor
     {
         if (other.gameObject.tag == "Player") // "Player" es un Tag que se le ha asignado al player desde el inspector.
         {
