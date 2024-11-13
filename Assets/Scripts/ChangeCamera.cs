@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ChangeCamera : MonoBehaviour
 {
     public GameObject[] cameraList;
-    public GameObject roomMode;
+    [FormerlySerializedAs("playerMode")] public GameObject player;
     public GameObject dronMode;
 
-    private void EnableRoomMode(bool state)
+    private void EnablePlayerRoomMode(bool state)
     { // La camara 0 es la principal de Room
         cameraList[0].gameObject.SetActive(true);
-        roomMode.gameObject.SetActive(state);
+        player.gameObject.SetActive(state);
     }
     private void EnableDronMode(bool state)
     { // La camara 1 es la principal del modo Dron
@@ -28,7 +29,7 @@ public class ChangeCamera : MonoBehaviour
     
     void Start()
     {
-        EnableRoomMode(true);
+        EnablePlayerRoomMode(true);
         EnableDronMode(false);
     }
 
@@ -37,19 +38,19 @@ public class ChangeCamera : MonoBehaviour
         // Jugador pasa a modo de juego Room y se deshabilita el modo Dron.
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            EnableRoomMode(true);
+            EnablePlayerRoomMode(true);
             EnableDronMode(false);
         }
         
         // Jugador pasa al modo Dron y se deshabilita el modo Room
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            EnableRoomMode(false);
+            EnablePlayerRoomMode(false);
             EnableDronMode(true);
         }
     }
     
-    private void OnTriggerEnter(Collider other) // TODO: INTENTO de el sensor
+    /*private void OnTriggerEnter(Collider other) // TODO: INTENTO de el sensor
     {
         if (other.gameObject.tag == "Player") // "Player" es un Tag que se le ha asignado al player desde el inspector.
         {
@@ -59,5 +60,5 @@ public class ChangeCamera : MonoBehaviour
             room.gameObject.SetActive(false);
             exterior.gameObject.SetActive(true);
         }
-    }
+    }*/
 }
