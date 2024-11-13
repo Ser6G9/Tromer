@@ -156,7 +156,7 @@ Transform:
   - {fileID: 708759397}
   - {fileID: 289726350}
   m_Father: {fileID: 547351918}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &15571302
 MonoBehaviour:
@@ -742,7 +742,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 204517280}
-  - component: {fileID: 204517281}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -767,26 +766,6 @@ Transform:
   m_Father: {fileID: 441742803}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &204517281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204517279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c68c0593ea8d64da6441ecaeec1bfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraList:
-  - {fileID: 963194225}
-  - {fileID: 2136036666}
-  - {fileID: 710707076}
-  - {fileID: 408704840}
-  - {fileID: 458981890}
-  player: {fileID: 15571300}
-  dronMode: {fileID: 1285876826}
 --- !u!1 &229182293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,8 +1665,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 46923017}
-  - {fileID: 15571301}
   - {fileID: 963194228}
+  - {fileID: 15571301}
   - {fileID: 1698624070}
   - {fileID: 1815603275}
   - {fileID: 930120290}
@@ -2793,7 +2772,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
-  m_Name: Room Camera
+  m_Name: Room Mode Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2857,12 +2836,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.33860308, y: 0.35605538, z: -0.14025399, w: 0.85959375}
+  m_LocalRotation: {x: 0.33860308, y: 0.35605538, z: -0.14025402, w: 0.85959375}
   m_LocalPosition: {x: -13, y: 16, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 547351918}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 43, y: 45, z: 0}
 --- !u!1 &994495485
 GameObject:
@@ -3254,7 +3233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285876827}
   m_Layer: 0
-  m_Name: DronMode
+  m_Name: Dron Mode Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4181,14 +4160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c68c0593ea8d64da6441ecaeec1bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraList:
-  - {fileID: 963194225}
-  - {fileID: 2136036666}
-  - {fileID: 710707076}
-  - {fileID: 408704840}
-  - {fileID: 458981890}
-  player: {fileID: 15571300}
-  dronMode: {fileID: 1285876826}
+  roomModeCamera: {fileID: 963194225}
+  roomModeControls: {fileID: 15571300}
+  dronModeCamera: {fileID: 2136036666}
+  dronModeControls: {fileID: 1285876826}
+  exteriorCameraList: []
 --- !u!1 &1729708689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,7 +5459,7 @@ GameObject:
   - component: {fileID: 2136036668}
   - component: {fileID: 2136036667}
   m_Layer: 0
-  m_Name: Dron Camera
+  m_Name: Dron Mode Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
