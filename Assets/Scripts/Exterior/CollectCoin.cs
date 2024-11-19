@@ -23,6 +23,11 @@ namespace Exterior
                 
                 Destroy(this.gameObject);
             }
+
+            if (levelManager.coins >= 3)
+            {
+                Debug.Log("You win");
+            }
         }
     }
 }

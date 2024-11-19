@@ -1579,6 +1579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsText: {fileID: 1256814623}
+  youWin: {fileID: 0}
   coins: 0
 --- !u!1 &458981890
 GameObject:
@@ -6502,8 +6503,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136036666}
-  m_LocalRotation: {x: -0.3935884, y: 0.34598014, z: -0.16237326, w: -0.83607465}
-  m_LocalPosition: {x: -1.3461841, y: 34.90442, z: -5.4114513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1218906871}

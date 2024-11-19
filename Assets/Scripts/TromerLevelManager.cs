@@ -7,6 +7,7 @@ using UnityEngine;
 public class TromerLevelManager : MonoBehaviour
 {
     public TextMeshProUGUI coinsText;
+    public GameObject youWin;
     public int coins = 0; // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
 
     public void UpdateCoinsText()
@@ -18,4 +19,6 @@ public class TromerLevelManager : MonoBehaviour
     {
         UpdateCoinsText();
     }
+    
+    
 }
