@@ -14,8 +14,10 @@ public class TromerLevelManager : MonoBehaviour
     public int coins = 0; 
     
     // Para cambiar de modos de juego.
+    public bool consoleOn;
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
+    public GameObject consoleSensor;
     public GameObject consoleCamera;
     // public GameObject consoleControls;
     public GameObject dron;
@@ -25,34 +27,35 @@ public class TromerLevelManager : MonoBehaviour
         coinsText.text = coins.ToString();
     }
 
-    public void PlayerControlTerminalMode(bool state)
+    public void PlayerChangeToConsoleMode(bool state)
     {
         consoleCamera.gameObject.SetActive(state);
         // consoleControls.gameObject.SetActive(state);
         dron.gameObject.SetActive(state);
         
         roomPlayerCamera.gameObject.SetActive(!state);
-        roomPlayer.gameObject.SetActive(!state);
+        roomPlayer.gameObject.SetActive(!state);        
+        consoleOn = state;
     }
 
-    public void ChangeToRoomMode()
+    private void Start()
     {
-        if (consoleCamera.gameObject.activeSelf == true && Input.GetKey(KeyCode.Space))
-        {
-            PlayerControlTerminalMode(false);
-        }
+        PlayerChangeToConsoleMode(false);
     }
-
-    /*private void Start()
-    {
-        PlayerControlTerminalMode(false);
-    }*/
 
     private void Update()
     {
         UpdateCoinsText();
-        ChangeToRoomMode();
+        
+        // Si el player está en el modo terminal y pulsa espacio, cambiará de modo.
+        if (consoleOn)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PlayerChangeToConsoleMode(false);
+            }
+            
+        }
     }
-    
-    
+
 }

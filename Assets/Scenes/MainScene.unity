@@ -1449,7 +1449,6 @@ GameObject:
   m_Component:
   - component: {fileID: 448893451}
   - component: {fileID: 448893452}
-  - component: {fileID: 448893453}
   m_Layer: 0
   m_Name: Tromer Level Manager
   m_TagString: Untagged
@@ -1488,25 +1487,9 @@ MonoBehaviour:
   coins: 0
   roomPlayerCamera: {fileID: 963194225}
   roomPlayer: {fileID: 15571300}
+  consoleSensor: {fileID: 2047464239}
   consoleCamera: {fileID: 2136036666}
   dron: {fileID: 1453399521}
---- !u!114 &448893453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448893450}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c68c0593ea8d64da6441ecaeec1bfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomModeCamera: {fileID: 0}
-  roomModeControls: {fileID: 0}
-  dronModeCamera: {fileID: 0}
-  dronModeControls: {fileID: 0}
-  exteriorCameraList: []
 --- !u!1 &458981890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5774,7 +5757,7 @@ GameObject:
   - component: {fileID: 2047464242}
   - component: {fileID: 2047464241}
   m_Layer: 0
-  m_Name: Sensor
+  m_Name: Console Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
