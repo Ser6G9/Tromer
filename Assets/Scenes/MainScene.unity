@@ -1485,6 +1485,7 @@ MonoBehaviour:
   youWin: {fileID: 0}
   coinsText: {fileID: 1256814623}
   coins: 0
+  consoleOn: 0
   roomPlayerCamera: {fileID: 963194225}
   roomPlayer: {fileID: 15571300}
   consoleSensor: {fileID: 2047464239}
@@ -4315,7 +4316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1453399522
 Transform:
   m_ObjectHideFlags: 0
@@ -5789,6 +5790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41df060f888e6b4296b7596c2fd3269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOnSensor: 0
 --- !u!65 &2047464242
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6113,7 +6115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &2136036667
 AudioListener:
   m_ObjectHideFlags: 0

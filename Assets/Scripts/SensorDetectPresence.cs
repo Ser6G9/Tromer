@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,34 +11,33 @@ public class SensorDetectPresence : MonoBehaviour
         levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
     }
 
-    public bool player = false;
-    public bool dron = false;
+    public bool isOnSensor = false;
     
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        /*if (levelManager.consoleOn == false)
-        {
-            if (other.gameObject.tag == "Player" && Input.GetKey(KeyCode.Space))
-            {
-                levelManager.PlayerControlConsoleMode(true);
-            }
-        }*/
-        if (other.gameObject.tag == "Player")
-        {
-            player = true;
-        }
-
-        if (other.gameObject.tag == "Dron")
-        {
-            dron = true;
-        }
-        
+        isOnSensor = true;
     }
-        
     private void OnTriggerExit(Collider other)
     {
-       
-            
+        isOnSensor = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (this.gameObject.name == "Console Sensor")
+            {
+                if (isOnSensor && !levelManager.consoleOn)
+                {
+                    levelManager.PlayerChangeToConsoleMode(true);
+                }
+                else if (isOnSensor && levelManager.consoleOn)
+                {
+                    levelManager.PlayerChangeToConsoleMode(false);
+                }
+            }
+        }
     }
 }
 

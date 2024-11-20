@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Exterior;
+using Room;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,22 +24,6 @@ public class TromerLevelManager : MonoBehaviour
     // public GameObject consoleControls;
     public GameObject dron;
 
-    public void UpdateCoinsText()
-    {
-        coinsText.text = coins.ToString();
-    }
-
-    public void PlayerChangeToConsoleMode(bool state)
-    {
-        consoleCamera.gameObject.SetActive(state);
-        // consoleControls.gameObject.SetActive(state);
-        dron.gameObject.SetActive(state);
-        
-        roomPlayerCamera.gameObject.SetActive(!state);
-        roomPlayer.gameObject.SetActive(!state);        
-        consoleOn = state;
-    }
-
     private void Start()
     {
         PlayerChangeToConsoleMode(false);
@@ -47,15 +33,26 @@ public class TromerLevelManager : MonoBehaviour
     {
         UpdateCoinsText();
         
-        // Si el player está en el modo terminal y pulsa espacio, cambiará de modo.
-        if (consoleOn)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                PlayerChangeToConsoleMode(false);
-            }
-            
-        }
     }
 
+    
+    public void UpdateCoinsText()
+    {
+        coinsText.text = coins.ToString();
+    }
+
+    public void PlayerChangeToConsoleMode(bool state)
+    {
+        consoleCamera.gameObject.SetActive(state);
+        // consoleControls.gameObject.SetActive(state);
+        dron.GetComponent<DronController>().enabled = state;
+        
+        roomPlayerCamera.gameObject.SetActive(!state);
+        roomPlayer.GetComponent<PlayerController>().enabled = !state;
+        for (int i = 0; i < roomPlayer.transform.childCount; i++)
+        {
+            roomPlayer.transform.GetChild(i).gameObject.SetActive(!state);
+        }
+        consoleOn = state;
+    }
 }
