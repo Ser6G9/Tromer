@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SecurityCamSystem : MonoBehaviour
+public class UIEventHandlers : MonoBehaviour
 {
-    
     // Start is called before the first frame update
     void Start()
     {
