@@ -21,8 +21,13 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject roomPlayer;
     public GameObject consoleSensor;
     public GameObject consoleCamera;
-    // public GameObject consoleControls;
     public GameObject dron;
+    
+    // Controles de las camaras de seguridad.
+    public List<GameObject> securityCameras;
+    public List<GameObject> securityCamerasScreens;
+    public List<GameObject> securityCamerasButtons;
+    
 
     private void Start()
     {
