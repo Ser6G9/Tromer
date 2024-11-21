@@ -4,6 +4,9 @@ Tromer es un juego de tensión y suspense en el que controlas a un técnico atra
 # Developers
 Sergio Garcías
 
+# ClickUp
+Accdeder al [Clickup](https://app.clickup.com/9012482400/v/o/s/90122018752) del proyecto.
+
 # GDD
 Acceder al [GDD](https://docs.google.com/document/d/1IQmVLPixEIvTvdl83yul_iwZowZjQhqXBTPAuenFnaA/edit?usp=sharing) del proyecto.
 
