@@ -19,7 +19,6 @@ public class TromerLevelManager : MonoBehaviour
     public bool consoleOn;
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
-    public GameObject consoleSensor;
     public GameObject consoleCamera;
     public GameObject dron;
     
