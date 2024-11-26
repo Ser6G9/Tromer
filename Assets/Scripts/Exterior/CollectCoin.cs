@@ -16,7 +16,7 @@ namespace Exterior
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.tag == "Player") // "Player" es un Tag que se le ha asignado al player desde el inspector.
+            if (other.gameObject.tag == "Dron") // "Player" es un Tag que se le ha asignado al player desde el inspector.
             {
                 Debug.Log(levelManager.coins);
                 levelManager.coins++;

@@ -2163,6 +2163,7 @@ GameObject:
   - component: {fileID: 408704841}
   - component: {fileID: 408704843}
   - component: {fileID: 408704842}
+  - component: {fileID: 408704844}
   m_Layer: 0
   m_Name: Camera 2
   m_TagString: Untagged
@@ -2235,6 +2236,22 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &408704844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408704840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6bf0ee30fa84c43ac91d4bdd2a5ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XAxisCamera: -10
+  rotationSpeed: 1
+  maxYAngle: 0
+  minYAngle: 0
 --- !u!1 &441742802
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,13 +3407,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710707076}
-  m_LocalRotation: {x: 0.057457093, y: -0.9383479, z: 0.28241062, w: 0.19090906}
+  m_LocalRotation: {x: 0.032624766, y: -0.95141596, z: 0.28634363, w: 0.10840025}
   m_LocalPosition: {x: 2.6, y: 5, z: 18.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 204517280}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 33.5, y: -157, z: 0}
+  m_LocalEulerAnglesHint: {x: 33.5, y: -167, z: 0}
 --- !u!81 &710707078
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3460,9 +3477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6bf0ee30fa84c43ac91d4bdd2a5ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
-  maxRotationRange: -120
-  minRotationRange: -157
+  XAxisCamera: -10
+  rotationSpeed: 1
+  maxYAngle: -94
+  minYAngle: -170
 --- !u!1 &765740623
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,7 +5950,7 @@ GameObject:
   - component: {fileID: 1453399527}
   m_Layer: 0
   m_Name: Dron
-  m_TagString: Player
+  m_TagString: Dron
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
