@@ -46,7 +46,7 @@ namespace Room
             {
                 if (i != cameraActive)
                 {
-                    levelManager.securityCameras[i].gameObject.SetActive(false);
+                    //levelManager.securityCameras[i].gameObject.SetActive(false);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(false);
                 }
             }
