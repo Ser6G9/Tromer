@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,48 +9,50 @@ namespace Exterior
     public class CameraFollowDron : MonoBehaviour
     {
         private TromerLevelManager levelManager;
+        private CameraVissionLimitsDetection cameraVissionLimitsDetection;
         private void OnEnable()
         {
             levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
-        }
-        public float xAxisCamera;
+            cameraVissionLimitsDetection = GameObject.FindGameObjectWithTag("VissionLimitLeft").GetComponent<CameraVissionLimitsDetection>();
+        } // Intenta recoger el valor de si está o no dentro del sensor!!!
+
         public float rotationSpeed;
+        public float xInclinationCamera;
         public float maxYRotation;
         public float minYRotation;
-        public Vector3 targetMinPosition;
-        public Vector3 targetMaxPosition;
-    
-        public float targetCurrentYAngle;
         
+        public float yRotationInAnteriorFrame;
+        public float deltaYRotation;
+        public float targetCurrentYAngle;
+
+        private void Start()
+        {
+            LookAtTarget(levelManager.dron);
+        }
+
         void Update()
         {
-            // Calcular la dirección hacia el jugador
-            Vector3 directionToPlayer = levelManager.dron.transform.position - transform.position;
-            directionToPlayer.y = 0;
-            
-            // Se calcula la rotación deseada hacia el dron
-            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-            targetCurrentYAngle = targetRotation.eulerAngles.y;
-            
-            targetCurrentYAngle = NormalizeAngle(targetCurrentYAngle);
-    
-            /*if (targetCurrentYAngle >= targetMinYAngle && targetCurrentYAngle <= targetMaxYAngle)
-            {*/
-                Quaternion rotation = Quaternion.Euler(xAxisCamera, targetCurrentYAngle, 0);
-                if (rotation.eulerAngles.y >= minYRotation && rotation.eulerAngles.y <= maxYRotation)
-                {
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-                }
-            //}
-            
+            LookAtTarget(levelManager.dron);
         }
         
-        // Método para normalizar ángulos a un rango [0, 360]
-        private float NormalizeAngle(float angle)
+        public void LookAtTarget(GameObject target)
         {
-            angle = angle % 360;
-            if (angle < 0) angle += 360;
-            return angle;
+            // Se calcula la dirección hacia el target en cuestión
+            Vector3 directionToTarget = target.transform.position - transform.position;
+            directionToTarget.y = 0;
+            
+            // Se aplica la rotación de la cámara hacia la posición actual del target
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+            deltaYRotation = targetRotation.eulerAngles.y - yRotationInAnteriorFrame;
+            targetCurrentYAngle += deltaYRotation;
+            yRotationInAnteriorFrame = targetCurrentYAngle;
+            deltaYRotation = 0;
+            
+            // La cámara rotará solo si el target se encuentra en su radio de visión
+            if (targetCurrentYAngle >= minYRotation && targetCurrentYAngle <= maxYRotation)
+            { 
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(xInclinationCamera, targetCurrentYAngle, 0), rotationSpeed * Time.deltaTime);
+            }
         }
     }
 }
