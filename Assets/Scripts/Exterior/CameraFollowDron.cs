@@ -1,41 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CameraFollowDron : MonoBehaviour
+namespace Exterior
 {
-    private TromerLevelManager levelManager;
-    private void OnEnable()
+    public class CameraFollowDron : MonoBehaviour
     {
-        levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
-    }
-    public float xAxisCamera;
-    public float rotationSpeed;
-    public float maxYRotation;
-    public float minYRotation;
-
-    private float targetYAngle;
-    private float currentYAngle;
-
-    void Update()
-    {
-        // Calcular la dirección hacia el jugador
-        Vector3 direction = levelManager.dron.transform.position - transform.position;
-        direction.y = 0;
-        
-        // Se calcula la rotación deseada hacia el dron
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        float targetYAngle = targetRotation.eulerAngles.y;
-
-        // Me aseguro de que el ángulo se mantenga en el rango -180 a 180 para una comparación correcta
-        if (targetYAngle > 180)
-            targetYAngle -= 360;
-
-        if (targetYAngle >= minYRotation && targetYAngle <= maxYRotation)
+        private TromerLevelManager levelManager;
+        private void OnEnable()
         {
-            Quaternion rotation = Quaternion.Euler(xAxisCamera, targetYAngle, 0);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+            levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+        }
+        public float xAxisCamera;
+        public float rotationSpeed;
+        public float maxYRotation;
+        public float minYRotation;
+        public Vector3 targetMinPosition;
+        public Vector3 targetMaxPosition;
+    
+        public float targetCurrentYAngle;
+        
+        void Update()
+        {
+            // Calcular la dirección hacia el jugador
+            Vector3 directionToPlayer = levelManager.dron.transform.position - transform.position;
+            directionToPlayer.y = 0;
+            
+            // Se calcula la rotación deseada hacia el dron
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+            targetCurrentYAngle = targetRotation.eulerAngles.y;
+            
+            targetCurrentYAngle = NormalizeAngle(targetCurrentYAngle);
+    
+            /*if (targetCurrentYAngle >= targetMinYAngle && targetCurrentYAngle <= targetMaxYAngle)
+            {*/
+                Quaternion rotation = Quaternion.Euler(xAxisCamera, targetCurrentYAngle, 0);
+                if (rotation.eulerAngles.y >= minYRotation && rotation.eulerAngles.y <= maxYRotation)
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+                }
+            //}
+            
         }
         
+        // Método para normalizar ángulos a un rango [0, 360]
+        private float NormalizeAngle(float angle)
+        {
+            angle = angle % 360;
+            if (angle < 0) angle += 360;
+            return angle;
+        }
     }
 }
+
