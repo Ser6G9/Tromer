@@ -8,13 +8,15 @@ namespace Exterior
 {
     public class CameraFollowDron : MonoBehaviour
     {
-        private TromerLevelManager levelManager;
-        private CameraVissionLimitsDetection cameraVissionLimitsDetection;
+        private TromerLevelManager _levelManager;
+        private CameraVissionLimitsDetectionMin _cameraVissionLimitsDetectionMin;
+        private CameraVissionLimitsDetectionMax _cameraVissionLimitsDetectionMax;
         private void OnEnable()
         {
-            levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
-            cameraVissionLimitsDetection = GameObject.FindGameObjectWithTag("VissionLimitLeft").GetComponent<CameraVissionLimitsDetection>();
-        } // Intenta recoger el valor de si está o no dentro del sensor!!!
+            _levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+            _cameraVissionLimitsDetectionMin = GameObject.FindGameObjectWithTag("VissionLimitMin").GetComponent<CameraVissionLimitsDetectionMin>();
+            _cameraVissionLimitsDetectionMax = GameObject.FindGameObjectWithTag("VissionLimitMax").GetComponent<CameraVissionLimitsDetectionMax>();
+        }
 
         public float rotationSpeed;
         public float xInclinationCamera;
@@ -27,12 +29,22 @@ namespace Exterior
 
         private void Start()
         {
-            LookAtTarget(levelManager.dron);
+            LookAtTarget(_levelManager.dron);
         }
 
         void Update()
         {
-            LookAtTarget(levelManager.dron);
+            // Método para seguir al dron
+            LookAtTarget(_levelManager.dron);
+            
+            // Si el dron entra en el campo de visión de la cámara, aunque no esté centrado, la cámara lo detectará y rotará hacia su posición Minima o Máxima para tener el dron a la vista.
+            if (_cameraVissionLimitsDetectionMin.isInVissionRange)
+            {
+                LookAtMinOrMaxYRotation(minYRotation);
+            } else if (_cameraVissionLimitsDetectionMax.isInVissionRange)
+            {
+                LookAtMinOrMaxYRotation(maxYRotation);
+            }
         }
         
         public void LookAtTarget(GameObject target)
@@ -53,6 +65,11 @@ namespace Exterior
             { 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(xInclinationCamera, targetCurrentYAngle, 0), rotationSpeed * Time.deltaTime);
             }
+        }
+
+        public void LookAtMinOrMaxYRotation(float rotation)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(xInclinationCamera, rotation, 0), rotationSpeed * Time.deltaTime);
         }
     }
 }
