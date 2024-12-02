@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Exterior
 {
-    public class CameraVissionLimitsDetectionMax : MonoBehaviour
+    public class CameraVissionLimitsDetection : MonoBehaviour
     {
         public bool isInVissionRange;
         public void OnTriggerEnter(Collider other)

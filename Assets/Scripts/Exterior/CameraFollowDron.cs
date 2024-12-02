@@ -9,19 +9,17 @@ namespace Exterior
     public class CameraFollowDron : MonoBehaviour
     {
         private TromerLevelManager _levelManager;
-        private CameraVissionLimitsDetectionMin _cameraVissionLimitsDetectionMin;
-        private CameraVissionLimitsDetectionMax _cameraVissionLimitsDetectionMax;
         private void OnEnable()
         {
             _levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
-            _cameraVissionLimitsDetectionMin = GameObject.FindGameObjectWithTag("VissionLimitMin").GetComponent<CameraVissionLimitsDetectionMin>();
-            _cameraVissionLimitsDetectionMax = GameObject.FindGameObjectWithTag("VissionLimitMax").GetComponent<CameraVissionLimitsDetectionMax>();
         }
 
         public float rotationSpeed;
         public float xInclinationCamera;
         public float maxYRotation;
         public float minYRotation;
+        public GameObject vissionLimitMin;
+        public GameObject vissionLimitMax;
         
         public float yRotationInAnteriorFrame;
         public float deltaYRotation;
@@ -34,17 +32,24 @@ namespace Exterior
 
         void Update()
         {
-            // Método para seguir al dron
+            // Método para seguir al dron con la vista.
             LookAtTarget(_levelManager.dron);
-            
-            // Si el dron entra en el campo de visión de la cámara, aunque no esté centrado, la cámara lo detectará y rotará hacia su posición Minima o Máxima para tener el dron a la vista.
-            if (_cameraVissionLimitsDetectionMin.isInVissionRange)
+
+            if (vissionLimitMin != null && vissionLimitMax != null)
             {
-                LookAtMinOrMaxYRotation(minYRotation);
-            } else if (_cameraVissionLimitsDetectionMax.isInVissionRange)
-            {
-                LookAtMinOrMaxYRotation(maxYRotation);
+                // Si el dron entra en el campo de visión de la cámara, aunque no esté centrado, la cámara lo detectará y rotará hacia su posición Minima o Máxima para tener el dron a la vista para el player.
+                bool isInMinRange = vissionLimitMin.GetComponent<CameraVissionLimitsDetection>().isInVissionRange;
+                bool isInMaxRange = vissionLimitMax.GetComponent<CameraVissionLimitsDetection>().isInVissionRange;
+                
+                if(isInMinRange)
+                { 
+                    LookAtMinOrMaxYRotation(minYRotation);
+                } else if (isInMaxRange) 
+                { 
+                    LookAtMinOrMaxYRotation(maxYRotation);
+                }
             }
+            
         }
         
         public void LookAtTarget(GameObject target)
