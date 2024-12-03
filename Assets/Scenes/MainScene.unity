@@ -3077,9 +3077,10 @@ MonoBehaviour:
   - {fileID: 987579727}
   - {fileID: 11918299}
   - {fileID: 303073249}
-  oxigenMaxTime: 60
+  oxigenInitialTime: 0
+  oxigenDecrementingTime: 60
   timerForOneSecond: 0
-  oxigenProgress: {fileID: 1375071201}
+  oxigenProgressText: {fileID: 1375071201}
   oxigenSliderProgress: {fileID: 2096570689}
   oxigenLevel3DProgress: {fileID: 1815603271}
 --- !u!1 &458981890

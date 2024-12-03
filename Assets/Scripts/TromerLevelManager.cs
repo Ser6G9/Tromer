@@ -31,13 +31,13 @@ public class TromerLevelManager : MonoBehaviour
     public List<GameObject> securityCamerasButtons;
     
     // Gestión del contador de Oxígeno:
-    public float oxigenMaxTime;
+    public float oxigenInitialTime;
+    public float oxigenDecrementingTime;
     public float timerForOneSecond;
-
-    public TextMeshProUGUI oxigenProgress;
+    public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
     public GameObject oxigenLevel3DProgress;
-
+    private int i = 100;
     
     private void Start()
     {
@@ -76,15 +76,18 @@ public class TromerLevelManager : MonoBehaviour
 
     public void OxigenCountDawnProgress()
     {
-        oxigenMaxTime -= Time.deltaTime;
+        oxigenDecrementingTime -= Time.deltaTime;
         timerForOneSecond += Time.deltaTime;
-        if (timerForOneSecond >= 1.0f && oxigenMaxTime > 0.0f) 
+        if (timerForOneSecond >= 1.0f && oxigenDecrementingTime > 0.0f) 
         {
             // Se reducirá 0.06 metros cada vez que pase 1 segundo
             oxigenLevel3DProgress.transform.Translate(Vector3.down * 0.0666666666667f);
+            oxigenSliderProgress.value = oxigenDecrementingTime;
+            oxigenProgressText.text = "" + oxigenDecrementingTime;
+            i--;
             timerForOneSecond = 0;
         }
-        else if (oxigenMaxTime <= 0.0f)
+        else if (oxigenDecrementingTime <= 0.0f)
         {
             // Si el tiempo ha llegado a 0 entonces: Game Over
             GameOver();
