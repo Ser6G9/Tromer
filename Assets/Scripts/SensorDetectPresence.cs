@@ -26,15 +26,15 @@ public class SensorDetectPresence : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (this.gameObject.name == "Console Sensor")
+            if (this.gameObject.name == "Terminal Sensor")
             {
-                if (isOnSensor && !levelManager.consoleOn)
+                if (isOnSensor && !levelManager.terminalOn)
                 {
-                    levelManager.PlayerChangeToConsoleMode(true);
+                    levelManager.PlayerChangeToTerminalMode(true);
                 }
-                else if (isOnSensor && levelManager.consoleOn)
+                else if (isOnSensor && levelManager.terminalOn)
                 {
-                    levelManager.PlayerChangeToConsoleMode(false);
+                    levelManager.PlayerChangeToTerminalMode(false);
                 }
             }
         }

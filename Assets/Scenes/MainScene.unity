@@ -2845,13 +2845,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cfbba67f648d048898cb3b7bcfeb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  youLose: {fileID: 0}
+  youLose: {fileID: 1679764081}
   coinsText: {fileID: 1256814623}
   coins: 0
-  consoleOn: 0
+  terminalOn: 0
   roomPlayerCamera: {fileID: 963194225}
   roomPlayer: {fileID: 15571300}
-  consoleCamera: {fileID: 2136036666}
+  terminalCamera: {fileID: 2136036666}
   dron: {fileID: 1453399521}
   securityCameras:
   - {fileID: 710707076}
@@ -6515,7 +6515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1218906871}
   m_Layer: 0
-  m_Name: Dron Console
+  m_Name: Terminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8365,7 +8365,7 @@ GameObject:
   - component: {fileID: 1698624068}
   - component: {fileID: 1698624067}
   m_Layer: 0
-  m_Name: Console
+  m_Name: Terminal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10156,7 +10156,7 @@ GameObject:
   - component: {fileID: 2047464242}
   - component: {fileID: 2047464241}
   m_Layer: 0
-  m_Name: Console Sensor
+  m_Name: Terminal Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10712,7 +10712,7 @@ GameObject:
   - component: {fileID: 2136036668}
   - component: {fileID: 2136036667}
   m_Layer: 0
-  m_Name: Console Camera
+  m_Name: Terminal Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
