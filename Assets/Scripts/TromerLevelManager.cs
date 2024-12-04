@@ -31,18 +31,22 @@ public class TromerLevelManager : MonoBehaviour
     public List<GameObject> securityCamerasButtons;
     
     // Gestión del contador de Oxígeno:
-    public float oxigenInitialTime;
+    public float totalOxigenTime;
     public float oxigenDecrementingTime;
     public float timerForOneSecond;
     public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
     public GameObject oxigenLevel3DProgress;
-    private int i = 100;
+    private float oxigenPercentage = 100;
     
     private void Start()
     {
         //youWin.SetActive(false);
         youLose.SetActive(false);
+        oxigenDecrementingTime = totalOxigenTime;
+        oxigenSliderProgress.value = oxigenDecrementingTime / totalOxigenTime;
+        oxigenPercentage = (oxigenDecrementingTime / totalOxigenTime) * 100;
+        oxigenProgressText.text = $"{oxigenPercentage:F0}%";
         PlayerChangeToTerminalMode(false);
     }
 
@@ -59,7 +63,7 @@ public class TromerLevelManager : MonoBehaviour
         coinsText.text = coins.ToString();
     }
 
-    // Cambiar cámara y controles del player al modo Terminal
+    // Cambiar cámara y controles del player al modo Terminal:
     public void PlayerChangeToTerminalMode(bool state)
     {
         terminalCamera.gameObject.SetActive(state);
@@ -67,27 +71,37 @@ public class TromerLevelManager : MonoBehaviour
         
         roomPlayerCamera.gameObject.SetActive(!state);
         roomPlayer.GetComponent<PlayerController>().enabled = !state;
-        for (int i = 0; i < roomPlayer.transform.childCount; i++) // También se desactivan/activan los componentes de Player
+        for (int i = 0; i < roomPlayer.transform.childCount; i++) // También se desactivan/activan los componentes del GameObject Player
         {
             roomPlayer.transform.GetChild(i).gameObject.SetActive(!state);
         }
         terminalOn = state;
     }
 
+    // Cuenta atrás del contador oxígeno (Objeto 3d y barra del HUD):
     public void OxigenCountDawnProgress()
     {
-        oxigenDecrementingTime -= Time.deltaTime;
+        
+        
+        // Se reducirá el contador de oxígeno cada vez que pase 1 segundo
         timerForOneSecond += Time.deltaTime;
-        if (timerForOneSecond >= 1.0f && oxigenDecrementingTime > 0.0f) 
+        
+        if (oxigenDecrementingTime >= 0.0f) 
         {
-            // Se reducirá 0.06 metros cada vez que pase 1 segundo
-            oxigenLevel3DProgress.transform.Translate(Vector3.down * 0.0666666666667f);
-            oxigenSliderProgress.value = oxigenDecrementingTime;
-            oxigenProgressText.text = "" + oxigenDecrementingTime;
-            i--;
-            timerForOneSecond = 0;
+            oxigenPercentage = (oxigenDecrementingTime / totalOxigenTime) * 100;
+            oxigenProgressText.text = $"{oxigenPercentage:F0}%";
+            oxigenDecrementingTime -= Time.deltaTime;
+            
+            if (timerForOneSecond >= 1.0f)
+            {
+                // Modelo 3D del contador: descenderá 0.06 metros por segundo
+                oxigenLevel3DProgress.transform.Translate(Vector3.down * 0.0666666666667f);
+                // Barra de oxígeno del HUD:
+                oxigenSliderProgress.value = oxigenDecrementingTime / totalOxigenTime;
+                timerForOneSecond = 0;
+            } 
         }
-        else if (oxigenDecrementingTime <= 0.0f)
+        else
         {
             // Si el tiempo ha llegado a 0 entonces: Game Over
             GameOver();
