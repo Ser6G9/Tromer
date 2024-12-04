@@ -70,7 +70,7 @@ public class TromerLevelManager : MonoBehaviour
         dron.GetComponent<DronController>().enabled = state;
         
         roomPlayerCamera.gameObject.SetActive(!state);
-        roomPlayer.GetComponent<PlayerController>().enabled = !state;
+        roomPlayer.gameObject.SetActive(!state);
         for (int i = 0; i < roomPlayer.transform.childCount; i++) // También se desactivan/activan los componentes del GameObject Player
         {
             roomPlayer.transform.GetChild(i).gameObject.SetActive(!state);
