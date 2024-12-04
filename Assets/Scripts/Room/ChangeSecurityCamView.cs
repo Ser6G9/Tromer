@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Room
 {
@@ -13,25 +14,20 @@ namespace Room
             levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
         }
         
-        public GameObject cameraSelected;
+        public GameObject buttonCameraSelected;
 
         private void Start()
         {
             // Desactivar las camaras innecesarias al inicio de la partida.
             TurnOtherCamerasOff(0);
         }
-
-        private void OnMouseDown()
-        {
-            cameraSelected = this.gameObject;
-            SwitchCamera();
-        }
         
-        private void SwitchCamera()
+        public void SwitchCamera()
         {
+            buttonCameraSelected = this.gameObject;
             for (int i = 0; i < levelManager.securityCamerasButtons.Count; i++)
             {
-                if (cameraSelected.name == levelManager.securityCamerasButtons[i].name)
+                if (buttonCameraSelected.name == levelManager.securityCamerasButtons[i].name)
                 {
                     levelManager.securityCameras[i].gameObject.SetActive(true);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(true);
