@@ -24,19 +24,33 @@ public class SensorDetectPresence : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Si solo se pulsa una sola vez:
+        if (Input.GetKeyDown(KeyCode.Space) && isOnSensor)
         {
             if (this.gameObject.name == "Terminal Sensor")
             {
-                if (isOnSensor && !levelManager.terminalOn)
+                if (!levelManager.terminalOn)
                 {
                     levelManager.PlayerChangeToTerminalMode(true);
                 }
-                else if (isOnSensor && levelManager.terminalOn)
+                else
                 {
                     levelManager.PlayerChangeToTerminalMode(false);
                 }
             }
+        }
+
+        // Mientras se mantenga la tecla pulsada:
+        if (Input.GetKey(KeyCode.Space) && isOnSensor)
+        {
+            if (this.gameObject.name == "Oxigen Sensor")
+            {
+                levelManager.oxigenIncrementationOn = true;
+            }
+        }
+        else
+        {
+            levelManager.oxigenIncrementationOn = false;
         }
     }
 }
