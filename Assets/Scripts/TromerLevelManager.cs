@@ -30,6 +30,13 @@ public class TromerLevelManager : MonoBehaviour
     public List<GameObject> securityCamerasScreens;
     public List<GameObject> securityCamerasButtons;
     
+    // Tareas del exterior: 0 = Task1, 1 = Task2, 2 = Task3
+    public int tasksCompleteCount;
+    public List<bool> tasksStates;
+
+    public bool openExitDoor = false;
+    public GameObject roomExitDoor;
+    
     // Gestión del contador de Oxígeno:
     public float totalOxigenTime;
     public float oxigenProgressTime;
@@ -64,15 +71,16 @@ public class TromerLevelManager : MonoBehaviour
         }
         
         UpdateCoinsText();
-        
-    }
-    
-    
-    public void UpdateCoinsText()
-    {
-        coinsText.text = coins.ToString();
-    }
 
+        if (openExitDoor == true)
+        {
+            OpenRoomExitDoor();
+        }
+    }
+    
+    
+    /* -- ROOM -- */
+    
     // Cambiar cámara y controles del player al modo Terminal:
     public void PlayerChangeToTerminalMode(bool state)
     {
@@ -88,7 +96,6 @@ public class TromerLevelManager : MonoBehaviour
         terminalOn = state;
     }
     
-
     // Cuenta atrás del contador oxígeno (Objeto 3d y barra del HUD):
     public void OxigenCountDawnProgress()
     {
@@ -131,6 +138,19 @@ public class TromerLevelManager : MonoBehaviour
         }
     }
 
+    public void OpenRoomExitDoor()
+    {
+        Vector3 doorOpenPosition = new Vector3(0.0f, 4.6f, 11.31371f);
+        roomExitDoor.transform.position = Vector3.MoveTowards(roomExitDoor.transform.position, doorOpenPosition, 0.2f * Time.deltaTime);
+        
+        if (Vector3.Distance(roomExitDoor.transform.position, doorOpenPosition) < 0.01f)
+        {
+            transform.position = doorOpenPosition;
+            openExitDoor = false;
+        }
+        // habilitar el sensor de youWin
+    }
+
     public void GameOver()
     {
         youLose.SetActive(true);
@@ -138,5 +158,33 @@ public class TromerLevelManager : MonoBehaviour
     public void GameWin()
     {
         youWin.SetActive(true);
+    }
+    
+    
+    /* -- EXTERIOR -- */
+    
+    public void UpdateCoinsText()
+    {
+        coinsText.text = coins.ToString();
+    }
+
+    // Progreso de las tareas del exterior: PENDIENTE se completan al instate
+    public void TaskInProgress(bool state, int taskID)
+    {
+        tasksStates[taskID-1] = state;
+        for (int i = 0; i < tasksStates.Count; i++)
+        {
+            if (tasksStates[i] == true)
+            {
+                tasksCompleteCount++;
+            }
+        }
+
+        if (tasksCompleteCount == tasksStates.Count)
+        {
+            openExitDoor = true;
+        }
+
+        tasksCompleteCount = 0;
     }
 }

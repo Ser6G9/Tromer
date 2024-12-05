@@ -12,9 +12,11 @@ public class SensorDetectPresence : MonoBehaviour
     }
 
     public bool isOnSensor = false;
+    public Collider target;
     
     private void OnTriggerEnter(Collider other)
     {
+        target = other;
         isOnSensor = true;
     }
     private void OnTriggerExit(Collider other)
@@ -53,8 +55,25 @@ public class SensorDetectPresence : MonoBehaviour
             levelManager.oxigenIncrementationOn = false;
         }
         
+        // Tareas del exterior: PENDIENTE
+        if (this.gameObject.name == "Task1 Sensor" && target.gameObject.tag == "Dron" && isOnSensor)
+        {
+            levelManager.TaskInProgress(true, 1);
+            this.gameObject.SetActive(false);
+        } 
+        else if (this.gameObject.name == "Task2 Sensor" && target.gameObject.tag == "Dron" && isOnSensor)
+        {
+            levelManager.TaskInProgress(true, 2);
+            this.gameObject.SetActive(false);
+        } 
+        else if (this.gameObject.name == "Task3 Sensor" && target.gameObject.tag == "Dron" && isOnSensor)
+        {
+            levelManager.TaskInProgress(true, 3);
+            this.gameObject.SetActive(false);
+        }
+        
         // Final de la partida.
-        if (this.gameObject.name == "Door Exit Sensor" && isOnSensor)
+        if (this.gameObject.name == "Door Exit Sensor" && target.gameObject.tag == "Player" && isOnSensor)
         {
             levelManager.GameWin();
         }
