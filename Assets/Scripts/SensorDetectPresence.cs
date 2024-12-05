@@ -52,6 +52,13 @@ public class SensorDetectPresence : MonoBehaviour
         {
             levelManager.oxigenIncrementationOn = false;
         }
+        
+        // Final de la partida.
+        if (this.gameObject.name == "Door Exit Sensor" && isOnSensor)
+        {
+            levelManager.GameWin();
+        }
+
     }
 }
 

@@ -42,7 +42,7 @@ public class TromerLevelManager : MonoBehaviour
     
     private void Start()
     {
-        //youWin.SetActive(false);
+        youWin.SetActive(false);
         youLose.SetActive(false);
         
         oxigenProgressTime = totalOxigenTime;
@@ -137,6 +137,6 @@ public class TromerLevelManager : MonoBehaviour
     }
     public void GameWin()
     {
-        //youWin.SetActive(true);
+        youWin.SetActive(true);
     }
 }
