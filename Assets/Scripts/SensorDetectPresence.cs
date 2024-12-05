@@ -40,6 +40,17 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToTerminalMode(false);
                 }
             }
+            else if (this.gameObject.name == "Console Sensor")
+            {
+                if (!levelManager.consoleOn)
+                {
+                    levelManager.PlayerChangeToConsoleMode(true);
+                }
+                else
+                {
+                    levelManager.PlayerChangeToConsoleMode(false);
+                }
+            }
         }
 
         // Mientras se mantenga la tecla pulsada:

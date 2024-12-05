@@ -95,7 +95,13 @@ public class TromerLevelManager : MonoBehaviour
         }
         terminalOn = state;
     }
-    
+
+    // Cambiar cámara al modo Consola:
+    public void PlayerChangeToConsoleMode(bool state)
+    {
+        // TODO
+    }
+
     // Cuenta atrás del contador oxígeno (Objeto 3d y barra del HUD):
     public void OxigenCountDawnProgress()
     {

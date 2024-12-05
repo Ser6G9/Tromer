@@ -11,11 +11,17 @@ namespace Exterior
         public bool isInVissionRange;
         public void OnTriggerEnter(Collider other)
         {
-            isInVissionRange = true;
+            if (other.tag == "Dron")
+            {
+                isInVissionRange = true;
+            }
         }
         public void OnTriggerExit(Collider other)
         {
-            isInVissionRange = false;
+            if (other.tag == "Dron")
+            {
+                isInVissionRange = false;
+            }
         }
     }
 }
