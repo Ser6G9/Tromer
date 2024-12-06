@@ -16,7 +16,6 @@ public class SensorDetectPresence : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        target = other;
         isOnSensor = true;
     }
     private void OnTriggerExit(Collider other)
@@ -27,7 +26,7 @@ public class SensorDetectPresence : MonoBehaviour
     private void Update()
     {
         // Si solo se pulsa una sola vez:
-        if (Input.GetKeyDown(KeyCode.Space) && isOnSensor)
+        if (Input.GetKeyDown(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
         {
             if (this.gameObject.name == "Terminal Sensor")
             {
@@ -40,7 +39,7 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToTerminalMode(false);
                 }
             }
-            else if (this.gameObject.name == "Console Sensor")
+            if (this.gameObject.name == "Console Sensor")
             {
                 if (!levelManager.consoleOn)
                 {
@@ -54,7 +53,7 @@ public class SensorDetectPresence : MonoBehaviour
         }
 
         // Mientras se mantenga la tecla pulsada:
-        if (Input.GetKey(KeyCode.Space) && isOnSensor)
+        if (Input.GetKey(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
         {
             if (this.gameObject.name == "Oxigen Sensor")
             {
@@ -83,7 +82,7 @@ public class SensorDetectPresence : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         
-        // Final de la partida.
+        // Final victoria de la partida.
         if (this.gameObject.name == "Door Exit Sensor" && target.gameObject.tag == "Player" && isOnSensor)
         {
             levelManager.GameWin();

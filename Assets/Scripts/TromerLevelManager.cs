@@ -13,18 +13,23 @@ public class TromerLevelManager : MonoBehaviour
     // Elementos del HUD:
     public GameObject youWin;
     public GameObject youLose;
+    public GameObject UControls;
+    public GameObject UControlsGuide;
+    public bool UControlsGuideOn = false;
     
     // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
     public TextMeshProUGUI coinsText;
-    public int coins = 0; 
+    public int coins = 0;
     
     // Para cambiar de modos/pantallas de juego:
-    public bool terminalOn;
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
+    public bool terminalOn;
     public GameObject terminalCamera;
     public GameObject dron;
-    
+    public bool consoleOn;
+    public GameObject consoleCamera;
+
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
     public List<GameObject> securityCamerasScreens;
@@ -51,11 +56,13 @@ public class TromerLevelManager : MonoBehaviour
     {
         youWin.SetActive(false);
         youLose.SetActive(false);
+        UControlsGuideOn = false;
         
         oxigenProgressTime = totalOxigenTime;
         ShowOxigenLevelProgress();
         
         PlayerChangeToTerminalMode(false);
+        PlayerChangeToConsoleMode(false);
     }
 
     private void Update()
@@ -76,6 +83,21 @@ public class TromerLevelManager : MonoBehaviour
         {
             OpenRoomExitDoor();
         }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UControlsGuideOn = !UControlsGuideOn;
+        }
+        if (UControlsGuideOn)
+        {
+            UControls.SetActive(false);
+            UControlsGuide.SetActive(true);
+        } 
+        else
+        {
+            UControls.SetActive(true);
+            UControlsGuide.SetActive(false);
+        }
     }
     
     
@@ -87,19 +109,19 @@ public class TromerLevelManager : MonoBehaviour
         terminalCamera.gameObject.SetActive(state);
         dron.GetComponent<DronController>().enabled = state;
         
-        roomPlayerCamera.gameObject.SetActive(!state);
-        roomPlayer.gameObject.SetActive(!state);
-        for (int i = 0; i < roomPlayer.transform.childCount; i++) // También se desactivan/activan los componentes del GameObject Player
-        {
-            roomPlayer.transform.GetChild(i).gameObject.SetActive(!state);
-        }
+        ChangeRoomPlayerState(state);
+        
         terminalOn = state;
     }
 
     // Cambiar cámara al modo Consola:
     public void PlayerChangeToConsoleMode(bool state)
     {
-        // TODO
+        consoleCamera.gameObject.SetActive(state);
+        
+        ChangeRoomPlayerState(state);
+
+        consoleOn = state;
     }
 
     // Cuenta atrás del contador oxígeno (Objeto 3d y barra del HUD):
@@ -155,6 +177,16 @@ public class TromerLevelManager : MonoBehaviour
             openExitDoor = false;
         }
         // habilitar el sensor de youWin
+    }
+
+    public void ChangeRoomPlayerState(bool state)
+    {
+        roomPlayerCamera.gameObject.SetActive(!state);
+        roomPlayer.gameObject.SetActive(!state);
+        for (int i = 0; i < roomPlayer.transform.childCount; i++) // También se desactivan/activan los componentes del GameObject Player
+        {
+            roomPlayer.transform.GetChild(i).gameObject.SetActive(!state);
+        }
     }
 
     public void GameOver()
