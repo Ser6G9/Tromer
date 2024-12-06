@@ -25,6 +25,30 @@ public class SensorDetectPresence : MonoBehaviour
 
     private void Update()
     {
+        // Mostrar textos flotantes de los objetos en la Room:
+        if (this.gameObject.name == "Terminal Sensor" && isOnSensor)
+        {
+            levelManager.terminalText.SetActive(true);
+        }
+        
+        if (this.gameObject.name == "Console Sensor" && isOnSensor)
+        {
+            levelManager.consoleText.SetActive(true);
+        }
+        else
+        {
+            levelManager.consoleText.SetActive(false);
+        }
+        
+        if (this.gameObject.name == "Oxigen Sensor" && isOnSensor)
+        {
+            levelManager.oxigen3DText.SetActive(true);
+        }
+        else
+        {
+            levelManager.oxigen3DText.SetActive(false);
+        }
+        
         // Si solo se pulsa una sola vez:
         if (Input.GetKeyDown(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
         {

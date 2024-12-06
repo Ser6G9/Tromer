@@ -24,11 +24,13 @@ public class TromerLevelManager : MonoBehaviour
     // Para cambiar de modos/pantallas de juego:
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
+    public GameObject dron;
     public bool terminalOn;
     public GameObject terminalCamera;
-    public GameObject dron;
+    public GameObject terminalText;
     public bool consoleOn;
     public GameObject consoleCamera;
+    public GameObject consoleText;
 
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
@@ -50,6 +52,7 @@ public class TromerLevelManager : MonoBehaviour
     public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
     public GameObject oxigenLevel3DProgress;
+    public GameObject oxigen3DText;
     public float oxigenPercentage = 100;
     
     private void Start()
