@@ -53,6 +53,15 @@ public class SensorDetectPresence : MonoBehaviour
             levelManager.oxigen3DText.SetActive(false);
         }
         
+        if (this.gameObject.name == "OptiTask1 Sensor" && isOnSensor)
+        {
+            levelManager.optiTask1Text.SetActive(true);
+        }
+        else
+        {
+            levelManager.optiTask1Text.SetActive(false);
+        }
+        
         // Si solo se pulsa una sola vez:
         if (Input.GetKeyDown(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
         {
@@ -78,6 +87,19 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToConsoleMode(false);
                 }
             }
+            
+            if (this.gameObject.name == "OptiTask1 Sensor")
+            {
+                if (!levelManager.optiTask1On)
+                {
+                    levelManager.PlayerChangeToOptiTaskMode(true, 1);
+                }
+                else
+                {
+                    levelManager.PlayerChangeToOptiTaskMode(false, 1);
+                }
+            }
+            
         }
 
         // Mientras se mantenga la tecla pulsada:

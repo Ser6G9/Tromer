@@ -13,9 +13,10 @@ public class TromerLevelManager : MonoBehaviour
     // Elementos del HUD:
     public GameObject youWin;
     public GameObject youLose;
-    public GameObject UControls;
-    public GameObject UControlsGuide;
-    public bool UControlsGuideOn = false;
+    public GameObject uControls;
+    public GameObject uControlsGuide;
+    public bool uControlsGuideOn = false;
+    public GameObject pPause;
     public GameObject pauseMenu;
     public bool pauseMenuOn = false;
 
@@ -27,12 +28,18 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
     public GameObject dron;
-    public bool terminalOn;
+    // Terminal
+    public bool terminalOn = false;
     public GameObject terminalCamera;
     public GameObject terminalText;
-    public bool consoleOn;
+    // Consola
+    public bool consoleOn = false;
     public GameObject consoleCamera;
     public GameObject consoleText;
+    // Tareas Opcionales
+    public bool optiTask1On = false;
+    public GameObject optiTask1Camera;
+    public GameObject optiTask1Text;
 
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
@@ -40,17 +47,17 @@ public class TromerLevelManager : MonoBehaviour
     public List<GameObject> securityCamerasButtons;
     
     // Tareas del exterior: 0 = Task1, 1 = Task2, 2 = Task3
-    public int tasksCompleteCount;
+    public int tasksCompleteCount = 0;
     public List<bool> tasksStates;
 
     public bool openExitDoor = false;
     public GameObject roomExitDoor;
     
     // Gestión del contador de Oxígeno:
-    public float totalOxigenTime;
+    public float totalOxigenTime = 60;
     public float oxigenProgressTime;
     public bool oxigenIncrementationOn = false;
-    public float oxigenIncrementationSpeed;
+    public float oxigenIncrementationSpeed = 0.4f;
     public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
     public GameObject oxigenLevel3DProgress;
@@ -61,8 +68,6 @@ public class TromerLevelManager : MonoBehaviour
     {
         youWin.SetActive(false);
         youLose.SetActive(false);
-        UControlsGuideOn = false;
-        pauseMenuOn = false;
         
         oxigenProgressTime = totalOxigenTime;
         ShowOxigenLevelProgress();
@@ -92,29 +97,31 @@ public class TromerLevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            UControlsGuideOn = !UControlsGuideOn;
+            uControlsGuideOn = !uControlsGuideOn;
         }
-        if (UControlsGuideOn)
+        if (uControlsGuideOn)
         {
-            UControls.SetActive(false);
-            UControlsGuide.SetActive(true);
+            uControls.SetActive(false);
+            uControlsGuide.SetActive(true);
         } 
         else
         {
-            UControls.SetActive(true);
-            UControlsGuide.SetActive(false);
+            uControls.SetActive(true);
+            uControlsGuide.SetActive(false);
         }
         
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             pauseMenuOn = !pauseMenuOn;
         }
         if (pauseMenuOn)
         {
+            pPause.SetActive(false);
             pauseMenu.SetActive(true);
         } 
         else
         {
+            pPause.SetActive(true);
             pauseMenu.SetActive(false);
         }
     }
@@ -184,7 +191,23 @@ public class TromerLevelManager : MonoBehaviour
             oxigenLevel3DProgress.transform.position = position;
         }
     }
+    
+    // Cambiar cámara al modo Consola:
+    public void PlayerChangeToOptiTaskMode(bool state, int num)
+    {
+        switch (num)
+        {
+            case 1:
+                optiTask1Camera.gameObject.SetActive(state);
+                break;
+        }
+        
+        ChangeRoomPlayerState(state);
 
+        optiTask1On = state;
+    }
+
+    // Abrir la puerta de salida:
     public void OpenRoomExitDoor()
     {
         Vector3 doorOpenPosition = new Vector3(0.0f, 4.6f, 11.31371f);
@@ -198,6 +221,7 @@ public class TromerLevelManager : MonoBehaviour
         // habilitar el sensor de youWin
     }
 
+    // Alternar el modo de juego de la Room:
     public void ChangeRoomPlayerState(bool state)
     {
         roomPlayerCamera.gameObject.SetActive(!state);
