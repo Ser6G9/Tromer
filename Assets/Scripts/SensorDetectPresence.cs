@@ -30,6 +30,10 @@ public class SensorDetectPresence : MonoBehaviour
         {
             levelManager.terminalText.SetActive(true);
         }
+        else
+        {
+            levelManager.terminalText.SetActive(false);
+        }
         
         if (this.gameObject.name == "Console Sensor" && isOnSensor)
         {
