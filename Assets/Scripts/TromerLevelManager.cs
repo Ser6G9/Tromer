@@ -16,7 +16,9 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject UControls;
     public GameObject UControlsGuide;
     public bool UControlsGuideOn = false;
-    
+    public GameObject pauseMenu;
+    public bool pauseMenuOn = false;
+
     // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
     public TextMeshProUGUI coinsText;
     public int coins = 0;
@@ -60,6 +62,7 @@ public class TromerLevelManager : MonoBehaviour
         youWin.SetActive(false);
         youLose.SetActive(false);
         UControlsGuideOn = false;
+        pauseMenuOn = false;
         
         oxigenProgressTime = totalOxigenTime;
         ShowOxigenLevelProgress();
@@ -100,6 +103,19 @@ public class TromerLevelManager : MonoBehaviour
         {
             UControls.SetActive(true);
             UControlsGuide.SetActive(false);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMenuOn = !pauseMenuOn;
+        }
+        if (pauseMenuOn)
+        {
+            pauseMenu.SetActive(true);
+        } 
+        else
+        {
+            pauseMenu.SetActive(false);
         }
     }
     
