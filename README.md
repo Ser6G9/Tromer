@@ -8,7 +8,7 @@ Sergio Garcías
 Accdeder al [Clickup](https://app.clickup.com/9012482400/v/o/s/90122018752) del proyecto.
 
 # GDD
-Acceder al [GDD](https://docs.google.com/document/d/1IQmVLPixEIvTvdl83yul_iwZowZjQhqXBTPAuenFnaA/edit?usp=sharing) del proyecto.
+Acceder al [GDD](https://docs.google.com/document/d/15-h4po_SSFAY2gdv4eAtcLt9I7rMMNudFp2nz-U9Ck8/edit?tab=t.0) del proyecto.
 
 # Miro
 Acceder al [Miro](https://miro.com/app/board/uXjVLIDNqaE=/) del proyecto.
