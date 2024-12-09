@@ -13,9 +13,11 @@ public class SensorDetectPresence : MonoBehaviour
 
     public bool isOnSensor = false;
     public Collider target;
+    public GameObject text;
     
     private void OnTriggerEnter(Collider other)
     {
+        target = other;
         isOnSensor = true;
     }
     private void OnTriggerExit(Collider other)
@@ -26,42 +28,15 @@ public class SensorDetectPresence : MonoBehaviour
     private void Update()
     {
         // Mostrar textos flotantes de los objetos en la Room:
-        if (this.gameObject.name == "Terminal Sensor" && isOnSensor)
+        if (isOnSensor && text != null)
         {
-            levelManager.terminalText.SetActive(true);
+            text.SetActive(true);
         }
         else
-        {
-            levelManager.terminalText.SetActive(false);
+        { 
+            text.SetActive(false);
         }
-        
-        if (this.gameObject.name == "Console Sensor" && isOnSensor)
-        {
-            levelManager.consoleText.SetActive(true);
-        }
-        else
-        {
-            levelManager.consoleText.SetActive(false);
-        }
-        
-        if (this.gameObject.name == "Oxigen Sensor" && isOnSensor)
-        {
-            levelManager.oxigen3DText.SetActive(true);
-        }
-        else
-        {
-            levelManager.oxigen3DText.SetActive(false);
-        }
-        
-        if (this.gameObject.name == "OptiTask1 Sensor" && isOnSensor)
-        {
-            levelManager.optiTask1Text.SetActive(true);
-        }
-        else
-        {
-            levelManager.optiTask1Text.SetActive(false);
-        }
-        
+
         // Si solo se pulsa una sola vez:
         if (Input.GetKeyDown(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
         {
@@ -76,6 +51,7 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToTerminalMode(false);
                 }
             }
+
             if (this.gameObject.name == "Console Sensor")
             {
                 if (!levelManager.consoleOn)
@@ -87,7 +63,7 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToConsoleMode(false);
                 }
             }
-            
+
             if (this.gameObject.name == "OptiTask1 Sensor")
             {
                 if (!levelManager.optiTask1On)
@@ -99,9 +75,15 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToOptiTaskMode(false, 1);
                 }
             }
-            
         }
 
+        // Final victoria de la partida.
+        if (this.gameObject.name == "Door Exit Sensor" && target.gameObject.tag == "Player" && isOnSensor)
+        {
+            levelManager.GameWin();
+        }
+        
+        
         // Mientras se mantenga la tecla pulsada:
         if (Input.GetKey(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
         {
@@ -110,32 +92,32 @@ public class SensorDetectPresence : MonoBehaviour
                 levelManager.oxigenIncrementationOn = true;
             }
         }
-        else
+        else if (this.gameObject.name == "Oxigen Sensor")
         {
             levelManager.oxigenIncrementationOn = false;
         }
+            
+        
+        
         
         // Tareas del exterior: PENDIENTE
-        if (this.gameObject.name == "Task1 Sensor" && target.gameObject.tag == "Dron" && isOnSensor)
+        if (target.gameObject.tag == "Dron" && isOnSensor)
         {
-            levelManager.TaskInProgress(true, 1);
-            this.gameObject.SetActive(false);
-        } 
-        else if (this.gameObject.name == "Task2 Sensor" && target.gameObject.tag == "Dron" && isOnSensor)
-        {
-            levelManager.TaskInProgress(true, 2);
-            this.gameObject.SetActive(false);
-        } 
-        else if (this.gameObject.name == "Task3 Sensor" && target.gameObject.tag == "Dron" && isOnSensor)
-        {
-            levelManager.TaskInProgress(true, 3);
-            this.gameObject.SetActive(false);
-        }
-        
-        // Final victoria de la partida.
-        if (this.gameObject.name == "Door Exit Sensor" && target.gameObject.tag == "Player" && isOnSensor)
-        {
-            levelManager.GameWin();
+            if (this.gameObject.name == "Task1 Sensor")
+            {
+                levelManager.TaskInProgress(true, 1);
+                this.gameObject.SetActive(false);
+            }
+            else if (this.gameObject.name == "Task2 Sensor")
+            {
+                levelManager.TaskInProgress(true, 2);
+                this.gameObject.SetActive(false);
+            }
+            else if (this.gameObject.name == "Task3 Sensor")
+            {
+                levelManager.TaskInProgress(true, 3);
+                this.gameObject.SetActive(false);
+            }
         }
 
     }

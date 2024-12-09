@@ -66,6 +66,7 @@ public class TromerLevelManager : MonoBehaviour
     
     private void Start()
     {
+        Time.timeScale = 1f;
         youWin.SetActive(false);
         youLose.SetActive(false);
         
@@ -78,6 +79,15 @@ public class TromerLevelManager : MonoBehaviour
 
     private void Update()
     {
+        // Se pausa el juego
+        if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn)
+        {
+            Time.timeScale = 0f;
+        } else if (!pauseMenuOn)
+        {
+            Time.timeScale = 1f;
+        }
+        
         ShowOxigenLevelProgress();
         if (oxigenIncrementationOn)
         {
@@ -114,6 +124,12 @@ public class TromerLevelManager : MonoBehaviour
         {
             pauseMenuOn = !pauseMenuOn;
         }
+        PauseMenuInteraction(pauseMenuOn);
+    }
+
+    public void PauseMenuInteraction(bool state)
+    {
+        pauseMenuOn = state;
         if (pauseMenuOn)
         {
             pPause.SetActive(false);
@@ -125,7 +141,6 @@ public class TromerLevelManager : MonoBehaviour
             pauseMenu.SetActive(false);
         }
     }
-    
     
     /* -- ROOM -- */
     
