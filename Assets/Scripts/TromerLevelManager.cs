@@ -19,6 +19,7 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject pPause;
     public GameObject pauseMenu;
     public bool pauseMenuOn = false;
+    public TextMeshProUGUI menaceLevelText;
 
     // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
     public TextMeshProUGUI coinsText;
@@ -274,6 +275,11 @@ public class TromerLevelManager : MonoBehaviour
             {
                 tasksCompleteCount++;
             }
+        }
+
+        if (tasksCompleteCount+1 <= 3)
+        {
+            menaceLevelText.text = "Nivel de peligro: "+(tasksCompleteCount+1);
         }
 
         if (tasksCompleteCount == tasksStates.Count)
