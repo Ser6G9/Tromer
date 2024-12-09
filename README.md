@@ -13,5 +13,8 @@ Acceder al [GDD](https://docs.google.com/document/d/1IQmVLPixEIvTvdl83yul_iwZowZ
 # Miro
 Acceder al [Miro](https://miro.com/app/board/uXjVLIDNqaE=/) del proyecto.
 
+# Prototipo del juego:
+[https://itch.io/Tromer](https://reptilsito.itch.io/tromer)
+
 # Web
 La página web aún no está disponible
