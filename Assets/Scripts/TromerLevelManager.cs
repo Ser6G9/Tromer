@@ -55,7 +55,7 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject roomExitDoor;
     
     // Gestión del contador de Oxígeno:
-    public float totalOxigenTime = 60;
+    public float totalOxigenTime = 90;
     public float oxigenProgressTime;
     public bool oxigenIncrementationOn = false;
     public float oxigenIncrementationSpeed = 0.4f;
