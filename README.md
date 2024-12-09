@@ -1,5 +1,6 @@
 # Tromer
 Tromer es un juego de tensión y suspense en el que controlas a un técnico atrapado en una habitación sellada de una instalación secreta afectada por un gas tóxico. Deberás realizar reparaciones tanto dentro como fuera de la habitación haciendo uso de un dron y cámaras de seguridad, mientras gestionas el oxígeno y evitas a un ente misterioso que complica tu escape. Con mecánicas de tensión, el tiempo y la estrategia son cruciales para escapar antes de que se agote el oxígeno o el ente te atrape.
+![image](https://github.com/user-attachments/assets/e9e2d7a7-3a6c-4b4b-9e5a-326b32727d7a)
 
 # Developers
 Sergio Garcías
