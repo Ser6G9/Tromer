@@ -20,7 +20,8 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject pauseMenu;
     public bool pauseMenuOn = false;
     public TextMeshProUGUI menaceLevelText;
-    public GameObject alertDoorOpen;
+    public GameObject alertDoorOpenTxt;
+    public GameObject exitInteractionTxt;
 
     // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
     public TextMeshProUGUI coinsText;
@@ -150,6 +151,7 @@ public class TromerLevelManager : MonoBehaviour
     // Cambiar cámara y controles del player al modo Terminal:
     public void PlayerChangeToTerminalMode(bool state)
     {
+        exitInteractionTxt.gameObject.SetActive(state);
         terminalCamera.gameObject.SetActive(state);
         dron.GetComponent<DronController>().enabled = state;
         
@@ -161,6 +163,7 @@ public class TromerLevelManager : MonoBehaviour
     // Cambiar cámara al modo Consola:
     public void PlayerChangeToConsoleMode(bool state)
     {
+        exitInteractionTxt.gameObject.SetActive(state);
         consoleCamera.gameObject.SetActive(state);
         
         ChangeRoomPlayerState(state);
@@ -212,9 +215,10 @@ public class TromerLevelManager : MonoBehaviour
         }
     }
     
-    // Cambiar cámara al modo Consola:
+    // Cambiar cámara para las OptiTasks:
     public void PlayerChangeToOptiTaskMode(bool state, int num)
     {
+        exitInteractionTxt.gameObject.SetActive(state);
         switch (num)
         {
             case 1:
@@ -230,7 +234,7 @@ public class TromerLevelManager : MonoBehaviour
     // Abrir la puerta de salida:
     public void OpenRoomExitDoor()
     {
-        alertDoorOpen.gameObject.SetActive(true);
+        alertDoorOpenTxt.gameObject.SetActive(true);
         Vector3 doorOpenPosition = new Vector3(0.0f, 4.6f, 11.31371f);
         roomExitDoor.transform.position = Vector3.MoveTowards(roomExitDoor.transform.position, doorOpenPosition, 0.2f * Time.deltaTime);
         
