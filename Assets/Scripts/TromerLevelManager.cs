@@ -20,6 +20,7 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject pauseMenu;
     public bool pauseMenuOn = false;
     public TextMeshProUGUI menaceLevelText;
+    public GameObject alertDoorOpen;
 
     // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
     public TextMeshProUGUI coinsText;
@@ -61,6 +62,7 @@ public class TromerLevelManager : MonoBehaviour
     public float oxigenIncrementationSpeed = 0.4f;
     public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
+    public GameObject incrementationMark;
     public GameObject oxigenLevel3DProgress;
     public GameObject oxigen3DText;
     public float oxigenPercentage = 100;
@@ -169,6 +171,7 @@ public class TromerLevelManager : MonoBehaviour
     // Cuenta atrás del contador oxígeno (Objeto 3d y barra del HUD):
     public void OxigenCountDawnProgress()
     {
+        incrementationMark.gameObject.SetActive(false);
         if (oxigenProgressTime >= 0.0f) 
         {
             oxigenProgressTime -= Time.deltaTime;
@@ -187,6 +190,7 @@ public class TromerLevelManager : MonoBehaviour
         {
             // El oxigeno se incrementará en relación a la velocidad de incremntación
             oxigenProgressTime += Time.deltaTime * oxigenIncrementationSpeed;
+            incrementationMark.gameObject.SetActive(true);
         }
     }
 
@@ -226,6 +230,7 @@ public class TromerLevelManager : MonoBehaviour
     // Abrir la puerta de salida:
     public void OpenRoomExitDoor()
     {
+        alertDoorOpen.gameObject.SetActive(true);
         Vector3 doorOpenPosition = new Vector3(0.0f, 4.6f, 11.31371f);
         roomExitDoor.transform.position = Vector3.MoveTowards(roomExitDoor.transform.position, doorOpenPosition, 0.2f * Time.deltaTime);
         
