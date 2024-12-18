@@ -13,13 +13,16 @@ namespace Exterior
         // Start is called before the first frame update
         void Start()
         {
+            // Obtener el componente NavMeshAgent
             navMeshAgent = GetComponent<NavMeshAgent>();
-            
+
+            // Asignar la velocidad al NavMeshAgent
+            navMeshAgent.speed = enemySpeed;
         }
-    
-        // Update is called once per frame
+
         void Update()
         {
+            // Establecer el destino del agente en cada frame
             navMeshAgent.destination = target.position;
         }
     }
