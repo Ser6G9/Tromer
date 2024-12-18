@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SensorDetectPresence : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class SensorDetectPresence : MonoBehaviour
 
     public bool isOnSensor = false;
     public Collider target;
-    public GameObject text;
+    public GameObject actionObject;
+    public bool isInteractionText = false;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -28,14 +30,18 @@ public class SensorDetectPresence : MonoBehaviour
     private void Update()
     {
         // Mostrar textos flotantes de los objetos en la Room:
-        if (isOnSensor && text != null)
+        if (isInteractionText == true)
         {
-            text.SetActive(true);
+            if (isOnSensor && actionObject != null)
+            {
+                actionObject.SetActive(true);
+            }
+            else
+            { 
+                actionObject.SetActive(false);
+            }
         }
-        else
-        { 
-            text.SetActive(false);
-        }
+        
 
         // Si solo se pulsa una sola vez:
         if (Input.GetKeyDown(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
@@ -106,16 +112,19 @@ public class SensorDetectPresence : MonoBehaviour
             if (this.gameObject.name == "Task1 Sensor")
             {
                 levelManager.TaskInProgress(true, 1);
+                actionObject.gameObject.SetActive(false);
                 this.gameObject.SetActive(false);
             }
             else if (this.gameObject.name == "Task2 Sensor")
             {
                 levelManager.TaskInProgress(true, 2);
+                actionObject.gameObject.SetActive(false);
                 this.gameObject.SetActive(false);
             }
             else if (this.gameObject.name == "Task3 Sensor")
             {
                 levelManager.TaskInProgress(true, 3);
+                actionObject.gameObject.SetActive(false);
                 this.gameObject.SetActive(false);
             }
         }
