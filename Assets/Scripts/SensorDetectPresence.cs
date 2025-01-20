@@ -15,7 +15,7 @@ public class SensorDetectPresence : MonoBehaviour
     public bool isOnSensor = false;
     public Collider target;
     public GameObject actionObject;
-    public bool isInteractionText = false;
+    public bool haveInteractionText = false;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -30,7 +30,7 @@ public class SensorDetectPresence : MonoBehaviour
     private void Update()
     {
         // Mostrar textos flotantes de los objetos en la Room:
-        if (isInteractionText == true)
+        if (haveInteractionText == true)
         {
             if (isOnSensor && actionObject != null)
             {
