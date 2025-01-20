@@ -35,11 +35,11 @@ public class TromerLevelManager : MonoBehaviour
     public bool terminalOn = false;
     public int cameraSelected = 0;
     public GameObject terminalCamera;
-    public GameObject terminalText;
+    public GameObject terminalCanvas;
     // Consola
     public bool consoleOn = false;
     public GameObject consoleCamera;
-    public GameObject consoleText;
+    public GameObject consoleCanvas;
     // Tareas Opcionales
     public bool optiTask1On = false;
     public GameObject optiTask1Camera;
@@ -159,6 +159,7 @@ public class TromerLevelManager : MonoBehaviour
     {
         exitInteractionTxt.gameObject.SetActive(state);
         terminalCamera.gameObject.SetActive(state);
+        terminalCanvas.GetComponent<GraphicRaycaster>().enabled = state;
         dron.GetComponent<DronController>().enabled = state;
         
         ChangeRoomPlayerState(state);
@@ -171,6 +172,7 @@ public class TromerLevelManager : MonoBehaviour
     {
         exitInteractionTxt.gameObject.SetActive(state);
         consoleCamera.gameObject.SetActive(state);
+        consoleCanvas.GetComponent<GraphicRaycaster>().enabled = state;
         
         ChangeRoomPlayerState(state);
 

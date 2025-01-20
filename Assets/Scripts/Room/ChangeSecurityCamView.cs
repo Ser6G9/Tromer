@@ -36,7 +36,6 @@ namespace Room
                     TurnOtherCamerasOff(levelManager.cameraSelected);
                 }
             }
-
             buttonCameraSelected = null;
         }
 

@@ -4555,10 +4555,10 @@ MonoBehaviour:
   terminalOn: 0
   cameraSelected: 0
   terminalCamera: {fileID: 2136036666}
-  terminalText: {fileID: 1919423815}
+  terminalCanvas: {fileID: 464196386}
   consoleOn: 0
   consoleCamera: {fileID: 703672633}
-  consoleText: {fileID: 1865729980}
+  consoleCanvas: {fileID: 1149588322}
   optiTask1On: 0
   optiTask1Camera: {fileID: 1773021151}
   optiTask1Text: {fileID: 1248552654}
@@ -9416,6 +9416,7 @@ GameObject:
   - component: {fileID: 945161501}
   - component: {fileID: 945161500}
   - component: {fileID: 945161499}
+  - component: {fileID: 945161502}
   m_Layer: 0
   m_Name: Door 1
   m_TagString: Untagged
@@ -9499,6 +9500,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945161497}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &945161502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945161497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b1006b7f7f5b64a88ece8b70b85033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openDoor: 0
 --- !u!1 &947979773
 GameObject:
   m_ObjectHideFlags: 0
@@ -15560,7 +15574,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 945161497}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
