@@ -33,9 +33,11 @@ namespace Room
                     levelManager.cameraSelected = i;
                     levelManager.securityCameras[i].gameObject.SetActive(true);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(true);
-                    TurnOtherCamerasOff(i);
+                    TurnOtherCamerasOff(levelManager.cameraSelected);
                 }
             }
+
+            buttonCameraSelected = null;
         }
 
         private void TurnOtherCamerasOff(int cameraActive)
