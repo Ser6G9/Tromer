@@ -15,11 +15,12 @@ namespace Room
         }
         
         public GameObject buttonCameraSelected;
+        
 
-        private void Start()
+        private void Update()
         {
             // Desactivar las camaras innecesarias al inicio de la partida.
-            TurnOtherCamerasOff(0);
+            TurnOtherCamerasOff(levelManager.cameraSelected);
         }
         
         public void SwitchCamera()
@@ -29,6 +30,7 @@ namespace Room
             {
                 if (buttonCameraSelected.name == levelManager.securityCamerasButtons[i].name)
                 {
+                    levelManager.cameraSelected = i;
                     levelManager.securityCameras[i].gameObject.SetActive(true);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(true);
                     TurnOtherCamerasOff(i);

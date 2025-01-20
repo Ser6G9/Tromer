@@ -33,6 +33,7 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject dron;
     // Terminal
     public bool terminalOn = false;
+    public int cameraSelected = 0;
     public GameObject terminalCamera;
     public GameObject terminalText;
     // Consola
@@ -83,7 +84,7 @@ public class TromerLevelManager : MonoBehaviour
 
     private void Update()
     {
-        // Se pausa el juego
+        // Se pausa el juego si ganas/pierdes o pones en pausa
         if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn)
         {
             Time.timeScale = 0f;
@@ -92,6 +93,7 @@ public class TromerLevelManager : MonoBehaviour
             Time.timeScale = 1f;
         }
         
+        // ¿Se está aumentando o no el Oxigeno?
         ShowOxigenLevelProgress();
         if (oxigenIncrementationOn)
         {
@@ -102,13 +104,16 @@ public class TromerLevelManager : MonoBehaviour
             OxigenCountDawnProgress();
         }
         
+        // Objetos recolectables
         UpdateCoinsText();
 
+        // Abrir puerta de final de partida
         if (openExitDoor == true)
         {
             OpenRoomExitDoor();
         }
 
+        // HUD mostrar/ocultar guia de controles
         if (Input.GetKeyDown(KeyCode.U))
         {
             uControlsGuideOn = !uControlsGuideOn;
@@ -124,6 +129,7 @@ public class TromerLevelManager : MonoBehaviour
             uControlsGuide.SetActive(false);
         }
         
+        // Pausar juego
         if (Input.GetKeyDown(KeyCode.P))
         {
             pauseMenuOn = !pauseMenuOn;

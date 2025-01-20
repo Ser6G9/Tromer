@@ -1324,7 +1324,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 1453399524}
   actionObject: {fileID: 796992070}
-  isInteractionText: 0
+  haveInteractionText: 0
 --- !u!65 &113037006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7634,7 +7634,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 15571304}
   actionObject: {fileID: 1248552654}
-  isInteractionText: 1
+  haveInteractionText: 1
 --- !u!65 &772690150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9119,7 +9119,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 15571304}
   actionObject: {fileID: 1499324788}
-  isInteractionText: 1
+  haveInteractionText: 1
 --- !u!65 &913974900
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10072,7 +10072,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 1453399524}
   actionObject: {fileID: 125237879}
-  isInteractionText: 0
+  haveInteractionText: 0
 --- !u!65 &1000992511
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12926,7 +12926,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 1453399524}
   actionObject: {fileID: 1430854510}
-  isInteractionText: 0
+  haveInteractionText: 0
 --- !u!65 &1326506153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14298,7 +14298,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 15571304}
   actionObject: {fileID: 0}
-  isInteractionText: 0
+  haveInteractionText: 0
 --- !u!65 &1479703850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16042,7 +16042,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 15571304}
   actionObject: {fileID: 1865729980}
-  isInteractionText: 1
+  haveInteractionText: 1
 --- !u!65 &1691066309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19358,7 +19358,7 @@ MonoBehaviour:
   isOnSensor: 0
   target: {fileID: 15571304}
   actionObject: {fileID: 1919423815}
-  isInteractionText: 1
+  haveInteractionText: 1
 --- !u!65 &2047464242
 BoxCollider:
   m_ObjectHideFlags: 0
