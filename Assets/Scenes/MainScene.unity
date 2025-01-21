@@ -4583,6 +4583,10 @@ MonoBehaviour:
   - {fileID: 987579727}
   - {fileID: 11918299}
   - {fileID: 303073249}
+  securityDoors:
+  - {fileID: 945161497}
+  - {fileID: 1064162888}
+  securityDoorsButtons: []
   tasksCompleteCount: 0
   tasksStates: 000000
   openExitDoor: 0
