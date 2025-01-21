@@ -52,7 +52,7 @@ public class TromerLevelManager : MonoBehaviour
     
     // Controles de las puertas de seguridad:
     public List<GameObject> securityDoors;
-    public List<GameObject> securityDoorsButtons;
+    public List<Button> securityDoorsButtons;
     
     // Tareas del exterior: 0 = Task1, 1 = Task2, 2 = Task3
     public int tasksCompleteCount = 0;
