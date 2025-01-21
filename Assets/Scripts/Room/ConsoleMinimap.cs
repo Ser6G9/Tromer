@@ -49,21 +49,27 @@ namespace Room
         private void LocateMarker()
         {
             // Marcador del Dron:
-            Vector3 newPosition = dronMarker.transform.position;
-            newPosition.x = pixelsPerMetterX * levelManager.dron.transform.position.x;
-            newPosition.y = pixelsPerMetterX * levelManager.dron.transform.position.z;
-            dronMarker.transform.position = newPosition;
+            Vector2 dronMarkerPosition = dronMarker.GetComponent<RectTransform>().anchoredPosition;
+            dronMarkerPosition.y = pixelsPerMetterX * levelManager.dron.transform.position.x;
+            dronMarkerPosition.x = pixelsPerMetterY * levelManager.dron.transform.position.z;
+            dronMarker.GetComponent<RectTransform>().anchoredPosition = dronMarkerPosition;
+            
+            /*// Marcador del Enemy:
+            Vector3 enemyMarkerPosition = enemyMarker.transform.localPosition;
+            enemyMarkerPosition.y = pixelsPerMetterX * levelManager.enemy.transform.position.x;
+            enemyMarkerPosition.x = pixelsPerMetterY * levelManager.enemy.transform.position.z;
+            enemyMarker.transform.localPosition = enemyMarkerPosition;*/
         }
 
         private void CalculatePixelsPerMetterXY()
         {
             imgTotalX = imgSupperiorX + imgInferiorX;
-            scenarioTotalX = scenarioSupperiorX + scenarioInferiorX;
-            pixelsPerMetterX = imgTotalX / scenarioTotalX;
+            scenarioTotalZ = scenarioSupperiorZ + scenarioInferiorZ;
+            pixelsPerMetterX = imgTotalX / scenarioTotalZ;
             
             imgTotalY = imgSupperiorY + imgInferiorY;
-            scenarioTotalZ = scenarioSupperiorZ + scenarioInferiorZ;
-            pixelsPerMetterY = imgTotalY / scenarioTotalZ;
+            scenarioTotalX = scenarioSupperiorX + scenarioInferiorX;
+            pixelsPerMetterY = imgTotalY / scenarioTotalX;
         }
 
         private void SerialiceVariables()

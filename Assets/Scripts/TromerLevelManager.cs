@@ -27,10 +27,11 @@ public class TromerLevelManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public int coins = 0;
     
-    // Para cambiar de modos/pantallas de juego:
+    // Player y enemy controllers:
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
     public GameObject dron;
+    public GameObject enemy;
     
     // Terminal
     public bool terminalOn = false;
