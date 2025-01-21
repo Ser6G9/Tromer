@@ -31,6 +31,7 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
     public GameObject dron;
+    
     // Terminal
     public bool terminalOn = false;
     public int cameraSelected = 0;
