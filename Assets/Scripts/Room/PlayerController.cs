@@ -29,6 +29,10 @@ namespace Room
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(movement),rotationSpeed * Time.deltaTime);
             }
+            
+            // Animacion:
+            float curSpeed = speed * movement.magnitude;
+            GetComponent<Animator>().SetFloat("Speed", curSpeed);
         }
     }
 }
