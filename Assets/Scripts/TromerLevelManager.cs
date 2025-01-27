@@ -56,9 +56,11 @@ public class TromerLevelManager : MonoBehaviour
     public List<GameObject> securityDoors;
     public List<Button> securityDoorsButtons;
     
-    // Tareas del exterior: 0 = Task1, 1 = Task2, 2 = Task3
+    // Lista de tareas a completar: 0 = Task1, 1 = Task2, 2 = Task3, 3 = Emergencia(extra)
     public int tasksCompleteCount = 0;
-    public List<bool> tasksStates;
+    public List<bool> tasksState;
+    public List<TextMeshProUGUI> tasksHUDSlider;
+    public List<float> tasksProgressTime;
 
     public bool openExitDoor = false;
     public GameObject roomExitDoor;
@@ -291,10 +293,10 @@ public class TromerLevelManager : MonoBehaviour
     // Progreso de las tareas del exterior: PENDIENTE se completan al instate
     public void TaskInProgress(bool state, int taskID)
     {
-        tasksStates[taskID-1] = state;
-        for (int i = 0; i < tasksStates.Count; i++)
+        tasksState[taskID-1] = state;
+        for (int i = 0; i < tasksState.Count; i++)
         {
-            if (tasksStates[i] == true)
+            if (tasksState[i] == true)
             {
                 tasksCompleteCount++;
             }
@@ -305,7 +307,7 @@ public class TromerLevelManager : MonoBehaviour
             menaceLevelText.text = "Nivel de peligro: "+(tasksCompleteCount+1);
         }
 
-        if (tasksCompleteCount == tasksStates.Count)
+        if (tasksCompleteCount == tasksState.Count)
         {
             openExitDoor = true;
         }
