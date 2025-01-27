@@ -4994,7 +4994,7 @@ MonoBehaviour:
   totalOxigenTime: 90
   oxigenProgressTime: 0
   oxigenIncrementationOn: 0
-  oxigenIncrementationSpeed: 0.4
+  oxigenIncrementationSpeed: 0.5
   oxigenProgressText: {fileID: 1375071201}
   oxigenSliderProgress: {fileID: 2096570689}
   incrementationMark: {fileID: 1005326928}

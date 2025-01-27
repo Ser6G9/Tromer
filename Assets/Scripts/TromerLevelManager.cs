@@ -67,9 +67,9 @@ public class TromerLevelManager : MonoBehaviour
     
     // Gestión del contador de Oxígeno:
     public float totalOxigenTime = 90;
-    public float oxigenProgressTime;
+    public float oxigenProgressTime = 0;
     public bool oxigenIncrementationOn = false;
-    public float oxigenIncrementationSpeed = 0.4f;
+    public float oxigenIncrementationSpeed = 0.5f;
     public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
     public GameObject incrementationMark;
