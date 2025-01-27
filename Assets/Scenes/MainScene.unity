@@ -4979,7 +4979,7 @@ MonoBehaviour:
   - {fileID: 1336620564}
   timeToCompleteTasks: 10
   tasksCompleteCount: 0
-  tasksState: 000000
+  tasksExteriorState: 000000
   tasksHUDSlider:
   - {fileID: 2084834290}
   - {fileID: 0}
@@ -22110,8 +22110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 82, y: 0}
-  m_SizeDelta: {x: 128, y: 65}
+  m_AnchoredPosition: {x: 65, y: 0}
+  m_SizeDelta: {x: 188.1, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2084834290
 MonoBehaviour:
