@@ -106,24 +106,32 @@ public class SensorDetectPresence : MonoBehaviour
         
         
         
-        // Tareas del exterior: PENDIENTE
+        // Tareas del exterior:
         if (target.gameObject.tag == "Dron" && isOnSensor)
         {
             if (this.gameObject.name == "Task1 Sensor")
             {
-                levelManager.TaskInProgress(true, 1);
-                actionObject.gameObject.SetActive(false);
-                this.gameObject.SetActive(false);
+                // Si la tarea aún no está completada, se aumenta su progreso.
+                if (levelManager.GetTaskState(1) == false)
+                {
+                    levelManager.TaskInProgress(1);
+                }
+                else
+                {
+                    // Si ya ha sido completada, se desactiva la luz y el sensor de la tarea.
+                    actionObject.gameObject.SetActive(false); 
+                    this.gameObject.SetActive(false);
+                }
             }
             else if (this.gameObject.name == "Task2 Sensor")
             {
-                levelManager.TaskInProgress(true, 2);
+                levelManager.TaskComplete(2);
                 actionObject.gameObject.SetActive(false);
                 this.gameObject.SetActive(false);
             }
             else if (this.gameObject.name == "Task3 Sensor")
             {
-                levelManager.TaskInProgress(true, 3);
+                levelManager.TaskComplete(3);
                 actionObject.gameObject.SetActive(false);
                 this.gameObject.SetActive(false);
             }

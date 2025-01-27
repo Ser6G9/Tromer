@@ -4977,14 +4977,15 @@ MonoBehaviour:
   - {fileID: 1939250622}
   - {fileID: 506047556}
   - {fileID: 1336620564}
+  timeToCompleteTasks: 10
   tasksCompleteCount: 0
-  tasksState: 00000000
+  tasksState: 000000
   tasksHUDSlider:
-  - {fileID: 2010460963}
+  - {fileID: 2084834290}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  tasksProgressTime:
+  tasksCurrentProgressTime:
   - 0
   - 0
   - 0

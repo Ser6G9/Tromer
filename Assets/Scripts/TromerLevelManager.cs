@@ -57,10 +57,11 @@ public class TromerLevelManager : MonoBehaviour
     public List<Button> securityDoorsButtons;
     
     // Lista de tareas a completar: 0 = Task1, 1 = Task2, 2 = Task3, 3 = Emergencia(extra)
+    public float timeToCompleteTasks = 10;
     public int tasksCompleteCount = 0;
-    public List<bool> tasksState;
-    public List<TextMeshProUGUI> tasksHUDSlider;
-    public List<float> tasksProgressTime;
+    [FormerlySerializedAs("tasksState")] public List<bool> tasksExteriorState;
+    public List<Slider> tasksHUDSlider;
+    public List<float> tasksCurrentProgressTime;
 
     public bool openExitDoor = false;
     public GameObject roomExitDoor;
@@ -231,7 +232,7 @@ public class TromerLevelManager : MonoBehaviour
         }
     }
     
-    // Cambiar cámara para las OptiTasks:
+    // Cambiar cámara para las OptiTasks (Tareas Opcionales):
     public void PlayerChangeToOptiTaskMode(bool state, int num)
     {
         exitInteractionTxt.gameObject.SetActive(state);
@@ -290,28 +291,46 @@ public class TromerLevelManager : MonoBehaviour
         coinsText.text = coins.ToString();
     }
 
-    // Progreso de las tareas del exterior: PENDIENTE se completan al instate
-    public void TaskInProgress(bool state, int taskID)
+    // Progreso de las tareas del exterior:
+    public void TaskInProgress(int taskID)
     {
-        tasksState[taskID-1] = state;
-        for (int i = 0; i < tasksState.Count; i++)
+        if (tasksCurrentProgressTime[taskID-1] <= timeToCompleteTasks) 
         {
-            if (tasksState[i] == true)
-            {
-                tasksCompleteCount++;
-            }
+            tasksCurrentProgressTime[taskID-1] += Time.deltaTime;
         }
+        
+        float percentageProgress = (tasksCurrentProgressTime[taskID-1] / timeToCompleteTasks) * 100.0f;
+        //tasksHUDSlider[taskID].texto = $"{percentageProgress:F0}%"; (PENIENTE)
+        tasksHUDSlider[taskID-1].value = percentageProgress / 100.0f;
 
+        // Si el progreso llega a su máximo, la tarea se completa.
+        if (tasksCurrentProgressTime[taskID-1] >= timeToCompleteTasks)
+        {
+            TaskComplete(taskID);
+        }
+    }
+    
+    // Al completar una tarea:
+    public void TaskComplete(int taskID)
+    {
+        tasksExteriorState[taskID-1] = true;
+        tasksCompleteCount++;
+            
+        //  Se aumenta el nivel de pelígro/dificultad del 1 al 3 máximo.
         if (tasksCompleteCount+1 <= 3)
         {
             menaceLevelText.text = "Nivel de peligro: "+(tasksCompleteCount+1);
         }
-
-        if (tasksCompleteCount == tasksState.Count)
+        
+        // Al completar todas las tareas, se abre la puerta para ganar.
+        if (tasksCompleteCount == tasksExteriorState.Count)
         {
             openExitDoor = true;
         }
-
-        tasksCompleteCount = 0;
+    }
+    
+    public bool GetTaskState(int taskID)
+    {
+        return tasksExteriorState[taskID-1];
     }
 }
