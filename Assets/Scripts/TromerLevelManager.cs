@@ -35,7 +35,7 @@ public class TromerLevelManager : MonoBehaviour
     
     // Terminal
     public bool terminalOn = false;
-    public int cameraSelected = 0;
+    public int cameraSelected = -1;
     public GameObject terminalCamera;
     public GameObject terminalCanvas;
     // Consola
@@ -50,7 +50,7 @@ public class TromerLevelManager : MonoBehaviour
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
     public List<GameObject> securityCamerasScreens;
-    public List<GameObject> securityCamerasButtons;
+    public List<Button> securityCamerasButtons;
     
     // Controles de las puertas de seguridad:
     public List<GameObject> securityDoors;

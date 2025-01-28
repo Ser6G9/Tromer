@@ -16,7 +16,6 @@ namespace Room
         }
         
         public GameObject buttonCameraSelected;
-        
 
         private void Update()
         {
@@ -34,7 +33,8 @@ namespace Room
                     levelManager.cameraSelected = i;
                     levelManager.securityCameras[i].gameObject.SetActive(true);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(true);
-                    //levelManager.securityCamerasButtons[i].GetComponent<Image>().color = Color.green;
+                    levelManager.securityCamerasButtons[i].GetComponent<Image>().color = new Color(0.66f, 1f, 0.18f, 1f);
+                    
                     TurnOtherCamerasOff(levelManager.cameraSelected);
                 }
             }
@@ -49,10 +49,11 @@ namespace Room
                 {
                     //levelManager.securityCameras[i].gameObject.SetActive(false);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(false);
-                    //levelManager.securityCamerasButtons[i].GetComponent<Image>().color = Color.gray;
+                    levelManager.securityCamerasButtons[i].GetComponent<Image>().color = new Color(0.92f, 0.92f, 0.92f, 1.0f);
                 }
             }
         }
+        //levelManager.securityCamerasButtons[i].GetComponent<Image>().color = new Color(1f, 0.3559244f, 0.2509804f, 1f);
     }
 }
 
