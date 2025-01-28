@@ -62,6 +62,7 @@ public class TromerLevelManager : MonoBehaviour
     public List<bool> tasksExteriorState;
     public List<Slider> tasksHUDSlider;
     public List<TextMeshProUGUI> tasksHUDProgressText;
+    public List<Image> tasksHUDProgressBar;
     public List<TextMeshProUGUI> tasksObjectiveText;
     public List<float> tasksCurrentProgressTime;
 
@@ -321,6 +322,8 @@ public class TromerLevelManager : MonoBehaviour
     public void TaskComplete(int taskID)
     {
         tasksObjectiveText[taskID-1].color = Color.green;
+        tasksHUDProgressText[taskID-1].color = Color.green;
+        tasksHUDProgressBar[taskID-1].color = Color.green;
         tasksExteriorState[taskID-1] = true;
         tasksCompleteCount++;
             
