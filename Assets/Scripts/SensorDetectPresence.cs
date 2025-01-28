@@ -125,15 +125,31 @@ public class SensorDetectPresence : MonoBehaviour
             }
             else if (this.gameObject.name == "Task2 Sensor")
             {
-                levelManager.TaskComplete(2);
-                actionObject.gameObject.SetActive(false);
-                this.gameObject.SetActive(false);
+                // Si la tarea aún no está completada, se aumenta su progreso.
+                if (levelManager.GetTaskState(2) == false)
+                {
+                    levelManager.TaskInProgress(2);
+                }
+                else
+                {
+                    // Si ya ha sido completada, se desactiva la luz y el sensor de la tarea.
+                    actionObject.gameObject.SetActive(false); 
+                    this.gameObject.SetActive(false);
+                }
             }
             else if (this.gameObject.name == "Task3 Sensor")
             {
-                levelManager.TaskComplete(3);
-                actionObject.gameObject.SetActive(false);
-                this.gameObject.SetActive(false);
+                // Si la tarea aún no está completada, se aumenta su progreso.
+                if (levelManager.GetTaskState(3) == false)
+                {
+                    levelManager.TaskInProgress(3);
+                }
+                else
+                {
+                    // Si ya ha sido completada, se desactiva la luz y el sensor de la tarea.
+                    actionObject.gameObject.SetActive(false); 
+                    this.gameObject.SetActive(false);
+                }
             }
         }
 
