@@ -59,8 +59,10 @@ public class TromerLevelManager : MonoBehaviour
     // Lista de tareas a completar: 0 = Task1, 1 = Task2, 2 = Task3, 3 = Emergencia(extra)
     public float timeToCompleteTasks = 10;
     public int tasksCompleteCount = 0;
-    [FormerlySerializedAs("tasksState")] public List<bool> tasksExteriorState;
+    public List<bool> tasksExteriorState;
     public List<Slider> tasksHUDSlider;
+    public List<TextMeshProUGUI> tasksHUDProgressText;
+    public List<TextMeshProUGUI> tasksObjectiveText;
     public List<float> tasksCurrentProgressTime;
 
     public bool openExitDoor = false;
@@ -291,6 +293,11 @@ public class TromerLevelManager : MonoBehaviour
         coinsText.text = coins.ToString();
     }
 
+    public bool GetTaskState(int taskID)
+    {
+        return tasksExteriorState[taskID-1];
+    }
+    
     // Progreso de las tareas del exterior:
     public void TaskInProgress(int taskID)
     {
@@ -300,7 +307,7 @@ public class TromerLevelManager : MonoBehaviour
         }
         
         float percentageProgress = (tasksCurrentProgressTime[taskID-1] / timeToCompleteTasks) * 100.0f;
-        //tasksHUDSlider[taskID].texto = $"{percentageProgress:F0}%"; (PENIENTE)
+        tasksHUDProgressText[taskID-1].text = $"{percentageProgress:F0}%";
         tasksHUDSlider[taskID-1].value = percentageProgress / 100.0f;
 
         // Si el progreso llega a su máximo, la tarea se completa.
@@ -313,6 +320,7 @@ public class TromerLevelManager : MonoBehaviour
     // Al completar una tarea:
     public void TaskComplete(int taskID)
     {
+        tasksObjectiveText[taskID-1].color = Color.green;
         tasksExteriorState[taskID-1] = true;
         tasksCompleteCount++;
             
@@ -329,8 +337,5 @@ public class TromerLevelManager : MonoBehaviour
         }
     }
     
-    public bool GetTaskState(int taskID)
-    {
-        return tasksExteriorState[taskID-1];
-    }
+    
 }

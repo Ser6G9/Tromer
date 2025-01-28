@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Room
 {
@@ -26,13 +27,14 @@ namespace Room
         public void SwitchCamera()
         {
             buttonCameraSelected = this.gameObject;
-            for (int i = 0; i < levelManager.securityCamerasButtons.Count; i++)
+            for (int i = 0; i < levelManager.securityCamerasScreens.Count; i++)
             {
-                if (buttonCameraSelected.name == levelManager.securityCamerasButtons[i].name)
+                if (buttonCameraSelected.name == levelManager.securityCamerasScreens[i].name)
                 {
                     levelManager.cameraSelected = i;
                     levelManager.securityCameras[i].gameObject.SetActive(true);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(true);
+                    //levelManager.securityCamerasButtons[i].GetComponent<Image>().color = Color.green;
                     TurnOtherCamerasOff(levelManager.cameraSelected);
                 }
             }
@@ -47,6 +49,7 @@ namespace Room
                 {
                     //levelManager.securityCameras[i].gameObject.SetActive(false);
                     levelManager.securityCamerasScreens[i].gameObject.SetActive(false);
+                    //levelManager.securityCamerasButtons[i].GetComponent<Image>().color = Color.gray;
                 }
             }
         }
