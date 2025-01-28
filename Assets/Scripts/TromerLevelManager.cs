@@ -56,7 +56,7 @@ public class TromerLevelManager : MonoBehaviour
     public List<GameObject> securityDoors;
     public List<Button> securityDoorsButtons;
     
-    // Lista de tareas a completar: 0 = Task1, 1 = Task2, 2 = Task3, 3 = Emergencia(extra)
+    // Lista de tareas del exterior a completar: 0 = Task1, 1 = Task2, 2 = Task3
     public float timeToCompleteTasks = 10;
     public int tasksCompleteCount = 0;
     public List<bool> tasksExteriorState;
@@ -65,7 +65,14 @@ public class TromerLevelManager : MonoBehaviour
     public List<Image> tasksHUDProgressBar;
     public List<TextMeshProUGUI> tasksObjectiveText;
     public List<float> tasksCurrentProgressTime;
+    
+    // Eventos de emergencia:
+    public bool emergencyRepairProgressOn = false;
+    public bool emergencyOxigenActive = false;
+    public float emergencyOxigenReductionSpeedMultiplier = 1.5f;
+    public TextMeshProUGUI emergencyText;
 
+    // La puerta de salida (victoria):
     public bool openExitDoor = false;
     public GameObject roomExitDoor;
     
@@ -197,7 +204,14 @@ public class TromerLevelManager : MonoBehaviour
         incrementationMark.gameObject.SetActive(false);
         if (oxigenProgressTime >= 0.0f) 
         {
-            oxigenProgressTime -= Time.deltaTime;
+            if (emergencyOxigenActive)
+            {
+                oxigenProgressTime -= Time.deltaTime * emergencyOxigenReductionSpeedMultiplier;
+            }
+            else
+            {
+                oxigenProgressTime -= Time.deltaTime;
+            }
         }
         else
         {

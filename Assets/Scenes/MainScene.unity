@@ -5008,6 +5008,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  emergencyRepairOn: 0
+  emergencyOxigenReductionSpeedMultiplier: 1.5
+  emergencyText: {fileID: 971014466}
   openExitDoor: 0
   roomExitDoor: {fileID: 397461753}
   totalOxigenTime: 90
