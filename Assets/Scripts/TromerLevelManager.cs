@@ -43,10 +43,11 @@ public class TromerLevelManager : MonoBehaviour
     public bool consoleOn = false;
     public GameObject consoleCamera;
     public GameObject consoleCanvas;
+    
     // Tareas Opcionales
     public bool optiTask1On = false;
     public GameObject optiTask1Camera;
-    public GameObject optiTask1Text;
+    public GameObject optiTask1HUDText;
 
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
@@ -301,8 +302,8 @@ public class TromerLevelManager : MonoBehaviour
         }
         
         ChangeRoomPlayerState(state);
-
         optiTask1On = state;
+        
     }
     
     // Se crea una Emergencia nueva dentro del juego:
