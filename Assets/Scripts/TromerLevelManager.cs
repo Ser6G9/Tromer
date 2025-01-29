@@ -68,11 +68,11 @@ public class TromerLevelManager : MonoBehaviour
     public List<float> tasksCurrentProgressTime;
     
     // Eventos de emergencia:
-    public float timeToRepairEmergency = 4;
+    public float timeToRepairEmergency = 4f;
     public bool emergencyActive = false;
     public float countDawnToAppearNextEmergency;
-    public float timeMinToAppearNextEmergency = 20;
-    public float timeMaxToAppearNextEmergency = 40;
+    public float timeMinToAppearNextEmergency = 20f;
+    public float timeMaxToAppearNextEmergency = 40f;
     public bool emergencyRepairInProgressOn = false;
     public float repairEmergencyProgress = 0;
     public GameObject emergencyHUDText;
@@ -80,7 +80,7 @@ public class TromerLevelManager : MonoBehaviour
     public TextMeshProUGUI emergencyHUDPercentage;
     // - Se reduce el oxigeno más rápido
     public GameObject emergencyOxigen;
-    public float emergencyOxigenReductionSpeedMultiplier = 3f;
+    public float emergencyOxigenReductionSpeedMultiplier = 8f;
 
     // La puerta de salida (victoria):
     public bool openExitDoor = false;

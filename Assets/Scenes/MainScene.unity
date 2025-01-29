@@ -5014,7 +5014,7 @@ MonoBehaviour:
   emergencyHUDSlider: {fileID: 1664616365}
   emergencyHUDPercentage: {fileID: 2128134275}
   emergencyOxigen: {fileID: 574285623}
-  emergencyOxigenReductionSpeedMultiplier: 3
+  emergencyOxigenReductionSpeedMultiplier: 8
   openExitDoor: 0
   roomExitDoor: {fileID: 397461753}
   totalOxigenTime: 220
@@ -6404,7 +6404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &574285624
 Transform:
   m_ObjectHideFlags: 0
@@ -6413,7 +6413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574285623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.665, y: 0, z: 7.505}
+  m_LocalPosition: {x: -3.498, y: 0, z: 7.517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 210799645}
@@ -12719,8 +12719,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: 190, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1069941062
 MonoBehaviour:
@@ -17648,7 +17648,7 @@ Transform:
   m_GameObject: {fileID: 1565685269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.202, y: 0.5, z: 1.333}
-  m_LocalScale: {x: 2.42142, y: 1, z: 2.3081398}
+  m_LocalScale: {x: 2.9, y: 1, z: 2.3081398}
   m_Children: []
   m_Father: {fileID: 574285624}
   m_RootOrder: 1
@@ -18346,7 +18346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187, y: -28.6}
+  m_AnchoredPosition: {x: 190, y: -32}
   m_SizeDelta: {x: 46.9, y: 30.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664616365
@@ -19936,7 +19936,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773559415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1996528263}
@@ -19944,7 +19944,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2173, y: 1114}
   m_SizeDelta: {x: 13156, y: 4466.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1773559417
@@ -19967,7 +19967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tarea opcional
+  m_text: Brecha de gas activa
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

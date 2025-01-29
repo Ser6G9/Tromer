@@ -6,13 +6,15 @@ using UnityEngine.Serialization;
 
 public class SensorDetectPresence : MonoBehaviour
 {
+    public bool isOnSensor = false;
     private TromerLevelManager levelManager;
     private void OnEnable()
     {
         levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+        isOnSensor = false;
     }
 
-    public bool isOnSensor = false;
+    
     public Collider target;
     public GameObject actionObject;
     public bool haveInteractionText = false;
@@ -44,7 +46,7 @@ public class SensorDetectPresence : MonoBehaviour
         
 
         // Si solo se pulsa una sola vez:
-        if (Input.GetKeyDown(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
+        if (Input.GetKeyDown(KeyCode.Space) && target.CompareTag("Player") && isOnSensor)
         {
             if (this.gameObject.name == "Terminal Sensor")
             {
@@ -57,7 +59,7 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToTerminalMode(false);
                 }
             }
-
+            
             if (this.gameObject.name == "Console Sensor")
             {
                 if (!levelManager.consoleOn)
@@ -69,7 +71,7 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToConsoleMode(false);
                 }
             }
-
+            
             if (this.gameObject.name == "OptiTask1 Sensor")
             {
                 if (!levelManager.optiTask1On)
@@ -84,21 +86,20 @@ public class SensorDetectPresence : MonoBehaviour
         }
 
         // Final victoria de la partida.
-        if (this.gameObject.name == "Door Exit Sensor" && target.gameObject.tag == "Player" && isOnSensor)
+        if (this.gameObject.name == "Door Exit Sensor" && target.CompareTag("Player") && isOnSensor)
         {
             levelManager.GameWin();
         }
         
         
         // Mientras se mantenga la tecla pulsada:
-        if (Input.GetKey(KeyCode.Space) && target.gameObject.tag == "Player" && isOnSensor)
+        if (Input.GetKey(KeyCode.Space) && target.CompareTag("Player") && isOnSensor)
         {
             if (this.gameObject.name == "Oxigen Sensor")
             {
                 levelManager.oxigenIncrementationOn = true;
-            }
-            
-            if (this.gameObject.name == "Emergency Sensor")
+            } 
+            else if (this.gameObject.name == "Emergency Sensor")
             {
                 levelManager.emergencyRepairInProgressOn = true;
             }
@@ -117,7 +118,7 @@ public class SensorDetectPresence : MonoBehaviour
         
         
         // Tareas del exterior:
-        if (target.gameObject.tag == "Dron" && isOnSensor)
+        if (target.CompareTag("Dron") && isOnSensor)
         {
             if (this.gameObject.name == "Task1 Sensor")
             {
