@@ -15,31 +15,24 @@ public class OptiTask1 : MonoBehaviour
     public bool taskComplete = false;
     public List<Button> taskButtons;
     public int taskButtonsActivedCount = 0;
-    public float oxigenPercentageToIncrement = 25;
+    public float oxigenPercentageToIncrement = 25f;
+    public float restoreTaskDelay = 60.0f;
+    public float restoreTaskTimeProgress = 0;
     
 
     // Update is called once per frame
     void Update()
     {
-        if (taskComplete)
+        if (taskComplete && restoreTaskTimeProgress < restoreTaskDelay)
         {
             levelManager.optiTask1HUDText.SetActive(true);
-        }
-        else
+            restoreTaskTimeProgress += Time.deltaTime;
+        } else if (restoreTaskTimeProgress >= restoreTaskDelay)
         {
-            levelManager.optiTask1HUDText.SetActive(false);
+            RestartTask();
         }
-    }
-   
-    public void OptiTask1State(bool state)
-    {
-        taskComplete = state;
         
-        if (taskComplete)
-        {
-            levelManager.oxigenProgressTime += (oxigenPercentageToIncrement * levelManager.totalOxigenTime) / 100;
-        }
-        else
+        if(!taskComplete)
         {
             levelManager.optiTask1HUDText.SetActive(false);
         }
@@ -59,11 +52,19 @@ public class OptiTask1 : MonoBehaviour
             taskComplete = true;
             levelManager.oxigenProgressTime += (oxigenPercentageToIncrement * levelManager.totalOxigenTime) / 100;
         }
+    }
+
+    public void RestartTask()
+    {
+        taskComplete = false;
+        restoreTaskTimeProgress = 0;
+        levelManager.optiTask1HUDText.SetActive(false);
+        taskButtonsActivedCount = 0;
         
-        /*else
+        for (int i = 0; i < taskButtons.Count; i++)
         {
-            taskButtons[button - 1].GetComponent<Image>().color = new Color(1f, 0.1784818f, 0.06132078f, 1f);
-            taskButtonsActivedCount--;
-        }*/
+            taskButtons[i].GetComponent<Image>().color = new Color(1f, 0.1784818f, 0.06132078f, 1f);
+        }
+        
     }
 }

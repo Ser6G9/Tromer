@@ -48,6 +48,7 @@ public class TromerLevelManager : MonoBehaviour
     public bool optiTask1On = false;
     public GameObject optiTask1Camera;
     public GameObject optiTask1HUDText;
+    public GameObject optiTask1Canvas;
 
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
@@ -109,6 +110,7 @@ public class TromerLevelManager : MonoBehaviour
         
         PlayerChangeToTerminalMode(false);
         PlayerChangeToConsoleMode(false);
+        PlayerChangeToOptiTaskMode(false, 1);
 
         DeactivateEmergency();
     }
@@ -298,6 +300,7 @@ public class TromerLevelManager : MonoBehaviour
         {
             case 1:
                 optiTask1Camera.gameObject.SetActive(state);
+                optiTask1Canvas.GetComponent<GraphicRaycaster>().enabled = state;
                 break;
         }
         
