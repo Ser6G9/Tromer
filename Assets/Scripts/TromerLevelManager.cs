@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class TromerLevelManager : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class TromerLevelManager : MonoBehaviour
     public List<Button> securityDoorsButtons;
     
     // Lista de tareas del exterior a completar: 0 = Task1, 1 = Task2, 2 = Task3
-    public float timeToCompleteTasks = 10;
+    public float timeToCompleteTasks = 30;
     public int tasksCompleteCount = 0;
     public List<bool> tasksExteriorState;
     public List<Slider> tasksHUDSlider;
@@ -67,17 +68,26 @@ public class TromerLevelManager : MonoBehaviour
     public List<float> tasksCurrentProgressTime;
     
     // Eventos de emergencia:
-    public bool emergencyRepairProgressOn = false;
-    public bool emergencyOxigenActive = false;
-    public float emergencyOxigenReductionSpeedMultiplier = 1.5f;
-    public TextMeshProUGUI emergencyText;
+    public float timeToRepairEmergency = 4;
+    public bool emergencyActive = false;
+    public float countDawnToAppearNextEmergency;
+    public float timeMinToAppearNextEmergency = 20;
+    public float timeMaxToAppearNextEmergency = 40;
+    public bool emergencyRepairInProgressOn = false;
+    public float repairEmergencyProgress = 0;
+    public GameObject emergencyHUDText;
+    public Slider emergencyHUDSlider;
+    public TextMeshProUGUI emergencyHUDPercentage;
+    // - Se reduce el oxigeno más rápido
+    public GameObject emergencyOxigen;
+    public float emergencyOxigenReductionSpeedMultiplier = 3f;
 
     // La puerta de salida (victoria):
     public bool openExitDoor = false;
     public GameObject roomExitDoor;
     
     // Gestión del contador de Oxígeno:
-    public float totalOxigenTime = 90;
+    public float totalOxigenTime = 220;
     public float oxigenProgressTime = 0;
     public bool oxigenIncrementationOn = false;
     public float oxigenIncrementationSpeed = 0.5f;
@@ -85,7 +95,6 @@ public class TromerLevelManager : MonoBehaviour
     public Slider oxigenSliderProgress;
     public GameObject incrementationMark;
     public GameObject oxigenLevel3DProgress;
-    public GameObject oxigen3DText;
     public float oxigenPercentage = 100;
     
     private void Start()
@@ -99,6 +108,8 @@ public class TromerLevelManager : MonoBehaviour
         
         PlayerChangeToTerminalMode(false);
         PlayerChangeToConsoleMode(false);
+
+        DeactivateEmergency();
     }
 
     private void Update()
@@ -125,6 +136,34 @@ public class TromerLevelManager : MonoBehaviour
         
         // Objetos recolectables
         UpdateCoinsText();
+
+        // Emergencias:
+        if (emergencyActive)
+        {
+            ShowEmergencyProgress();
+        }
+        
+        // El jugador está reparando la emergencia.
+        if (emergencyRepairInProgressOn)
+        {
+            ReparingEmergency();
+        }
+        // Si no hay una Emergencia en espera de aparecer (activa), se activa otra nueva y se le asigna un tiempo de espera de aparición.
+        else if (emergencyActive == false)
+        {
+            countDawnToAppearNextEmergency = Random.Range(timeMinToAppearNextEmergency, timeMaxToAppearNextEmergency);
+            emergencyActive = true;
+        }
+        // Si su tiempo de aparición llega a 0 se creará una Emergencia en la partida.
+        else if (countDawnToAppearNextEmergency >= 0.0f)
+        {
+            countDawnToAppearNextEmergency -= Time.deltaTime;
+        }
+        else
+        {
+            CreateEmergency();
+        }
+        
 
         // Abrir puerta de final de partida
         if (openExitDoor == true)
@@ -204,7 +243,8 @@ public class TromerLevelManager : MonoBehaviour
         incrementationMark.gameObject.SetActive(false);
         if (oxigenProgressTime >= 0.0f) 
         {
-            if (emergencyOxigenActive)
+            // La Emergencia de oxígeno hace que se reduzca más rápidamente.
+            if (emergencyOxigen.activeSelf)
             {
                 oxigenProgressTime -= Time.deltaTime * emergencyOxigenReductionSpeedMultiplier;
             }
@@ -263,6 +303,40 @@ public class TromerLevelManager : MonoBehaviour
         ChangeRoomPlayerState(state);
 
         optiTask1On = state;
+    }
+    
+    // Se crea una Emergencia nueva dentro del juego:
+    public void CreateEmergency()
+    {
+        emergencyOxigen.SetActive(true);
+        emergencyHUDText.SetActive(true);
+    }
+    public void ReparingEmergency()
+    {
+        // Si el tiempo de reparación se completa, se repara la Emergencia (desactiva).
+        if (repairEmergencyProgress <= timeToRepairEmergency)
+        {
+            repairEmergencyProgress += Time.deltaTime;
+        }
+        else
+        {
+            DeactivateEmergency();
+            emergencyRepairInProgressOn = false;
+            repairEmergencyProgress = 0;
+        }
+    }
+    public void DeactivateEmergency()
+    {
+        emergencyActive = false;
+        emergencyOxigen.SetActive(false);
+        emergencyHUDText.SetActive(false);
+    }
+
+    public void ShowEmergencyProgress()
+    {
+        float percentageProgress = (repairEmergencyProgress / timeToRepairEmergency) * 100.0f;
+        emergencyHUDPercentage.text = $"{percentageProgress:F0}%";
+        emergencyHUDSlider.value = percentageProgress / 100.0f;
     }
 
     // Abrir la puerta de salida:

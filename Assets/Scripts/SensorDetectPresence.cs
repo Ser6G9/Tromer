@@ -98,9 +98,9 @@ public class SensorDetectPresence : MonoBehaviour
                 levelManager.oxigenIncrementationOn = true;
             }
             
-            if (this.gameObject.name == "Oxigen Emergency Sensor")
+            if (this.gameObject.name == "Emergency Sensor")
             {
-                levelManager.emergencyRepairProgressOn = true;
+                levelManager.emergencyRepairInProgressOn = true;
             }
             
         }
@@ -108,9 +108,9 @@ public class SensorDetectPresence : MonoBehaviour
         {
             levelManager.oxigenIncrementationOn = false;
         }
-        else if (this.gameObject.name == "Oxigen Emergency Sensor")
+        else if (this.gameObject.name == "Emergency Sensor")
         {
-            levelManager.emergencyRepairProgressOn = false;
+            levelManager.emergencyRepairInProgressOn = false;
         }
             
         
