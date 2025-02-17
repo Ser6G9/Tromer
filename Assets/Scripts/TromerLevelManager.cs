@@ -11,6 +11,12 @@ using Random = UnityEngine.Random;
 
 public class TromerLevelManager : MonoBehaviour
 {
+    private TromerLevelManager enemyFollowPlayer;
+    private void OnEnable()
+    {
+        //enemyFollowPlayer = GameObject.FindObjectOfType<EnemyFollowPlayer>();
+    }
+    
     // Elementos del HUD:
     public GameObject youWin;
     public GameObject youLose;
@@ -28,11 +34,18 @@ public class TromerLevelManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public int coins = 0;
     
-    // Player y enemy controllers:
+    // PLAYER:
     public GameObject roomPlayerCamera;
     public GameObject roomPlayer;
-    public GameObject dron;
+    // ENEMY:
     public GameObject enemy;
+    // DRON:
+    public GameObject dron;
+    public bool dronEnabled = true;
+    public Material dronEnabledMaterial;
+    public Material dronDisabledMaterial;
+    public float dronMaxTimeToBeEnabled = 15.0f;
+    public float dronEnableTimer = 0.0f;
     
     // Terminal
     public bool terminalOn = false;
@@ -45,10 +58,16 @@ public class TromerLevelManager : MonoBehaviour
     public GameObject consoleCanvas;
     
     // Tareas Opcionales
+    // +25% de Oxígeno extra:
     public bool optiTask1On = false;
     public GameObject optiTask1Camera;
     public GameObject optiTask1HUDText;
     public GameObject optiTask1Canvas;
+    // Reparar el Dron:
+    public bool optiTask2On = false;
+    public GameObject optiTask2Camera;
+    public GameObject optiTask2HUDWarningText;
+    public GameObject optiTask2Canvas;
 
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
@@ -138,7 +157,7 @@ public class TromerLevelManager : MonoBehaviour
         }
         
         // Objetos recolectables
-        UpdateCoinsText();
+        /*UpdateCoinsText();*/
 
         // Emergencias:
         if (emergencyActive)
@@ -167,6 +186,15 @@ public class TromerLevelManager : MonoBehaviour
             CreateEmergency();
         }
         
+        // Autorreparación del dron con el tiempo
+        if (!dronEnabled && dronEnableTimer <= dronMaxTimeToBeEnabled)
+        {
+            dronEnableTimer += Time.deltaTime;
+        } else if (dronEnableTimer > dronMaxTimeToBeEnabled)
+        {
+            dronEnableTimer = 0;
+            DronEnabled(true);
+        }
 
         // Abrir puerta de final de partida
         if (openExitDoor == true)
@@ -221,7 +249,10 @@ public class TromerLevelManager : MonoBehaviour
         exitInteractionTxt.gameObject.SetActive(state);
         terminalCamera.gameObject.SetActive(state);
         terminalCanvas.GetComponent<GraphicRaycaster>().enabled = state;
-        dron.GetComponent<DronController>().enabled = state;
+        if(dronEnabled)
+        {
+            dron.GetComponent<DronController>().enabled = state;
+        }
         
         ChangeRoomPlayerState(state);
         
@@ -302,6 +333,10 @@ public class TromerLevelManager : MonoBehaviour
                 optiTask1Camera.gameObject.SetActive(state);
                 optiTask1Canvas.GetComponent<GraphicRaycaster>().enabled = state;
                 break;
+            case 2:
+                optiTask2Camera.gameObject.SetActive(state);
+                optiTask2Canvas.GetComponent<GraphicRaycaster>().enabled = state;
+                break;
         }
         
         ChangeRoomPlayerState(state);
@@ -381,10 +416,10 @@ public class TromerLevelManager : MonoBehaviour
     
     /* -- EXTERIOR -- */
     
-    public void UpdateCoinsText()
+    /*public void UpdateCoinsText()
     {
         coinsText.text = coins.ToString();
-    }
+    }*/
 
     public bool GetTaskState(int taskID)
     {
@@ -431,6 +466,27 @@ public class TromerLevelManager : MonoBehaviour
             openExitDoor = true;
         }
     }
-    
+
+    // Si el dron se deshabilita se bloqueará su movimiento y se activará una cuenta atras para su reactivación.
+    public void DronEnabled(bool state)
+    {
+        dronEnabled = state;
+        dron.GetComponent<DronController>().enabled = state;
+        if (state == true)
+        {
+            dron.tag = "Dron";
+            dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
+            dronEnableTimer = 0;
+            
+            // ProVISional
+            //EnemyFollowPlayer.SpawnEnemy();
+        }
+        else
+        {
+            dron.tag = "DronDisabled";
+            dron.GetComponent<MeshRenderer>().material = dronDisabledMaterial;
+        }
+        
+    }
     
 }

@@ -83,6 +83,18 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToOptiTaskMode(false, 1);
                 }
             }
+            
+            if (this.gameObject.name == "OptiTask2 Sensor")
+            {
+                if (!levelManager.optiTask2On)
+                {
+                    levelManager.PlayerChangeToOptiTaskMode(true, 2);
+                }
+                else
+                {
+                    levelManager.PlayerChangeToOptiTaskMode(false, 2);
+                }
+            }
         }
 
         // Final victoria de la partida.

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 namespace Room
@@ -30,6 +31,14 @@ namespace Room
         private void Update()
         {
             LocateMarker();
+            if (levelManager.dronEnabled)
+            {
+                dronMarker.GetComponent<Image>().color = new Color(0.8490566f, 0.8272718f, 0.004004993f, 1f);
+            }
+            else
+            {
+                dronMarker.GetComponent<Image>().color = new Color(1f, 0.5668886f, 0f, 1f);
+            }
         }
 
         private void LocateMarker()
@@ -46,6 +55,7 @@ namespace Room
             enemyMarkerPosition.y = ((levelManager.enemy.transform.localPosition.x - scenarioInferiorX) / (scenarioSupperiorX - scenarioInferiorX)) * (imgSupperiorY - imgInferiorY) + imgInferiorY;
             enemyMarker.GetComponent<RectTransform>().anchoredPosition = enemyMarkerPosition;
         }
+
     }
 
 }
