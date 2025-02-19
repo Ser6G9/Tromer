@@ -11,18 +11,18 @@ using Random = UnityEngine.Random;
 
 public class TromerLevelManager : MonoBehaviour
 {
-    private TromerLevelManager enemyFollowPlayer;
+    private EnemyFollowPlayer enemyFollowPlayer;
     private void OnEnable()
     {
-        //enemyFollowPlayer = GameObject.FindObjectOfType<EnemyFollowPlayer>();
+        enemyFollowPlayer = GameObject.FindObjectOfType<EnemyFollowPlayer>();
     }
     
     // Elementos del HUD:
     public GameObject youWin;
     public GameObject youLose;
-    public GameObject uControls;
-    public GameObject uControlsGuide;
-    public bool uControlsGuideOn = false;
+    public GameObject uTutorialGuideText;
+    public GameObject uTutorial;
+    public bool uTutorialOn = true;
     public GameObject pPause;
     public GameObject pauseMenu;
     public bool pauseMenuOn = false;
@@ -46,6 +46,7 @@ public class TromerLevelManager : MonoBehaviour
     public Material dronDisabledMaterial;
     public float dronMaxTimeToBeEnabled = 15.0f;
     public float dronEnableTimer = 0.0f;
+    public float dronReparingPercentage = 0.0f;
     
     // Terminal
     public bool terminalOn = false;
@@ -66,8 +67,8 @@ public class TromerLevelManager : MonoBehaviour
     // Reparar el Dron:
     public bool optiTask2On = false;
     public GameObject optiTask2Camera;
-    public GameObject optiTask2HUDWarningText;
-    public GameObject optiTask2Canvas;
+    public GameObject optiTask2HUDText;
+    public TextMeshProUGUI optiTask2HUDProgressText;
 
     // Controles de las camaras de seguridad:
     public List<GameObject> securityCameras;
@@ -187,9 +188,13 @@ public class TromerLevelManager : MonoBehaviour
         }
         
         // Autorreparación del dron con el tiempo
+        // HUD:
+        optiTask2HUDText.gameObject.SetActive(!dronEnabled);
         if (!dronEnabled && dronEnableTimer <= dronMaxTimeToBeEnabled)
         {
             dronEnableTimer += Time.deltaTime;
+            dronReparingPercentage = (dronEnableTimer / dronMaxTimeToBeEnabled) * 100;
+            optiTask2HUDProgressText.text = "Reparando: "+$"{dronReparingPercentage:F0}%";
         } else if (dronEnableTimer > dronMaxTimeToBeEnabled)
         {
             dronEnableTimer = 0;
@@ -202,20 +207,11 @@ public class TromerLevelManager : MonoBehaviour
             OpenRoomExitDoor();
         }
 
-        // HUD mostrar/ocultar guia de controles
+        // HUD mostrar/ocultar tutorial del juego
         if (Input.GetKeyDown(KeyCode.U))
         {
-            uControlsGuideOn = !uControlsGuideOn;
-        }
-        if (uControlsGuideOn)
-        {
-            uControls.SetActive(false);
-            uControlsGuide.SetActive(true);
-        } 
-        else
-        {
-            uControls.SetActive(true);
-            uControlsGuide.SetActive(false);
+            uTutorialOn = !uTutorialOn;
+            ShowTutorial(uTutorialOn);
         }
         
         // Pausar juego
@@ -224,6 +220,19 @@ public class TromerLevelManager : MonoBehaviour
             pauseMenuOn = !pauseMenuOn;
         }
         PauseMenuInteraction(pauseMenuOn);
+    }
+
+    public void ShowTutorial(bool state)
+    {
+        uTutorialGuideText.SetActive(!state);
+        uTutorial.SetActive(state);
+
+        if (uTutorialOn)
+        {
+            Time.timeScale = 0f;
+        } else {
+            Time.timeScale = 1f;
+        }
     }
 
     public void PauseMenuInteraction(bool state)
@@ -335,7 +344,7 @@ public class TromerLevelManager : MonoBehaviour
                 break;
             case 2:
                 optiTask2Camera.gameObject.SetActive(state);
-                optiTask2Canvas.GetComponent<GraphicRaycaster>().enabled = state;
+                optiTask2HUDText.GetComponent<GraphicRaycaster>().enabled = state;
                 break;
         }
         
@@ -472,6 +481,7 @@ public class TromerLevelManager : MonoBehaviour
     {
         dronEnabled = state;
         dron.GetComponent<DronController>().enabled = state;
+        
         if (state == true)
         {
             dron.tag = "Dron";
@@ -479,7 +489,7 @@ public class TromerLevelManager : MonoBehaviour
             dronEnableTimer = 0;
             
             // ProVISional
-            //EnemyFollowPlayer.SpawnEnemy();
+            enemyFollowPlayer.SpawnEnemy();
         }
         else
         {
