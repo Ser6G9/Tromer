@@ -125,6 +125,8 @@ public class TromerLevelManager : MonoBehaviour
         youWin.SetActive(false);
         youLose.SetActive(false);
         
+        ShowTutorial(uTutorialOn);
+        
         oxigenProgressTime = totalOxigenTime;
         ShowOxigenLevelProgress();
         
@@ -138,10 +140,10 @@ public class TromerLevelManager : MonoBehaviour
     private void Update()
     {
         // Se pausa el juego si ganas/pierdes o pones en pausa
-        if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn)
+        if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn || uTutorialOn)
         {
             Time.timeScale = 0f;
-        } else if (!pauseMenuOn)
+        } else if (!pauseMenuOn && !uTutorialOn)
         {
             Time.timeScale = 1f;
         }
@@ -210,12 +212,11 @@ public class TromerLevelManager : MonoBehaviour
         // HUD mostrar/ocultar tutorial del juego
         if (Input.GetKeyDown(KeyCode.U))
         {
-            uTutorialOn = !uTutorialOn;
-            ShowTutorial(uTutorialOn);
+            ShowTutorial(!uTutorialOn);
         }
         
         // Pausar juego
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenuOn = !pauseMenuOn;
         }
@@ -224,6 +225,7 @@ public class TromerLevelManager : MonoBehaviour
 
     public void ShowTutorial(bool state)
     {
+        uTutorialOn = state;
         uTutorialGuideText.SetActive(!state);
         uTutorial.SetActive(state);
 
