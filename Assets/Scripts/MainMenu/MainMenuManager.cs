@@ -12,6 +12,7 @@ namespace MainMenu
         public GameObject registerPanel;
         public string userName;
         public TextMeshProUGUI userNameText;
+        public TextMeshProUGUI scoreBoardText;
 
         public void Start()
         {
