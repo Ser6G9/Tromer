@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b021b3a0230c99146b13af703bf7fb87
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - loginDataSO: {fileID: 11400000, guid: a33b58517596c9142966e331ac91e8fe, type: 2}
+  - nameInput: {instanceID: 0}
+  - emailInput: {instanceID: 0}
+  - passwordInput: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
