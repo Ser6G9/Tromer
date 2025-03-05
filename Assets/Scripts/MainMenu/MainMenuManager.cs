@@ -16,19 +16,18 @@ namespace MainMenu
 
         public void Start()
         {
-            mainMenuPanel.SetActive(false);
-            registerPanel.SetActive(false);
-            loginPanel.SetActive(true);
+            ChangeLoginPanel();
         }
 
         public void Update()
         {
-            userNameText.text = userName;
+            
         }
 
         public void UserName(string name)
         {
             userName = name;
+            userNameText.text = userName;
         }
         
         public void ChangeMainMenuPanel()
