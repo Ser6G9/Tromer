@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameLevelDto
+public class LeaderBoardDto
 {
     public int Id { get; set; }
     public int UserId { get; set; }

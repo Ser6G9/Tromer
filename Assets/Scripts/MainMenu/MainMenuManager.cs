@@ -17,6 +17,8 @@ namespace MainMenu
         public void Start()
         {
             ChangeLoginPanel();
+            LeaderBoard leaderboard = FindObjectOfType<LeaderBoard>();
+            leaderboard.GetLeaderBoard();
         }
 
         public void Update()
