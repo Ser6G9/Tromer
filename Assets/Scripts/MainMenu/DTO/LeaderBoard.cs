@@ -24,21 +24,21 @@ public class LeaderBoard : MonoBehaviour
         {
             string url = apiData.apiUrl + "/LeaderBoardL1/GetClassificationLevel1";
 
-            using (UnityWebRequest request = UnityWebRequest.Get(url))
+            using (UnityWebRequest httpClient = UnityWebRequest.Get(url))
             {
-                request.SetRequestHeader("Accept", "application/json");
-                request.SetRequestHeader("Authorization", "Bearer " + apiData.token); // Si la API requiere token
+                httpClient.SetRequestHeader("Accept", "application/json");
+                httpClient.SetRequestHeader("Authorization", "Bearer " + apiData.token);
 
-                yield return request.SendWebRequest();
+                yield return httpClient.SendWebRequest();
 
-                if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+                if (httpClient.result == UnityWebRequest.Result.ConnectionError || httpClient.result == UnityWebRequest.Result.ProtocolError)
                 {
-                    Debug.LogError("Error en la petición: " + request.error);
+                    Debug.LogError("Error en la petición: " + httpClient.error);
                     leaderboardText.text = "No se pudo obtener la clasificación.";
                     yield break;
                 }
 
-                string jsonResponse = request.downloadHandler.text;
+                string jsonResponse = httpClient.downloadHandler.text;
 
                 try
                 {
@@ -56,7 +56,7 @@ public class LeaderBoard : MonoBehaviour
 
         private void ShowLeaderBoard()
         {
-            leaderboardText.text = ""; // Limpiamos el texto antes de mostrar
+            leaderboardText.text = "";
 
             if (leaderBoardList.Count > 0)
             {
