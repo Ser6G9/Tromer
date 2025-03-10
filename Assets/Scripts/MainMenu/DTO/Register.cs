@@ -64,6 +64,7 @@ namespace MainMenu.DTO
                 
                 MainMenuManager manager = GameObject.FindObjectOfType<MainMenuManager>();
                 manager.ChangeMainMenuPanel();
+                manager.UserData(user);
             }
         }
     }

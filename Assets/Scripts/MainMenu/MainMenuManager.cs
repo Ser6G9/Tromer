@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MainMenu.DTO;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +8,10 @@ namespace MainMenu
 {
     public class MainMenuManager : MonoBehaviour
     {
+        public User User;
         public GameObject mainMenuPanel;
         public GameObject loginPanel;
         public GameObject registerPanel;
-        public string userName;
         public TextMeshProUGUI userNameText;
         public TextMeshProUGUI scoreBoardText;
 
@@ -26,10 +27,16 @@ namespace MainMenu
             
         }
 
-        public void UserName(string name)
+        public void UserData(User u)
         {
-            userName = name;
-            userNameText.text = userName;
+            User = u;
+            userNameText.text = User.name;
+        }
+
+        public void Logout()
+        {
+            UserData(null);
+            ChangeLoginPanel();
         }
         
         public void ChangeMainMenuPanel()

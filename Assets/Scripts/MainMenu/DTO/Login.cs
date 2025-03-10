@@ -63,8 +63,12 @@ namespace MainMenu.DTO
 
                 MainMenuManager manager = GameObject.FindObjectOfType<MainMenuManager>();
                 manager.ChangeMainMenuPanel();
-                manager.UserName(user.name);
+                manager.UserData(user);
                 
+            }
+            else
+            {
+                Debug.Log("User is not null: "+user.name);
             }
         }
     }
