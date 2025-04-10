@@ -7,5 +7,5 @@ using UnityEngine;
 public class NetworkingDataScriptableObject : ScriptableObject
 {
     public string apiUrl = "https://tromer-api.azurewebsites.net/api";
-    public string token;
+    public string token = "xwjZjJrd7M9kJZUZxkJ3F5gxNCNGGXAgmrrtzFpPcilL2YKFluCj5Cm5np41";
 }

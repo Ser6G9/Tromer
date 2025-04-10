@@ -30,7 +30,15 @@ namespace MainMenu
         public void UserData(User u)
         {
             User = u;
-            userNameText.text = User.name;
+            if (u != null)
+            {
+                userNameText.text = User.name;
+            }
+            else
+            {
+                userNameText.text = null;
+            }
+            
         }
 
         public void Logout()
