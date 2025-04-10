@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd562891c1721f4b8f802eebd0996f8, type: 3}
   m_Name: LoginData
   m_EditorClassIdentifier: 
-  apiUrl: https://tromer-api.azurewebsites.net/api
-  token: 
+  apiUrl: https://phpstack-1076337-5399863.cloudwaysapps.com
+  token: xwjZjJrd7M9kJZUZxkJ3F5gxNCNGGXAgmrrtzFpPcilL2YKFluCj5Cm5np41

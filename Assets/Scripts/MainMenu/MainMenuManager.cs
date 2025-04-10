@@ -17,9 +17,13 @@ namespace MainMenu
 
         public void Start()
         {
+            /* Escena LoginRegisterMenu:
             ChangeLoginPanel();
             LeaderBoard leaderboard = FindObjectOfType<LeaderBoard>();
-            leaderboard.GetLeaderBoard();
+            leaderboard.GetLeaderBoard();*/
+            
+            ScoreBoard leaderboard = FindObjectOfType<ScoreBoard>();
+            leaderboard.GetScoreBoard();
         }
 
         public void Update()
@@ -27,6 +31,9 @@ namespace MainMenu
             
         }
 
+        
+        
+        // --- Escena LoginRegisterMenu: ---
         public void UserData(User u)
         {
             User = u;

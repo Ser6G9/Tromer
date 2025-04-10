@@ -3,7 +3,42 @@ guid: 09cfbba67f648d048898cb3b7bcfeb9e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - youWin: {instanceID: 0}
+  - youLose: {instanceID: 0}
+  - uTutorialGuideText: {instanceID: 0}
+  - uTutorial: {instanceID: 0}
+  - pPause: {instanceID: 0}
+  - pauseMenu: {instanceID: 0}
+  - menaceLevelText: {instanceID: 0}
+  - alertDoorOpenTxt: {instanceID: 0}
+  - exitInteractionTxt: {instanceID: 0}
+  - coinsText: {instanceID: 0}
+  - roomPlayerCamera: {instanceID: 0}
+  - roomPlayer: {instanceID: 0}
+  - enemy: {fileID: 8185919989643036162, guid: 27100233bbe589d45aa02dcb13160f35, type: 3}
+  - dron: {fileID: 4437612318523890678, guid: dab14231ba5f66748857755068c15dbe, type: 3}
+  - dronEnabledMaterial: {instanceID: 0}
+  - dronDisabledMaterial: {instanceID: 0}
+  - terminalCamera: {instanceID: 0}
+  - terminalCanvas: {instanceID: 0}
+  - consoleCamera: {instanceID: 0}
+  - consoleCanvas: {instanceID: 0}
+  - optiTask1Camera: {instanceID: 0}
+  - optiTask1HUDText: {instanceID: 0}
+  - optiTask1Canvas: {instanceID: 0}
+  - optiTask2Camera: {instanceID: 0}
+  - optiTask2HUDText: {instanceID: 0}
+  - optiTask2HUDProgressText: {instanceID: 0}
+  - emergencyHUDText: {instanceID: 0}
+  - emergencyHUDSlider: {instanceID: 0}
+  - emergencyHUDPercentage: {instanceID: 0}
+  - emergencyOxigen: {instanceID: 0}
+  - roomExitDoor: {instanceID: 0}
+  - oxigenProgressText: {instanceID: 0}
+  - oxigenSliderProgress: {instanceID: 0}
+  - incrementationMark: {instanceID: 0}
+  - oxigenLevel3DProgress: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

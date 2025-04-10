@@ -6,6 +6,6 @@ using UnityEngine;
 
 public class NetworkingDataScriptableObject : ScriptableObject
 {
-    public string apiUrl = "https://tromer-api.azurewebsites.net/api";
+    public string apiUrl = "https://phpstack-1076337-5399863.cloudwaysapps.com";
     public string token = "xwjZjJrd7M9kJZUZxkJ3F5gxNCNGGXAgmrrtzFpPcilL2YKFluCj5Cm5np41";
 }
