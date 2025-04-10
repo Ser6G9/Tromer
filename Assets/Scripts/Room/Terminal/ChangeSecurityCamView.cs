@@ -9,10 +9,10 @@ namespace Room
 {
     public class ChangeSecurityCamView : MonoBehaviour
     {
-        private TromerLevelManager levelManager;
+        private GameManager levelManager;
         private void OnEnable()
         {
-            levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+            levelManager = GameObject.FindObjectOfType<GameManager>();
         }
         
         public GameObject buttonCameraSelected;

@@ -10,11 +10,11 @@ namespace Exterior
 {
     public class EnemyFollowPlayer : MonoBehaviour
     {
-        private TromerLevelManager levelManager;
+        private GameManager levelManager;
         private ConsoleMinimap ConsoleMinimap;
         private void OnEnable()
         {
-            levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+            levelManager = GameObject.FindObjectOfType<GameManager>();
             ConsoleMinimap = GameObject.FindObjectOfType<ConsoleMinimap>();
         }
         

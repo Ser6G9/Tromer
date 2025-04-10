@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class OptiTask1 : MonoBehaviour
 {
-    private TromerLevelManager levelManager;
+    private GameManager levelManager;
     private void OnEnable()
     {
-        levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+        levelManager = GameObject.FindObjectOfType<GameManager>();
     }
     
     // OptiTask 1: (pulsar todos los botones)

@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class TromerLevelManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private EnemyFollowPlayer enemyFollowPlayer;
     private void OnEnable()

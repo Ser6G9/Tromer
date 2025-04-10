@@ -7,10 +7,10 @@ using UnityEngine.Serialization;
 public class SensorDetectPresence : MonoBehaviour
 {
     public bool isOnSensor = false;
-    private TromerLevelManager levelManager;
+    private GameManager levelManager;
     private void OnEnable()
     {
-        levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+        levelManager = GameObject.FindObjectOfType<GameManager>();
         isOnSensor = false;
     }
 

@@ -9,10 +9,10 @@ namespace Room
 {
     public class ConsoleMinimap : MonoBehaviour
     {
-        private TromerLevelManager levelManager;
+        private GameManager levelManager;
         private void OnEnable()
         {
-            levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+            levelManager = GameObject.FindObjectOfType<GameManager>();
         }
         
         public float imgSupperiorX;

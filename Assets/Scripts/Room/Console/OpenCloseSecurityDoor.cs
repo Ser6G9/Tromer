@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class OpenCloseSecurityDoor : MonoBehaviour
 {
-    private TromerLevelManager levelManager;
+    private GameManager levelManager;
     private void OnEnable()
     {
-        levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+        levelManager = GameObject.FindObjectOfType<GameManager>();
     }
     
     public void OpenDoor()

@@ -8,10 +8,10 @@ namespace Exterior
 {
     public class CameraFollowDron : MonoBehaviour
     {
-        private TromerLevelManager _levelManager;
+        private GameManager _levelManager;
         private void OnEnable()
         {
-            _levelManager = GameObject.FindObjectOfType<TromerLevelManager>();
+            _levelManager = GameObject.FindObjectOfType<GameManager>();
         }
 
         public float rotationSpeed;
