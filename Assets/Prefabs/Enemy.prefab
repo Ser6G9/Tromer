@@ -193,6 +193,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  animator: {fileID: 8472211140753162318}
+  enemyInstance: {fileID: 8185919989643036162}
 --- !u!195 &8185919989643036172
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -313,5 +315,10 @@ PrefabInstance:
 --- !u!4 &8472211140743917486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 290884568573959264, guid: 6ec18304030011c47aaa07296ea319e0, type: 3}
+  m_PrefabInstance: {fileID: 8185919990446928846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8472211140753162318 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 290884568580928384, guid: 6ec18304030011c47aaa07296ea319e0, type: 3}
   m_PrefabInstance: {fileID: 8185919990446928846}
   m_PrefabAsset: {fileID: 0}

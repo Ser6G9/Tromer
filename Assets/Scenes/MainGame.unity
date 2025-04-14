@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3361363}
   m_Layer: 0
   m_Name: Spawn2
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4294,7 +4294,7 @@ GameObject:
   - component: {fileID: 259591872}
   m_Layer: 0
   m_Name: Spawn6
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6280,7 +6280,7 @@ GameObject:
   - component: {fileID: 405338702}
   m_Layer: 0
   m_Name: Spawn3
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6830,6 +6830,7 @@ MonoBehaviour:
   roomPlayerCamera: {fileID: 541277323}
   roomPlayer: {fileID: 131730692}
   enemy: {fileID: 1048029502}
+  enemyInstance: {fileID: 0}
   dron: {fileID: 1453399521}
   dronEnabled: 1
   dronEnabledMaterial: {fileID: 2100000, guid: 9bcecf9881762e349bfd8dc2732d73d3, type: 2}
@@ -17549,7 +17550,7 @@ GameObject:
   - component: {fileID: 1157623337}
   m_Layer: 0
   m_Name: Spawn5
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22714,7 +22715,7 @@ GameObject:
   - component: {fileID: 1565690974}
   m_Layer: 0
   m_Name: Spawn4
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24161,7 +24162,7 @@ GameObject:
   - component: {fileID: 1696951111}
   m_Layer: 0
   m_Name: Spawn1
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26519,6 +26520,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823193325}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1823425346 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8472211140753162318, guid: 27100233bbe589d45aa02dcb13160f35, type: 3}
+  m_PrefabInstance: {fileID: 1831330483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1823575940
 GameObject:
   m_ObjectHideFlags: 0
@@ -26673,6 +26679,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1453399522}
+    - target: {fileID: 8185919989643036173, guid: 27100233bbe589d45aa02dcb13160f35, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1823425346}
     - target: {fileID: 8185919989643036173, guid: 27100233bbe589d45aa02dcb13160f35, type: 3}
       propertyPath: spawn.Array.size
       value: 6

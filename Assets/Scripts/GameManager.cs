@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject roomPlayer;
     // ENEMY:
     public GameObject enemy;
+    public GameObject enemyInstance;
     // DRON:
     public GameObject dron;
     public bool dronEnabled = true;
@@ -492,6 +493,7 @@ public class GameManager : MonoBehaviour
             
             // ProVISional
             enemyFollowPlayer.SpawnEnemy();
+            //Instantiate(enemyInstance, spawnPoint.transform.position, Quaternion.identity);
         }
         else
         {

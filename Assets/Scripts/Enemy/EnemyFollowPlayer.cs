@@ -22,6 +22,7 @@ namespace Exterior
         public Transform target;
         private NavMeshAgent navMeshAgent;
         public List<GameObject> spawn;
+        public Animator animator;
         
         
         void Start()
@@ -46,6 +47,8 @@ namespace Exterior
         {
             if (other.gameObject.CompareTag("Dron"))
             {
+                animator.SetTrigger("isAttacking"); // TODO
+
                 this.gameObject.SetActive(false);
                 ConsoleMinimap.enemyMarker.gameObject.SetActive(false);
                 levelManager.DronEnabled(false);
