@@ -24,6 +24,7 @@ namespace MainMenu
             
             ScoreBoard leaderboard = FindObjectOfType<ScoreBoard>();
             leaderboard.GetScoreBoard();
+            Time.timeScale = 1f;
         }
 
         public void Update()
