@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 public class ScoreBoard : MonoBehaviour
 {
     public NetworkingDataScriptableObject apiData;
+    public TextMeshProUGUI playersBoardText;
     public TextMeshProUGUI scoreBoardText;
 
     private List<ScoreBoardDto> scoreBoardList = new List<ScoreBoardDto>();
@@ -33,7 +34,7 @@ public class ScoreBoard : MonoBehaviour
             if (httpClient.result == UnityWebRequest.Result.ConnectionError || httpClient.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error en la petición: " + httpClient.error);
-                scoreBoardText.text = "No se pudo obtener la clasificación.";
+                playersBoardText.text = "No se pudo obtener la clasificación.";
                 yield break;
             }
 
@@ -49,20 +50,30 @@ public class ScoreBoard : MonoBehaviour
             catch (Exception ex)
             {
                 Debug.LogError("Error al deserializar JSON: " + ex.Message);
-                scoreBoardText.text = "Error al cargar la clasificación.";
+                playersBoardText.text = "Error al cargar la clasificación.";
             }
         }
     }
     
     private void ShowScoreBoard()
     {
+        playersBoardText.text = "";
         scoreBoardText.text = "";
-
+        int count = 0;
         if (scoreBoardList.Count > 0)
         {
             foreach (var player in scoreBoardList)
             {
-                scoreBoardText.text += $"{player.Puntuacion}  -  {player.Name}\n";
+                count++;
+                if (count <= 6)
+                {
+                    playersBoardText.text += $"{count}. {player.Name}\n";
+                    scoreBoardText.text += $"-  {player.Puntuacion}\n";
+                    if (count == 6)
+                    {
+                        break;
+                    }
+                }
             }
         }
         else

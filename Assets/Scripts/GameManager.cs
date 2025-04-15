@@ -216,18 +216,24 @@ public class GameManager : MonoBehaviour
             OpenRoomExitDoor();
         }
 
-        // -- HUD mostrar/ocultar tutorial del juego
-        if (Input.GetKeyDown(KeyCode.U))
+        // Se deshabilitan las interacciones con el HUD del juego según la siuación.
+        if (!saveScoreMenuOn && !youLose.activeSelf && !youWin.activeSelf)
         {
-            ShowTutorial(!uTutorialOn);
+            // -- HUD mostrar/ocultar tutorial del juego
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                ShowTutorial(!uTutorialOn);
+            }
+            
+            // -- Pausar juego
+            if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseMenuOn = !pauseMenuOn;
+            }
+            PauseMenuInteraction(pauseMenuOn);
         }
+
         
-        // -- Pausar juego
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseMenuOn = !pauseMenuOn;
-        }
-        PauseMenuInteraction(pauseMenuOn);
     }
 
     public void ShowTutorial(bool state)

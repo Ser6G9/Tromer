@@ -6,15 +6,15 @@ public class ShowSaveScoreMenu : MonoBehaviour
 {
     public GameObject scoreMenu;
     
-    
-    // Start is called before the first frame update
-    void Start()
+    private GameManager gameManager;
+    private void OnEnable()
     {
-        
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     public void StartSaveScoreMenu()
     {
+        gameManager.saveScoreMenuOn = true;
         scoreMenu.SetActive(true);
     }
 }
