@@ -29,10 +29,15 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI menaceLevelText;
     public GameObject alertDoorOpenTxt;
     public GameObject exitInteractionTxt;
+    public GameObject saveScoreMenu;
+    public bool saveScoreMenuOn = false;
 
     // Cada vez que el dron recoja una coin, el HUD sumará +1 al contador
     public TextMeshProUGUI coinsText;
     public int coins = 0;
+    
+    // Puntuación
+    public int score;
     
     // PLAYER:
     public GameObject roomPlayerCamera;
@@ -125,6 +130,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         youWin.SetActive(false);
         youLose.SetActive(false);
+        saveScoreMenu.SetActive(false);
         
         ShowTutorial(uTutorialOn);
         
@@ -140,7 +146,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // Se pausa el juego si ganas/pierdes o pones en pausa
+        // -- Se pausa el juego si ganas/pierdes o pones en pausa
         if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn || uTutorialOn)
         {
             Time.timeScale = 0f;
@@ -149,7 +155,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
         }
         
-        // ¿Se está aumentando o no el Oxigeno?
+        // -- ¿Se está aumentando o no el Oxigeno?
         ShowOxigenLevelProgress();
         if (oxigenIncrementationOn)
         {
@@ -163,7 +169,7 @@ public class GameManager : MonoBehaviour
         // Objetos recolectables
         /*UpdateCoinsText();*/
 
-        // Emergencias:
+        // -- Emergencias:
         if (emergencyActive)
         {
             ShowEmergencyProgress();
@@ -191,7 +197,7 @@ public class GameManager : MonoBehaviour
         }
         
         // Autorreparación del dron con el tiempo
-        // HUD:
+        // -- HUD:
         optiTask2HUDText.gameObject.SetActive(!dronEnabled);
         if (!dronEnabled && dronEnableTimer <= dronMaxTimeToBeEnabled)
         {
@@ -204,19 +210,19 @@ public class GameManager : MonoBehaviour
             DronEnabled(true);
         }
 
-        // Abrir puerta de final de partida
+        // -- Abrir puerta de final de partida
         if (openExitDoor == true)
         {
             OpenRoomExitDoor();
         }
 
-        // HUD mostrar/ocultar tutorial del juego
+        // -- HUD mostrar/ocultar tutorial del juego
         if (Input.GetKeyDown(KeyCode.U))
         {
             ShowTutorial(!uTutorialOn);
         }
         
-        // Pausar juego
+        // -- Pausar juego
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenuOn = !pauseMenuOn;
@@ -423,6 +429,12 @@ public class GameManager : MonoBehaviour
     public void GameWin()
     {
         youWin.SetActive(true);
+    }
+    
+    public void ShowSaveScoreMenu()
+    {
+        saveScoreMenu.SetActive(true);
+        saveScoreMenuOn = true;
     }
     
     

@@ -62,7 +62,7 @@ public class ScoreBoard : MonoBehaviour
         {
             foreach (var player in scoreBoardList)
             {
-                scoreBoardText.text += $"{player.Name}  -  {player.Puntuacion}\n \n";
+                scoreBoardText.text += $"{player.Puntuacion}  -  {player.Name}\n";
             }
         }
         else
