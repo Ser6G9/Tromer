@@ -95,6 +95,15 @@ public class SensorDetectPresence : MonoBehaviour
                     levelManager.PlayerChangeToOptiTaskMode(false, 2);
                 }
             }
+            
+            if (this.gameObject.name == "Oxigen Sensor")
+            {
+                levelManager.oxigenIncrementationOn = true;
+            }
+            
+        } else if (this.gameObject.name == "Oxigen Sensor")
+        {
+            levelManager.oxigenIncrementationOn = false;
         }
 
         // Final victoria de la partida.
@@ -107,19 +116,11 @@ public class SensorDetectPresence : MonoBehaviour
         // Mientras se mantenga la tecla pulsada:
         if (Input.GetKey(KeyCode.Space) && target.CompareTag("Player") && isOnSensor)
         {
-            if (this.gameObject.name == "Oxigen Sensor")
-            {
-                levelManager.oxigenIncrementationOn = true;
-            } 
-            else if (this.gameObject.name == "Emergency Sensor")
+            if (this.gameObject.name == "Emergency Sensor")
             {
                 levelManager.emergencyRepairInProgressOn = true;
             }
             
-        }
-        else if (this.gameObject.name == "Oxigen Sensor")
-        {
-            levelManager.oxigenIncrementationOn = false;
         }
         else if (this.gameObject.name == "Emergency Sensor")
         {

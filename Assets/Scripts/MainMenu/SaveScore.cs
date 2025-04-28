@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class SaveScore : MonoBehaviour
 {
@@ -20,11 +22,16 @@ public class SaveScore : MonoBehaviour
     
     public TMP_InputField userName;
     public TextMeshProUGUI saveScoreText;
+    public TextMeshProUGUI statsScoreText;
+    public Button buttonSaveScore;
     
     private GameManager gameManager;
+    private ScoreManager scoreManager;
     private void OnEnable()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
+        ShowScoreStats();
     }
 
     public void SaveTotalScore()
@@ -61,13 +68,29 @@ public class SaveScore : MonoBehaviour
             if (httpClient.result == UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Respuesta de la API: " + httpClient.downloadHandler.text);
-                saveScoreText.text = "Puntuación de "+ playerName +": " + totalScore;
+                saveScoreText.gameObject.SetActive(true);
+                saveScoreText.text = "Puntuación guardada:\n"+ playerName +" - " + totalScore;
+                buttonSaveScore.interactable = false;
+                statsScoreText.gameObject.SetActive(false);
             } 
             else
             {
                 Debug.LogError("Error en la petición: " + httpClient.error);
-                saveScoreText.text = "No se pudo guardar la puntuación.";
+                saveScoreText.gameObject.SetActive(true);
+                saveScoreText.text = "Error\nNo se pudo guardar la puntuación";
+                statsScoreText.gameObject.SetActive(false);
             }
         }
+    }
+
+    public void ShowScoreStats()
+    {
+        saveScoreText.gameObject.SetActive(false);
+        statsScoreText.text = "Tiempo: "+ scoreManager.totalPlayTime +"\n"+
+                              "Veces que se ha repuesto oxígeno: "+ scoreManager.totalOxigenIncrementations +"\n"+
+                              "Tareas completadas: "+ gameManager.tasksCompleteCount +"\n"+
+                              "Brechas de gas selladas: "+ scoreManager.totalEmergencysFixed +"\n"+
+                              "Averías del Dron: "+ scoreManager.totalDronCrashes +"\n"+
+                              "\nPuntuación total: " + gameManager.score;
     }
 }

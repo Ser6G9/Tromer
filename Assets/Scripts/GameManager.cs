@@ -12,9 +12,11 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     private EnemyFollowPlayer enemyFollowPlayer;
+    private ScoreManager scoreManager;
     private void OnEnable()
     {
         enemyFollowPlayer = GameObject.FindObjectOfType<EnemyFollowPlayer>();
+        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
     }
     
     // Elementos del HUD:
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject pPause;
     public GameObject pauseMenu;
     public bool pauseMenuOn = false;
-    public TextMeshProUGUI menaceLevelText;
+    public TextMeshProUGUI currentPlayTime;
     public GameObject alertDoorOpenTxt;
     public GameObject exitInteractionTxt;
     public GameObject saveScoreMenu;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     
     // Puntuación
     public int score;
+    public bool scoreSet= false;
     
     // PLAYER:
     public GameObject roomPlayerCamera;
@@ -125,6 +128,7 @@ public class GameManager : MonoBehaviour
     public GameObject oxigenLevel3DProgress;
     public float oxigenPercentage = 100;
     
+    
     private void Start()
     {
         Time.timeScale = 1f;
@@ -146,14 +150,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // -- Se pausa el juego si ganas/pierdes o pones en pausa
-        if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn || uTutorialOn)
-        {
-            Time.timeScale = 0f;
-        } else if (!pauseMenuOn && !uTutorialOn)
-        {
-            Time.timeScale = 1f;
-        }
+        
+        CheckIfGameIsPaused();
+        
+        // -- Cronometro del tiempo de juego --
+        currentPlayTime.text = "Tiempo de juego: "+ scoreManager.totalPlayTime;
         
         // -- ¿Se está aumentando o no el Oxigeno?
         ShowOxigenLevelProgress();
@@ -234,6 +235,21 @@ public class GameManager : MonoBehaviour
         }
 
         
+    }
+
+    public bool CheckIfGameIsPaused()
+    {
+        // -- Se pausa el juego si ganas/pierdes o pones en pausa
+        if (youWin.activeSelf || youLose.activeSelf || pauseMenuOn || uTutorialOn)
+        {
+            Time.timeScale = 0f;
+            return true;
+        } else if (!pauseMenuOn && !uTutorialOn)
+        {
+            Time.timeScale = 1f;
+            return false;
+        }
+        return false;
     }
 
     public void ShowTutorial(bool state)
@@ -321,11 +337,14 @@ public class GameManager : MonoBehaviour
     // Incrementar el medidor de oxígeno:
     public void OxigenIncrementation()
     {
-        if (oxigenProgressTime <= totalOxigenTime && oxigenProgressTime > 0.0f) 
+        if (oxigenProgressTime <= totalOxigenTime && oxigenProgressTime > 0.0f) // && CheckIfGameIsPaused() == false
         {
-            // El oxigeno se incrementará en relación a la velocidad de incremntación
-            oxigenProgressTime += Time.deltaTime * oxigenIncrementationSpeed;
+            /*// El oxigeno se incrementará en relación a la velocidad de incremntación
+            oxigenProgressTime += Time.deltaTime * oxigenIncrementationSpeed;*/
             incrementationMark.gameObject.SetActive(true);
+            
+            oxigenProgressTime += totalOxigenTime * 0.01f; // se sube un 1%
+            scoreManager.totalOxigenIncrementations++;
         }
     }
 
@@ -386,6 +405,8 @@ public class GameManager : MonoBehaviour
             DeactivateEmergency();
             emergencyRepairInProgressOn = false;
             repairEmergencyProgress = 0;
+            
+            scoreManager.totalEmergencysFixed++;
         }
     }
     public void DeactivateEmergency()
@@ -431,10 +452,21 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         youLose.SetActive(true);
+        if(!scoreSet)
+        {
+            score = scoreManager.CalculateTotalScore(false);
+            scoreSet = true;
+        }
+        
     }
     public void GameWin()
     {
         youWin.SetActive(true);
+        if(!scoreSet)
+        {
+            score = scoreManager.CalculateTotalScore(true);
+            scoreSet = true;
+        }
     }
     
     public void ShowSaveScoreMenu()
@@ -483,12 +515,6 @@ public class GameManager : MonoBehaviour
         tasksHUDProgressBar[taskID-1].color = Color.green;
         tasksExteriorState[taskID-1] = true;
         tasksCompleteCount++;
-            
-        //  Se aumenta el nivel de pelígro/dificultad del 1 al 3 máximo.
-        if (tasksCompleteCount+1 <= 3)
-        {
-            menaceLevelText.text = "Nivel de peligro: "+(tasksCompleteCount+1);
-        }
         
         // Al completar todas las tareas, se abre la puerta para ganar.
         if (tasksCompleteCount == tasksExteriorState.Count)
@@ -506,7 +532,7 @@ public class GameManager : MonoBehaviour
         if (state == true)
         {
             dron.tag = "Dron";
-            dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
+            //dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
             dronEnableTimer = 0;
             
             // ProVISional
@@ -516,7 +542,9 @@ public class GameManager : MonoBehaviour
         else
         {
             dron.tag = "DronDisabled";
-            dron.GetComponent<MeshRenderer>().material = dronDisabledMaterial;
+            //dron.GetComponent<MeshRenderer>().material = dronDisabledMaterial;
+
+            scoreManager.totalDronCrashes++;
         }
         
     }
