@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyEventsManager : MonoBehaviour
 {
+    public GameObject enemy;
     public int currentRandomEnemyEvent = 1; // Empieza siempre en el evento 1 (perseguir al Dron)
     public float countDawnToNextEnemyEvent = 0;
     public float timeMinToNextEvent = 10f;

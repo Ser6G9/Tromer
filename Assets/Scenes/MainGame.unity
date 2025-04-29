@@ -7634,6 +7634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af452a6eaaee5da48a44a1080bf12432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 1048029502}
   currentRandomEnemyEvent: 1
   countDawnToNextEnemyEvent: 0
   timeMinToNextEvent: 10
