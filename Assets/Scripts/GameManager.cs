@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     public GameObject consoleCanvas;
     
     // Tareas Opcionales
-    // +25% de Oxígeno extra:
+    // +50% de Oxígeno extra:
     public bool optiTask1On = false;
     public GameObject optiTask1Camera;
     public GameObject optiTask1HUDText;
@@ -534,7 +534,15 @@ public class GameManager : MonoBehaviour
     public void DronEnabled(bool state)
     {
         dronEnabled = state;
-        dron.GetComponent<DronController>().enabled = state;
+        if (!dronEnabled || !terminalOn)
+        {
+            dron.GetComponent<DronController>().enabled = false;
+        }
+        else if (dronEnabled && terminalOn)
+        {
+            dron.GetComponent<DronController>().enabled = true;
+        }
+        
         
         if (state == true)
         {
@@ -542,7 +550,7 @@ public class GameManager : MonoBehaviour
             //dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
             dronEnableTimer = 0;
             
-            // ProVISional
+            // ProVISional (respawnea el Enemy)
             enemyFollowPlayer.SpawnEnemy();
             //Instantiate(enemyInstance, spawnPoint.transform.position, Quaternion.identity);
         }

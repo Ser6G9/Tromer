@@ -50,7 +50,7 @@ public class SensorDetectPresence : MonoBehaviour
         
 
         // Si solo se pulsa una sola vez:
-        if (Input.GetKeyDown(KeyCode.Space) && target.CompareTag("Player") && isOnSensor)
+        if (Input.GetKeyDown(KeyCode.Space) && target.CompareTag("Player") && isOnSensor && levelManager.CheckIfGameIsPaused() == false)
         {
             if (this.gameObject.name == "Terminal Sensor")
             {
@@ -123,7 +123,7 @@ public class SensorDetectPresence : MonoBehaviour
         
         
         // Mientras se mantenga la tecla pulsada:
-        if (Input.GetKey(KeyCode.Space) && target.CompareTag("Player") && isOnSensor)
+        if (Input.GetKey(KeyCode.Space) && target.CompareTag("Player") && isOnSensor && levelManager.CheckIfGameIsPaused() == false)
         {
             if (this.gameObject.name == "Emergency Sensor")
             {
@@ -140,7 +140,7 @@ public class SensorDetectPresence : MonoBehaviour
         
         
         // Tareas del exterior:
-        if (target.CompareTag("Dron") && isOnSensor)
+        if (target.CompareTag("Dron") && isOnSensor && levelManager.CheckIfGameIsPaused() == false)
         {
             if (this.gameObject.name == "Task1 Sensor")
             {

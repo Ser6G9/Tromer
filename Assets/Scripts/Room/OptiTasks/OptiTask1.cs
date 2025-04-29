@@ -25,7 +25,7 @@ public class OptiTask1 : MonoBehaviour
     {
         if (taskComplete && restoreTaskTimeProgress < restoreTaskDelay)
         {
-            levelManager.optiTask1HUDText.SetActive(true);
+            levelManager.optiTask1HUDText.SetActive(false);
             restoreTaskTimeProgress += Time.deltaTime;
         } else if (restoreTaskTimeProgress >= restoreTaskDelay)
         {
@@ -34,7 +34,7 @@ public class OptiTask1 : MonoBehaviour
         
         if(!taskComplete)
         {
-            levelManager.optiTask1HUDText.SetActive(false);
+            levelManager.optiTask1HUDText.SetActive(true);
         }
     }
 
