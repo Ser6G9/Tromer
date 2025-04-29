@@ -51,8 +51,6 @@ public class GameManager : MonoBehaviour
     // DRON:
     public GameObject dron;
     public bool dronEnabled = true;
-    public Material dronEnabledMaterial;
-    public Material dronDisabledMaterial;
     public float dronMaxTimeToBeEnabled = 15.0f;
     public float dronEnableTimer = 0.0f;
     public float dronReparingPercentage = 0.0f;
@@ -108,6 +106,7 @@ public class GameManager : MonoBehaviour
     public float repairEmergencyProgress = 0;
     public GameObject emergencyHUDText;
     public Slider emergencyHUDSlider;
+    public Slider emergencyHUDSlider3D;
     public TextMeshProUGUI emergencyHUDPercentage;
     // - Se reduce el oxigeno más rápido
     public GameObject emergencyOxigen;
@@ -127,6 +126,8 @@ public class GameManager : MonoBehaviour
     public GameObject incrementationMark;
     public GameObject oxigenLevel3DProgress;
     public float oxigenPercentage = 100;
+    public Material oxigenNormalMaterial;
+    public Material oxigenEmergencyMaterial;
     
     
     private void Start()
@@ -392,6 +393,7 @@ public class GameManager : MonoBehaviour
     {
         emergencyOxigen.SetActive(true);
         emergencyHUDText.SetActive(true);
+        oxigenLevel3DProgress.GetComponent<MeshRenderer>().material = oxigenEmergencyMaterial;
     }
     public void ReparingEmergency()
     {
@@ -414,6 +416,7 @@ public class GameManager : MonoBehaviour
         emergencyActive = false;
         emergencyOxigen.SetActive(false);
         emergencyHUDText.SetActive(false);
+        oxigenLevel3DProgress.GetComponent<MeshRenderer>().material = oxigenNormalMaterial;
     }
 
     public void ShowEmergencyProgress()
@@ -421,6 +424,7 @@ public class GameManager : MonoBehaviour
         float percentageProgress = (repairEmergencyProgress / timeToRepairEmergency) * 100.0f;
         emergencyHUDPercentage.text = $"{percentageProgress:F0}%";
         emergencyHUDSlider.value = percentageProgress / 100.0f;
+        emergencyHUDSlider3D.value = percentageProgress / 100.0f;
     }
 
     // Abrir la puerta de salida:

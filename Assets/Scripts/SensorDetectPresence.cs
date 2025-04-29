@@ -37,6 +37,10 @@ public class SensorDetectPresence : MonoBehaviour
             if (isOnSensor && actionObject != null)
             {
                 actionObject.SetActive(true);
+                if (this.gameObject.name == "Oxigen Sensor" && levelManager.emergencyOxigen.activeSelf)
+                {
+                    actionObject.SetActive(false);
+                }
             }
             else
             { 
@@ -96,9 +100,14 @@ public class SensorDetectPresence : MonoBehaviour
                 }
             }
             
-            if (this.gameObject.name == "Oxigen Sensor")
+            if (this.gameObject.name == "Oxigen Sensor" && !levelManager.emergencyOxigen.activeSelf) // Si la brecha esta activa, no se puede incrementar
             {
                 levelManager.oxigenIncrementationOn = true;
+            }
+            
+            if (this.gameObject.name == "Emergency Sensor")
+            {
+                levelManager.repairEmergencyProgress += 0.1f;
             }
             
         } else if (this.gameObject.name == "Oxigen Sensor")
