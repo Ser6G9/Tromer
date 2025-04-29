@@ -11,11 +11,10 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    private EnemyFollowPlayer enemyFollowPlayer;
+    
     private ScoreManager scoreManager;
     private void OnEnable()
     {
-        enemyFollowPlayer = GameObject.FindObjectOfType<EnemyFollowPlayer>();
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
     }
     
@@ -27,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool uTutorialOn = true;
     public GameObject pPause;
     public GameObject pauseMenu;
+    public TextMeshProUGUI pauseMenuScore;
     public bool pauseMenuOn = false;
     public TextMeshProUGUI currentPlayTime;
     public GameObject alertDoorOpenTxt;
@@ -274,6 +274,7 @@ public class GameManager : MonoBehaviour
         {
             pPause.SetActive(false);
             pauseMenu.SetActive(true);
+            pauseMenuScore.text = "Puntuación actual:\n"+scoreManager.totalScore;
         } 
         else
         {
@@ -549,10 +550,11 @@ public class GameManager : MonoBehaviour
             dron.tag = "Dron";
             //dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
             dronEnableTimer = 0;
+
+
+            EnemyEventsManager enemyEventsManager = new EnemyEventsManager();
+            enemyEventsManager.PrepareNextEnemyEvent();
             
-            // ProVISional (respawnea el Enemy)
-            enemyFollowPlayer.SpawnEnemy();
-            //Instantiate(enemyInstance, spawnPoint.transform.position, Quaternion.identity);
         }
         else
         {
