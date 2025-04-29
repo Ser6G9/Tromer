@@ -455,22 +455,25 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        alertDoorOpenTxt.SetActive(false);
         youLose.SetActive(true);
         if(!scoreSet)
         {
             score = scoreManager.CalculateTotalScore(false);
             scoreSet = true;
         }
-        
+        ShowSaveScoreMenu();
     }
     public void GameWin()
     {
+        alertDoorOpenTxt.SetActive(false);
         youWin.SetActive(true);
         if(!scoreSet)
         {
             score = scoreManager.CalculateTotalScore(true);
             scoreSet = true;
         }
+        ShowSaveScoreMenu();
     }
     
     public void ShowSaveScoreMenu()

@@ -78,7 +78,7 @@ public class ScoreBoard : MonoBehaviour
         }
         else
         {
-            scoreBoardText.text = "No hay jugadores en la clasificación.";
+            playersBoardText.text = "No hay jugadores en la clasificación.";
         }
     }
 }

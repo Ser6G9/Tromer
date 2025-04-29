@@ -69,7 +69,7 @@ public class SaveScore : MonoBehaviour
             {
                 Debug.LogError("Respuesta de la API: " + httpClient.downloadHandler.text);
                 saveScoreText.gameObject.SetActive(true);
-                saveScoreText.text = "Puntuación guardada:\n"+ playerName +" - " + totalScore;
+                saveScoreText.text = "Puntuación guardada:\n \n"+ playerName +"\n" + totalScore+" puntos";
                 buttonSaveScore.interactable = false;
                 statsScoreText.gameObject.SetActive(false);
             } 
@@ -78,7 +78,8 @@ public class SaveScore : MonoBehaviour
                 Debug.LogError("Error en la petición: " + httpClient.error);
                 saveScoreText.gameObject.SetActive(true);
                 saveScoreText.text = "Error\nNo se pudo guardar la puntuación";
-                statsScoreText.gameObject.SetActive(false);
+                statsScoreText.text = "\n\n\n\n\n\n" +
+                                      "Puntuación total: " + gameManager.score;
             }
         }
     }
@@ -86,11 +87,11 @@ public class SaveScore : MonoBehaviour
     public void ShowScoreStats()
     {
         saveScoreText.gameObject.SetActive(false);
-        statsScoreText.text = "Tiempo: "+ scoreManager.totalPlayTime +"\n"+
-                              "Veces que se ha repuesto oxígeno: "+ scoreManager.totalOxigenIncrementations +"\n"+
-                              "Tareas completadas: "+ gameManager.tasksCompleteCount +"\n"+
-                              "Brechas de gas selladas: "+ scoreManager.totalEmergencysFixed +"\n"+
-                              "Averías del Dron: "+ scoreManager.totalDronCrashes +"\n"+
+        statsScoreText.text = "Tiempo de juego: "+ scoreManager.totalPlayTime +" segundos\n"+
+                              "· "+ scoreManager.totalOxigenIncrementations +"% de oxígeno repuesto manualmente\n"+
+                              "· "+ gameManager.tasksCompleteCount +"  tareas completadas\n"+
+                              "· "+ scoreManager.totalEmergencysFixed +"  brechas de gas selladas\n"+
+                              "Veces que el Dron se ha averiado: "+ scoreManager.totalDronCrashes +"\n"+
                               "\nPuntuación total: " + gameManager.score;
     }
 }

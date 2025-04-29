@@ -14,7 +14,7 @@ public class ShowSaveScoreMenu : MonoBehaviour
 
     public void StartSaveScoreMenu()
     {
-        gameManager.saveScoreMenuOn = true;
         scoreMenu.SetActive(true);
+        gameManager.saveScoreMenuOn = true;
     }
 }

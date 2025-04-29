@@ -15,7 +15,7 @@ public class OptiTask1 : MonoBehaviour
     public bool taskComplete = false;
     public List<Button> taskButtons;
     public int taskButtonsActivedCount = 0;
-    public float oxigenPercentageToIncrement = 25f;
+    public float oxigenPercentageToIncrement = 50f;
     public float restoreTaskDelay = 60.0f;
     public float restoreTaskTimeProgress = 0;
     
@@ -43,6 +43,7 @@ public class OptiTask1 : MonoBehaviour
         if (taskButtonsActivedCount < taskButtons.Count)
         {
             taskButtons[button - 1].GetComponent<Image>().color = new Color(0.66f, 1f, 0.18f, 1f);
+            taskButtons[button - 1].interactable = false;
             taskButtonsActivedCount++;
         }
         
@@ -64,6 +65,7 @@ public class OptiTask1 : MonoBehaviour
         for (int i = 0; i < taskButtons.Count; i++)
         {
             taskButtons[i].GetComponent<Image>().color = new Color(1f, 0.1784818f, 0.06132078f, 1f);
+            taskButtons[i].interactable = true;
         }
         
     }
