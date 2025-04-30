@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     public GameObject consoleCanvas;
     
     // Tareas Opcionales
+    public int optiTasksCompleteCount = 0;
     // +50% de Oxígeno extra:
     public bool optiTask1On = false;
     public GameObject optiTask1Camera;
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
     public List<float> tasksCurrentProgressTime;
     
     // Eventos de emergencia:
-    public float timeToRepairEmergency = 4f;
+    public float timeToRepairEmergency = 2f;
     public bool emergencyActive = false;
     public float countDawnToAppearNextEmergency;
     public float timeMinToAppearNextEmergency = 20f;
@@ -346,10 +347,16 @@ public class GameManager : MonoBehaviour
         {
             /*// El oxigeno se incrementará en relación a la velocidad de incremntación
             oxigenProgressTime += Time.deltaTime * oxigenIncrementationSpeed;*/
+            
             incrementationMark.gameObject.SetActive(true);
             
-            oxigenProgressTime += totalOxigenTime * 0.01f; // se sube un 1%
+            oxigenProgressTime += totalOxigenTime * 0.012f; // se sube un 1,2%
             scoreManager.totalOxigenIncrementations++;
+            
+            if (oxigenProgressTime >= totalOxigenTime)
+            {
+                oxigenProgressTime = totalOxigenTime;
+            }
         }
     }
 

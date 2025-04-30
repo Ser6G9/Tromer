@@ -78,7 +78,7 @@ public class SaveScore : MonoBehaviour
                 Debug.LogError("Error en la petición: " + httpClient.error);
                 saveScoreText.gameObject.SetActive(true);
                 saveScoreText.text = "Error\nNo se pudo guardar la puntuación";
-                statsScoreText.text = "\n\n\n\n\n\n" +
+                statsScoreText.text = "\n\n\n\n\n\n\n" +
                                       "Puntuación total: " + gameManager.score;
             }
         }
@@ -90,6 +90,7 @@ public class SaveScore : MonoBehaviour
         statsScoreText.text = "Tiempo de juego: "+ scoreManager.totalPlayTime +" segundos\n"+
                               "· "+ scoreManager.totalOxigenIncrementations +"% de oxígeno repuesto manualmente\n"+
                               "· "+ gameManager.tasksCompleteCount +"  tareas completadas\n"+
+                              "· "+ gameManager.optiTasksCompleteCount +"  tareas extra completadas\n"+
                               "· "+ scoreManager.totalEmergencysFixed +"  brechas de gas selladas\n"+
                               "Veces que el Dron se ha averiado: "+ scoreManager.totalDronCrashes +"\n"+
                               "\nPuntuación total: " + gameManager.score;

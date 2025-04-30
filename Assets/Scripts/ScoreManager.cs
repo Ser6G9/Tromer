@@ -22,11 +22,12 @@ public class ScoreManager : MonoBehaviour
     public int winGameScore = 1000;
     public int oxigenIncrementationScore = 1; // Por cada 1% que se suba el Oxigeno
     public int taskCompleteScore = 150;
+    public int optiTaskCompleteScore = 25;
     public int cameraFixedScore = 50;
     public int emergencyFixedScore = 75;
     
     // Restan puntuación:
-    public int dronCrashesScore = 50;
+    public int dronCrashesScore = 20;
 
 
     private float playTimer;
@@ -72,6 +73,9 @@ public class ScoreManager : MonoBehaviour
         
         // Puntuación por Tareas completadas:
         totalScore += gameManager.tasksCompleteCount * taskCompleteScore;
+        
+        // Puntuación por Tareas Extra completadas:
+        totalScore += gameManager.optiTasksCompleteCount * optiTaskCompleteScore;
         
         // Puntuación por incrementar Oxigeno:
         totalScore += (oxigenIncrementationScore * totalOxigenIncrementations);

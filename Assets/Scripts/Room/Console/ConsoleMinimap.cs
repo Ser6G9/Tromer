@@ -27,6 +27,9 @@ namespace Room
 
         public GameObject dronMarker;
         public GameObject enemyMarker;
+        
+        public List<GameObject> taskImgs;
+        public List<GameObject> taskMarkers;
 
         private void Update()
         {
@@ -39,6 +42,21 @@ namespace Room
             {
                 dronMarker.GetComponent<Image>().color = new Color(1f, 0.5668886f, 0f, 1f);
             }
+
+            for (int i = 0; i < levelManager.tasksExteriorState.Count; i++)
+            {
+                if (levelManager.tasksExteriorState[i] == true)
+                {
+                    taskMarkers[i].GetComponent<Image>().color = new Color(0, 0.83f, 0f, 1f);
+                    taskImgs[i].SetActive(false);
+                }
+                else
+                {
+                    taskMarkers[i].GetComponent<Image>().color = new Color(1, 0.4048133f, 0f, 1f);
+                    taskImgs[i].SetActive(true);
+                }
+            }
+            
         }
 
         private void LocateMarker()
@@ -54,6 +72,16 @@ namespace Room
             enemyMarkerPosition.x = ((levelManager.enemy.transform.localPosition.z - scenarioInferiorZ) / (scenarioSupperiorZ - scenarioInferiorZ)) * (imgSupperiorX - imgInferiorX) + imgInferiorX;
             enemyMarkerPosition.y = ((levelManager.enemy.transform.localPosition.x - scenarioInferiorX) / (scenarioSupperiorX - scenarioInferiorX)) * (imgSupperiorY - imgInferiorY) + imgInferiorY;
             enemyMarker.GetComponent<RectTransform>().anchoredPosition = enemyMarkerPosition;
+            
+            /*// Marcador de las tareas:
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                Vector2 taskMarkerPosition = taskMarkers[i].GetComponent<RectTransform>().anchoredPosition;
+                taskMarkerPosition.x = ((tasks[i].transform.localPosition.z - scenarioInferiorZ) / (scenarioSupperiorZ - scenarioInferiorZ)) * (imgSupperiorX - imgInferiorX) + imgInferiorX;
+                taskMarkerPosition.y = ((tasks[i].transform.localPosition.x - scenarioInferiorX) / (scenarioSupperiorX - scenarioInferiorX)) * (imgSupperiorY - imgInferiorY) + imgInferiorY;
+                taskMarkers[i].GetComponent<RectTransform>().anchoredPosition = taskMarkerPosition;
+            }*/
+            
         }
 
     }
