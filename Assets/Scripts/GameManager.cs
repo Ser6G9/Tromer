@@ -13,9 +13,11 @@ public class GameManager : MonoBehaviour
 {
     
     private ScoreManager scoreManager;
+    private EnemyEventsManager enemyEventsManager;
     private void OnEnable()
     {
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
+        enemyEventsManager = GameObject.FindObjectOfType<EnemyEventsManager>();
     }
     
     // Elementos del HUD:
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemyInstance;
     // DRON:
     public GameObject dron;
+    public ParticleSystem dronDisabledParticles;
     public bool dronEnabled = true;
     public float dronMaxTimeToBeEnabled = 15.0f;
     public float dronEnableTimer = 0.0f;
@@ -551,8 +554,7 @@ public class GameManager : MonoBehaviour
             //dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
             dronEnableTimer = 0;
 
-
-            EnemyEventsManager enemyEventsManager = new EnemyEventsManager();
+            
             enemyEventsManager.PrepareNextEnemyEvent();
             
         }
@@ -560,6 +562,7 @@ public class GameManager : MonoBehaviour
         {
             dron.tag = "DronDisabled";
             //dron.GetComponent<MeshRenderer>().material = dronDisabledMaterial;
+            dronDisabledParticles.Play();
 
             scoreManager.totalDronCrashes++;
         }

@@ -23,6 +23,9 @@ namespace Exterior
         private NavMeshAgent navMeshAgent;
         public List<GameObject> spawn;
         public Animator animator;
+        public float destroyTime = 2f;
+        public float destroyTimer;
+        public bool enemyAtack;
         
         
         void Start()
@@ -34,12 +37,25 @@ namespace Exterior
             navMeshAgent.speed = enemySpeed;
 
             SpawnEnemy();
+            destroyTimer = destroyTime;
+            enemyAtack = false;
         }
 
         void Update()
         {
             // Establecer el destino del enemy en cada frame
             navMeshAgent.destination = target.position;
+            animator.SetBool("isWalking", true);
+
+            if (enemyAtack)
+            {
+                destroyTimer -= Time.deltaTime;
+                if (destroyTimer <= 0)
+                {
+                    EnemyAtackComplete();
+                }
+            }
+            
         }
 
         // Al colisionar con el Dron, el dron se deshabilita y el enemy desaparece.
@@ -47,11 +63,8 @@ namespace Exterior
         {
             if (other.gameObject.CompareTag("Dron"))
             {
-                animator.SetTrigger("isAttacking"); // TODO
-
-                this.gameObject.SetActive(false);
-                ConsoleMinimap.enemyMarker.gameObject.SetActive(false);
-                levelManager.DronEnabled(false);
+                animator.SetTrigger("isAttacking");
+                enemyAtack = true;
             }
         }
 
@@ -60,6 +73,16 @@ namespace Exterior
             this.gameObject.transform.position = spawn[Random.Range(0, spawn.Count)].transform.position;
             this.gameObject.SetActive(true);
             ConsoleMinimap.enemyMarker.gameObject.SetActive(true);
+        }
+
+        public void EnemyAtackComplete()
+        {
+            this.gameObject.SetActive(false);
+            ConsoleMinimap.enemyMarker.gameObject.SetActive(false);
+            levelManager.DronEnabled(false);
+            
+            destroyTimer = destroyTime;
+            enemyAtack = false;
         }
         
     }
