@@ -30,6 +30,9 @@ namespace Room
         
         public List<GameObject> taskImgs;
         public List<GameObject> taskMarkers;
+        
+        public List<GameObject> terminalTasksImgs;
+        public List<GameObject> terminalTasksMarkers;
 
         private void Update()
         {
@@ -49,11 +52,17 @@ namespace Room
                 {
                     taskMarkers[i].GetComponent<Image>().color = new Color(0, 0.83f, 0f, 1f);
                     taskImgs[i].SetActive(false);
+                    
+                    terminalTasksMarkers[i].GetComponent<Image>().color = new Color(0, 0.8f, 0f, 0.9f);
+                    terminalTasksImgs[i].SetActive(false);
                 }
                 else
                 {
                     taskMarkers[i].GetComponent<Image>().color = new Color(1, 0.4048133f, 0f, 1f);
                     taskImgs[i].SetActive(true);
+                    
+                    terminalTasksMarkers[i].GetComponent<Image>().color = new Color(1, 0.4048133f, 0f, 0.8f);
+                    terminalTasksImgs[i].SetActive(true);
                 }
             }
             

@@ -21,11 +21,16 @@ public class OpenCloseSecurityDoor : MonoBehaviour
                 levelManager.securityDoorsButtons[i].GetComponent<Image>().color = new Color(1f, 0.1784818f, 0.06132078f, 1f);
                 levelManager.securityDoors[i].gameObject.SetActive(true);
             } 
-            else if(levelManager.securityDoors[i] == this.gameObject)
+            else if(levelManager.securityDoors[i] == this.gameObject && this.gameObject.activeSelf)
             {
                 // Se abre y se cambia el color del botón de la puerta que está abierta.
                 this.gameObject.SetActive(false);
                 levelManager.securityDoorsButtons[i].GetComponent<Image>().color = new Color(0.66f, 1f, 0.18f, 1f);
+            } else if (levelManager.securityDoors[i] == this.gameObject && this.gameObject.activeSelf == false)
+            {
+                // Si ya está abierta, se cierra y se cambia el color del botón de la puerta.
+                levelManager.securityDoorsButtons[i].GetComponent<Image>().color = new Color(1f, 0.1784818f, 0.06132078f, 1f);
+                levelManager.securityDoors[i].gameObject.SetActive(true);
             }
         }
     }

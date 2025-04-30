@@ -65,7 +65,7 @@ public class OptiTask1 : MonoBehaviour
         
         for (int i = 0; i < taskButtons.Count; i++)
         {
-            taskButtons[i].GetComponent<Image>().color = new Color(1f, 0.1784818f, 0.06132078f, 1f);
+            taskButtons[i].GetComponent<Image>().color = new Color(0.8490566f, 0.1161446f, 0.1161446f, 1f);
             taskButtons[i].interactable = true;
         }
         
