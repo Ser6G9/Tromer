@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
     // La puerta de salida (victoria):
     public bool openExitDoor = false;
     public GameObject roomExitDoor;
+    public GameObject lightRoomExitDoor;
     
     // Gestión del contador de Oxígeno:
     public float totalOxigenTime = 220;
@@ -442,6 +443,7 @@ public class GameManager : MonoBehaviour
     public void OpenRoomExitDoor()
     {
         alertDoorOpenTxt.gameObject.SetActive(true);
+        lightRoomExitDoor.SetActive(true);
         Vector3 doorOpenPosition = new Vector3(0.0f, 4.6f, 11.31371f);
         roomExitDoor.transform.position = Vector3.MoveTowards(roomExitDoor.transform.position, doorOpenPosition, 0.2f * Time.deltaTime);
         
