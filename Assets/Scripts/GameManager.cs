@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
     public float oxigenIncrementationSpeed = 0.5f;
     public TextMeshProUGUI oxigenProgressText;
     public Slider oxigenSliderProgress;
+    public GameObject oxigenLevelColor;
     public GameObject incrementationMark;
     public GameObject oxigenLevel3DProgress;
     public GameObject oxigenLevel3DExteriorProgress;
@@ -289,6 +290,7 @@ public class GameManager : MonoBehaviour
             emergencySoundEffect.Pause();
             dronDisabledSoundEffect.Pause();
             roomExitDoorSoundEffect.Pause();
+            roomPlayer.GetComponent<PlayerController>().movementAudio.Stop();
         } 
         else
         {
@@ -345,10 +347,12 @@ public class GameManager : MonoBehaviour
             if (emergencyOxigen.activeSelf)
             {
                 oxigenProgressTime -= Time.deltaTime * emergencyOxigenReductionSpeedMultiplier;
+                oxigenLevelColor.GetComponent<Image>().color = new Color(1f, 0.05088251f, 0f);
             }
             else
             {
                 oxigenProgressTime -= Time.deltaTime;
+                oxigenLevelColor.GetComponent<Image>().color = new Color(1f, 0.3882353f, 0.09803922f);
             }
         }
         else
@@ -513,10 +517,12 @@ public class GameManager : MonoBehaviour
             score = scoreManager.CalculateTotalScore(false);
             scoreSet = true;
         }
+        
         ShowSaveScoreMenu();
         emergencySoundEffect.Stop();
         dronDisabledSoundEffect.Stop();
         roomExitDoorSoundEffect.Stop();
+        roomPlayer.GetComponent<PlayerController>().movementAudio.Stop();
     }
     public void GameWin()
     {
@@ -531,6 +537,7 @@ public class GameManager : MonoBehaviour
         emergencySoundEffect.Stop();
         dronDisabledSoundEffect.Stop();
         roomExitDoorSoundEffect.Stop();
+        roomPlayer.GetComponent<PlayerController>().movementAudio.Stop();
     }
     
     public void ShowSaveScoreMenu()

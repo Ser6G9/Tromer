@@ -10,10 +10,14 @@ namespace Room
         public float horizontalInput;
         public float speed;
         public float rotationSpeed;
-        // Start is called before the first frame update
-        void Start()
+        
+        public bool movementAudioOn = false;
+        public AudioSource movementAudio;
+        
+        void OnEnable()
         {
-            
+            horizontalInput = 0;
+            verticalInput = 0;
         }
     
         // Update is called once per frame
@@ -33,6 +37,18 @@ namespace Room
             // Animacion:
             float curSpeed = speed * movement.magnitude;
             GetComponent<Animator>().SetFloat("Speed", curSpeed);
+            
+            // Sonido
+            if ((horizontalInput != 0 || verticalInput != 0) && !movementAudioOn)
+            {
+                movementAudio.Play();
+                movementAudioOn = true;
+            }
+            else if(horizontalInput == 0 && verticalInput == 0)
+            {
+                movementAudioOn = false;
+                movementAudio.Stop();
+            }
         }
     }
 }
