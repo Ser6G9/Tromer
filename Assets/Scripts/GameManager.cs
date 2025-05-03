@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject youLose;
     public AudioSource youLooseSound;
     public GameObject uTutorial;
+    public List<GameObject> tutorialPanels;
     public bool uTutorialOn = false;
     public GameObject pPause;
     public GameObject pauseMenu;
@@ -274,8 +275,23 @@ public class GameManager : MonoBehaviour
         if (uTutorialOn)
         {
             Time.timeScale = 0f;
+            NextTutorialPanel(0);
         } else {
             Time.timeScale = 1f;
+        }
+    }
+    public void NextTutorialPanel(int index)
+    {
+        for (int i = 0; i < tutorialPanels.Count; i++)
+        {
+            if (i == index)
+            {
+                tutorialPanels[i].SetActive(true);
+            }
+            else
+            {
+                tutorialPanels[i].SetActive(false);
+            }
         }
     }
 

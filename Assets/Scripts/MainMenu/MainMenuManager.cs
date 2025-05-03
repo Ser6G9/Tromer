@@ -18,10 +18,12 @@ namespace MainMenu
         public GameObject mainCamera;
         public GameObject terminalCamera;
         public GameObject menuPanel;
-        public GameObject tutorialPanel;
         public GameObject scoreGuidePanel;
         public TextMeshProUGUI guideScoresText;
         public TextMeshProUGUI scoreGuideScoresText;
+        
+        public GameObject tutorialPanel;
+        public List<GameObject> tutorialPanels;
         
         private ScoreManager scoreManager;
         private void OnEnable()
@@ -57,6 +59,7 @@ namespace MainMenu
             menuPanel.SetActive(!show);
             terminalCamera.SetActive(show);
             tutorialPanel.SetActive(show);
+            NextTutorialPanel(0);
         }
         
         public void ShowScoreGuide(bool show)
@@ -80,6 +83,21 @@ namespace MainMenu
                                         "+"+scoreManager.optiTaskCompleteScore+" puntos\n" +
                                         "+"+scoreManager.emergencyFixedScore+" puntos\n" +
                                         "\n+"+scoreManager.oxigenIncrementationScore+" punto";
+        }
+
+        public void NextTutorialPanel(int index)
+        {
+            for (int i = 0; i < tutorialPanels.Count; i++)
+            {
+                if (i == index)
+                {
+                    tutorialPanels[i].SetActive(true);
+                }
+                else
+                {
+                    tutorialPanels[i].SetActive(false);
+                }
+            }
         }
 
         
