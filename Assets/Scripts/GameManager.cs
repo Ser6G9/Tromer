@@ -22,10 +22,11 @@ public class GameManager : MonoBehaviour
     
     // Elementos del HUD:
     public GameObject youWin;
+    public AudioSource youWinMussic;
     public GameObject youLose;
-    public GameObject uTutorialGuideText;
+    public AudioSource youLooseSound;
     public GameObject uTutorial;
-    public bool uTutorialOn = true;
+    public bool uTutorialOn = false;
     public GameObject pPause;
     public GameObject pauseMenu;
     public TextMeshProUGUI pauseMenuScore;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     // DRON:
     public GameObject dron;
     public ParticleSystem dronDisabledParticles;
+    public AudioSource dronDisabledSoundEffect;
     public bool dronEnabled = true;
     public float dronMaxTimeToBeEnabled = 15.0f;
     public float dronEnableTimer = 0.0f;
@@ -99,6 +101,8 @@ public class GameManager : MonoBehaviour
     public List<Image> tasksHUDProgressBar;
     public List<TextMeshProUGUI> tasksObjectiveText;
     public List<float> tasksCurrentProgressTime;
+    public float taskProgressPercentage;
+    public AudioSource taskCompleteSound;
     
     // Eventos de emergencia:
     public float timeToRepairEmergency = 2f;
@@ -112,12 +116,16 @@ public class GameManager : MonoBehaviour
     public Slider emergencyHUDSlider;
     public Slider emergencyHUDSlider3D;
     public TextMeshProUGUI emergencyHUDPercentage;
+    public bool emergencySoundEffectOn = false;
+    public AudioSource emergencySoundEffect;
     // - Se reduce el oxigeno más rápido
     public GameObject emergencyOxigen;
     public float emergencyOxigenReductionSpeedMultiplier = 8f;
 
     // La puerta de salida (victoria):
     public bool openExitDoor = false;
+    public bool openExitDoorSoundEffectOn = false;
+    public AudioSource roomExitDoorSoundEffect;
     public GameObject roomExitDoor;
     public GameObject lightRoomExitDoor;
     
@@ -130,6 +138,7 @@ public class GameManager : MonoBehaviour
     public Slider oxigenSliderProgress;
     public GameObject incrementationMark;
     public GameObject oxigenLevel3DProgress;
+    public GameObject oxigenLevel3DExteriorProgress;
     public float oxigenPercentage = 100;
     public Material oxigenNormalMaterial;
     public Material oxigenEmergencyMaterial;
@@ -142,7 +151,7 @@ public class GameManager : MonoBehaviour
         youLose.SetActive(false);
         saveScoreMenu.SetActive(false);
         
-        ShowTutorial(uTutorialOn);
+        ShowTutorial(false);
         
         oxigenProgressTime = totalOxigenTime;
         ShowOxigenLevelProgress();
@@ -226,16 +235,14 @@ public class GameManager : MonoBehaviour
         // Se deshabilitan las interacciones con el HUD del juego según la siuación.
         if (!saveScoreMenuOn && !youLose.activeSelf && !youWin.activeSelf)
         {
-            // -- HUD mostrar/ocultar tutorial del juego
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                ShowTutorial(!uTutorialOn);
-            }
-            
             // -- Pausar juego
             if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             {
                 pauseMenuOn = !pauseMenuOn;
+                if (uTutorialOn)
+                {
+                    ShowTutorial(false);
+                }
             }
             PauseMenuInteraction(pauseMenuOn);
         }
@@ -261,7 +268,6 @@ public class GameManager : MonoBehaviour
     public void ShowTutorial(bool state)
     {
         uTutorialOn = state;
-        uTutorialGuideText.SetActive(!state);
         uTutorial.SetActive(state);
 
         if (uTutorialOn)
@@ -280,12 +286,23 @@ public class GameManager : MonoBehaviour
             pPause.SetActive(false);
             pauseMenu.SetActive(true);
             pauseMenuScore.text = "Puntuación actual:\n"+scoreManager.totalScore;
+            emergencySoundEffect.Pause();
+            dronDisabledSoundEffect.Pause();
+            roomExitDoorSoundEffect.Pause();
         } 
         else
         {
             pPause.SetActive(true);
             pauseMenu.SetActive(false);
+            emergencySoundEffect.UnPause();
+            dronDisabledSoundEffect.UnPause();
+            roomExitDoorSoundEffect.UnPause();
         }
+    }
+    
+    public void PlaySound(AudioSource audioSource)
+    {
+        audioSource.Play();
     }
     
     /* -- ROOM -- */
@@ -406,6 +423,11 @@ public class GameManager : MonoBehaviour
         emergencyOxigen.SetActive(true);
         emergencyHUDText.SetActive(true);
         oxigenLevel3DProgress.GetComponent<MeshRenderer>().material = oxigenEmergencyMaterial;
+        if (!emergencySoundEffectOn)
+        {
+            emergencySoundEffect.Play();
+            emergencySoundEffectOn = true;
+        }
     }
     public void ReparingEmergency()
     {
@@ -429,6 +451,9 @@ public class GameManager : MonoBehaviour
         emergencyOxigen.SetActive(false);
         emergencyHUDText.SetActive(false);
         oxigenLevel3DProgress.GetComponent<MeshRenderer>().material = oxigenNormalMaterial;
+        
+        emergencySoundEffectOn = false;
+        emergencySoundEffect.Stop();
     }
 
     public void ShowEmergencyProgress()
@@ -442,6 +467,14 @@ public class GameManager : MonoBehaviour
     // Abrir la puerta de salida:
     public void OpenRoomExitDoor()
     {
+        if (!openExitDoorSoundEffectOn)
+        {
+            youWinMussic.Play();
+            
+            roomExitDoorSoundEffect.Play();
+            openExitDoorSoundEffectOn = true;
+        }
+        
         alertDoorOpenTxt.gameObject.SetActive(true);
         lightRoomExitDoor.SetActive(true);
         Vector3 doorOpenPosition = new Vector3(0.0f, 4.6f, 11.31371f);
@@ -451,6 +484,8 @@ public class GameManager : MonoBehaviour
         {
             transform.position = doorOpenPosition;
             openExitDoor = false;
+            openExitDoorSoundEffectOn = false;
+            roomExitDoorSoundEffect.Stop();
         }
         // habilitar el sensor de youWin
     }
@@ -468,14 +503,20 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        youWinMussic.Stop();
         alertDoorOpenTxt.SetActive(false);
+        
         youLose.SetActive(true);
         if(!scoreSet)
         {
+            youLooseSound.Play();
             score = scoreManager.CalculateTotalScore(false);
             scoreSet = true;
         }
         ShowSaveScoreMenu();
+        emergencySoundEffect.Stop();
+        dronDisabledSoundEffect.Stop();
+        roomExitDoorSoundEffect.Stop();
     }
     public void GameWin()
     {
@@ -487,6 +528,9 @@ public class GameManager : MonoBehaviour
             scoreSet = true;
         }
         ShowSaveScoreMenu();
+        emergencySoundEffect.Stop();
+        dronDisabledSoundEffect.Stop();
+        roomExitDoorSoundEffect.Stop();
     }
     
     public void ShowSaveScoreMenu()
@@ -514,6 +558,15 @@ public class GameManager : MonoBehaviour
         if (tasksCurrentProgressTime[taskID-1] <= timeToCompleteTasks) 
         {
             tasksCurrentProgressTime[taskID-1] += Time.deltaTime;
+            // La tarea de reiniciar ventilación tiene una "animación".
+            if (taskID == 3)
+            {
+                taskProgressPercentage = (tasksCurrentProgressTime[taskID-1] / timeToCompleteTasks) * 100;
+                float currentHeight = Mathf.Lerp(-2, 2, taskProgressPercentage / 100.0f);
+                Vector3 position2 = oxigenLevel3DExteriorProgress.transform.position;
+                position2.y = currentHeight;
+                oxigenLevel3DExteriorProgress.transform.position = position2;
+            }
         }
         
         float percentageProgress = (tasksCurrentProgressTime[taskID-1] / timeToCompleteTasks) * 100.0f;
@@ -535,6 +588,8 @@ public class GameManager : MonoBehaviour
         tasksHUDProgressBar[taskID-1].color = Color.green;
         tasksExteriorState[taskID-1] = true;
         tasksCompleteCount++;
+        
+        taskCompleteSound.Play();
         
         // Al completar todas las tareas, se abre la puerta para ganar.
         if (tasksCompleteCount == tasksExteriorState.Count)
@@ -559,6 +614,7 @@ public class GameManager : MonoBehaviour
         
         if (state == true)
         {
+            dronDisabledSoundEffect.Stop();
             dron.tag = "Dron";
             //dron.GetComponent<MeshRenderer>().material = dronEnabledMaterial;
             dronEnableTimer = 0;
@@ -569,9 +625,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            dronDisabledSoundEffect.Play();
             dron.tag = "DronDisabled";
             //dron.GetComponent<MeshRenderer>().material = dronDisabledMaterial;
-            dronDisabledParticles.Play();
+            
 
             scoreManager.totalDronCrashes++;
         }

@@ -53,6 +53,7 @@ public class OptiTask1 : MonoBehaviour
             taskComplete = true;
             levelManager.oxigenProgressTime += (oxigenPercentageToIncrement * levelManager.totalOxigenTime) / 100;
             levelManager.optiTasksCompleteCount++;
+            levelManager.taskCompleteSound.Play();
         }
     }
 

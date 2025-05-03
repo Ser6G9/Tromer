@@ -26,7 +26,10 @@ namespace Exterior
         public float destroyTime = 2f;
         public float destroyTimer;
         public bool enemyAtack;
-        
+        /*
+        public float timeToDespawn = 10f;
+        public float despawnTimer;
+        */
         
         void Start()
         {
@@ -39,6 +42,7 @@ namespace Exterior
             SpawnEnemy();
             destroyTimer = destroyTime;
             enemyAtack = false;
+
         }
 
         void Update()
@@ -50,12 +54,25 @@ namespace Exterior
             if (enemyAtack)
             {
                 destroyTimer -= Time.deltaTime;
+                if (destroyTimer <= 1.2f)
+                {
+                    levelManager.dronDisabledParticles.Play();
+                }
                 if (destroyTimer <= 0)
                 {
                     EnemyAtackComplete();
                 }
             }
-            
+
+            /*// Desaparecerá al cabo de unos segundos
+            if (despawnTimer > 0)
+            {
+                despawnTimer -= Time.deltaTime;
+                if (despawnTimer <= 0)
+                {
+                    EnemyAtackComplete();
+                }
+            }*/
         }
 
         // Al colisionar con el Dron, el dron se deshabilita y el enemy desaparece.
@@ -65,6 +82,8 @@ namespace Exterior
             {
                 animator.SetTrigger("isAttacking");
                 enemyAtack = true;
+                
+                levelManager.DronEnabled(false);
             }
         }
 
@@ -73,13 +92,14 @@ namespace Exterior
             this.gameObject.transform.position = spawn[Random.Range(0, spawn.Count)].transform.position;
             this.gameObject.SetActive(true);
             ConsoleMinimap.enemyMarker.gameObject.SetActive(true);
+            
+            //despawnTimer = timeToDespawn;
         }
 
         public void EnemyAtackComplete()
         {
             this.gameObject.SetActive(false);
             ConsoleMinimap.enemyMarker.gameObject.SetActive(false);
-            levelManager.DronEnabled(false);
             
             destroyTimer = destroyTime;
             enemyAtack = false;

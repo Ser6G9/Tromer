@@ -10,6 +10,10 @@ public class DoorMenuAnimation : MonoBehaviour
     public List<GameObject> eventList;
     public float countDawnTime;
     public bool eventAllowed = true;
+    public bool closeSoundEffectOn = false;
+    public AudioSource closeSoundEffect;
+    public bool openSoundEffectOn = false;
+    public AudioSource openSoundEffect;
 
     void Start()
     {
@@ -49,18 +53,39 @@ public class DoorMenuAnimation : MonoBehaviour
     {
         Vector3 doorOpenPosition = new Vector3(0.0f, 4.25f, 5f);
         transform.position = Vector3.MoveTowards(transform.position, doorOpenPosition, 2f * Time.deltaTime);
-        
+
+        if (Vector3.Distance(transform.position, doorOpenPosition) < 2.4f)
+        {
+            if (!openSoundEffectOn)
+            {
+                openSoundEffect.Play();
+                openSoundEffectOn = true;
+            }
+        }
+
         if (Vector3.Distance(transform.position, doorOpenPosition) < 0.01f)
         {
             transform.position = doorOpenPosition;
             doorOpen = true;
             countDawnTime = Random.Range(3.2f, 5f);
+            
+            openSoundEffectOn = false;
+            openSoundEffect.Stop();
         }
     }
     public void CloseDoor()
     {
         Vector3 doorOpenPosition = new Vector3(0.0f, 1.75f, 5f);
-        transform.position = Vector3.MoveTowards(transform.position, doorOpenPosition, 4f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, doorOpenPosition, 5f * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, doorOpenPosition) < 1.8f)
+        {
+            if (!closeSoundEffectOn)
+            {
+                closeSoundEffect.Play();
+                closeSoundEffectOn = true;
+            }
+        }
         
         if (Vector3.Distance(transform.position, doorOpenPosition) < 0.01f)
         {
@@ -68,6 +93,8 @@ public class DoorMenuAnimation : MonoBehaviour
             EliminateEnvent();
             doorOpen = false;
             countDawnTime = Random.Range(1f, 3f);
+            
+            closeSoundEffectOn = false;
         }
     }
 

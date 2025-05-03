@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class ScoreManager : MonoBehaviour
     // -- Gestores de puntuaciónes --
     public int maxPlayTimeScore = 3000; // a menor tiempo más puntuación
     //public int minPlayTimeScore = 0; // a mayor tiempo menor puntuación
-    public float maxPlayTimeToEnd = 600; // por defecto 10 minutos minimo para ganar puntuación por tiempo.
+    public float maxPlayTimeToEnd = 420; // por defecto 10 minutos minimo para ganar puntuación por tiempo.
     
     public int winGameScore = 1000;
     public int oxigenIncrementationScore = 1; // Por cada 1% que se suba el Oxigeno
@@ -27,7 +28,8 @@ public class ScoreManager : MonoBehaviour
     public int emergencyFixedScore = 75;
     
     // Restan puntuación:
-    public int dronCrashesScore = 20;
+    public int dronCrashesScore = 30;
+    public int looseGameScore = 800;
 
 
     private float playTimer;
@@ -35,7 +37,10 @@ public class ScoreManager : MonoBehaviour
     private GameManager gameManager;
     private void OnEnable()
     {
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+        if (SceneManager.GetActiveScene().name == "MainGame")
+        {
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+        }
     }
 
     void Start()
@@ -45,14 +50,17 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        // Contador de tiempo de juego
-        if (gameManager.CheckIfGameIsPaused() == false)
+        if (SceneManager.GetActiveScene().name == "MainGame")
         {
-            playTimer += Time.deltaTime;
-            totalPlayTime = Mathf.FloorToInt(playTimer);
+            // Contador de tiempo de juego
+            if (gameManager.CheckIfGameIsPaused() == false)
+            {
+                playTimer += Time.deltaTime;
+                totalPlayTime = Mathf.FloorToInt(playTimer);
+            }
+            
+            totalScore = CalculateTotalScore(false);
         }
-
-        totalScore = CalculateTotalScore(false);
     }
     
     public int CalculateTotalScore(bool gameWin)
@@ -62,6 +70,10 @@ public class ScoreManager : MonoBehaviour
         if (gameWin)
         {
             totalScore += winGameScore;
+        }
+        else
+        {
+            totalScore -= looseGameScore;
         }
         
         // Puntuación por tiempo:

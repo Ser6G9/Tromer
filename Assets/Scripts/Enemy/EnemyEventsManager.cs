@@ -34,7 +34,12 @@ public class EnemyEventsManager : MonoBehaviour
     public void PrepareNextEnemyEvent()
     {
         // ProVISional (respawnea el Enemy)
-        //EnemyFollowPlayer enemyFollowPlayer = new EnemyFollowPlayer();
-        enemyFollowPlayer.SpawnEnemy();
+        StartCoroutine(EsperarYSpawnear());
+    }
+    
+    private IEnumerator EsperarYSpawnear()
+    {
+        yield return new WaitForSeconds(5f); // Espera 5 segundos
+        enemyFollowPlayer.SpawnEnemy();       // Luego llama a SpawnEnemy
     }
 }
