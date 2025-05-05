@@ -5,6 +5,12 @@ Tromer es un juego de tensión y suspense en el que controlas a un técnico atra
 # Developers
 Sergio Garcías
 
+# Web
+[https://TROMER.com](https://juandavidva.github.io/TROMER/)
+
+# Prototipo del juego:
+[https://itch.io/Tromer](https://reptilsito.itch.io/tromer)
+
 # GDD
 Acceder al [GDD](https://docs.google.com/document/d/15-h4po_SSFAY2gdv4eAtcLt9I7rMMNudFp2nz-U9Ck8/edit?tab=t.0) del proyecto.
 
@@ -14,8 +20,4 @@ Accdeder al [Clickup](https://app.clickup.com/9012482400/v/o/s/90122018752) del 
 # Miro
 Acceder al [Miro](https://miro.com/app/board/uXjVLIDNqaE=/) de la web del proyecto.
 
-# Prototipo del juego:
-[https://itch.io/Tromer](https://reptilsito.itch.io/tromer)
 
-# Web
-La página web aún no está disponible
