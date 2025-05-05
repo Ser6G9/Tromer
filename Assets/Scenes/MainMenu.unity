@@ -796,8 +796,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Una vez que todas las tareas de la lista se hayan completado se abrir\xE1
-    la puerta de sal\xEDda.\n\nDeber\xE1s de escapar por esta puerta para ganar la
-    partida."
+    la puerta de salida.\n\nDeber\xE1s de escapar por esta puerta para ganar la partida."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

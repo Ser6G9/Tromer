@@ -2421,7 +2421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125237879}
   m_LocalRotation: {x: 0.45787388, y: 0, z: 0, w: 0.88901716}
-  m_LocalPosition: {x: 24.78, y: 5.93, z: 16.028}
+  m_LocalPosition: {x: 24.78, y: 5.9999995, z: 15.019997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 106869243}
@@ -3673,8 +3673,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1145}
-  m_SizeDelta: {x: 66.5, y: 30.9}
+  m_AnchoredPosition: {x: 0, y: -1220.2}
+  m_SizeDelta: {x: 84.2, y: 37.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &173215226
 MonoBehaviour:
@@ -4079,7 +4079,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1483751055}
-  - {fileID: 926891599}
   m_Father: {fileID: 1163918519}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5428,7 +5427,7 @@ RectTransform:
   - {fileID: 1145071276}
   - {fileID: 971014465}
   m_Father: {fileID: 1483751055}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6152,7 +6151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259591871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.08, y: 0, z: 18.24}
+  m_LocalPosition: {x: 40.58, y: 0, z: 15.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 394019782}
@@ -17144,7 +17143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &760047310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18451,8 +18450,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -21739,12 +21738,12 @@ RectTransform:
   - {fileID: 223974227}
   - {fileID: 234130424}
   - {fileID: 1997987303}
-  m_Father: {fileID: 195778845}
-  m_RootOrder: 1
+  m_Father: {fileID: 1483751055}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 47.3, y: -225.6}
+  m_AnchoredPosition: {x: 76.691605, y: -282.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &928753715
@@ -25888,7 +25887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200.9, y: 0}
+  m_AnchoredPosition: {x: 200.9, y: 16}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1069941062
@@ -27236,8 +27235,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -173.60681}
-  m_SizeDelta: {x: 325, y: 46.423}
+  m_AnchoredPosition: {x: 37.7816, y: -183.37793}
+  m_SizeDelta: {x: 400.5631, y: 63.603}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145071277
 MonoBehaviour:
@@ -35076,6 +35075,7 @@ RectTransform:
   - {fileID: 1246849521}
   - {fileID: 1142507791}
   - {fileID: 1423824015}
+  - {fileID: 926891599}
   - {fileID: 234403249}
   m_Father: {fileID: 195778845}
   m_RootOrder: 0
@@ -39257,8 +39257,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Una vez que todas las tareas de la lista se hayan completado se abrir\xE1
-    la puerta de sal\xEDda.\n\nDeber\xE1s de escapar por esta puerta para ganar la
-    partida."
+    la puerta de salida.\n\nDeber\xE1s de escapar por esta puerta para ganar la partida."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -39599,8 +39598,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200.9, y: -42.46}
-  m_SizeDelta: {x: 66.5, y: 30.9}
+  m_AnchoredPosition: {x: 50.221, y: -33}
+  m_SizeDelta: {x: 371.358, y: 42.6253}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664616365
 MonoBehaviour:
@@ -57340,8 +57339,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
