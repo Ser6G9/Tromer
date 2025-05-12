@@ -36,8 +36,32 @@ public class SaveScore : MonoBehaviour
 
     public void SaveTotalScore()
     {
+        // Con la api
         StartCoroutine(SendScore(userName.text, gameManager.score));
+        
+        /*// Sin la api
+        RegisterScore(userName.text, gameManager.score);*/
     }
+
+    /*// Este se solo para cuando no se use la api (puntuación en local)
+    private void RegisterScore(string playerName, int totalScore)
+    {
+        if (playerName != null)
+        {
+            saveScoreText.gameObject.SetActive(true);
+            saveScoreText.text = "Puntuación guardada:\n \n"+ playerName +"\n" + totalScore+" puntos";
+            buttonSaveScore.interactable = false;
+            statsScoreText.gameObject.SetActive(false);
+            ScoreBoard.scoreBoardList.Add(new ScoreBoardDto(playerName, totalScore));
+        }
+        else
+        {
+            saveScoreText.gameObject.SetActive(true);
+            saveScoreText.text = "Error\nNo se pudo guardar la puntuación";
+            statsScoreText.text = "\n\n\n\n\n\n\n" +
+                                  "Puntuación total: " + gameManager.score;
+        }
+    }*/
     
     private IEnumerator SendScore(string playerName, int totalScore)
     {

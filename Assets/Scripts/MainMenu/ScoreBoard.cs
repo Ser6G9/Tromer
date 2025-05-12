@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
@@ -12,11 +13,15 @@ public class ScoreBoard : MonoBehaviour
     public TextMeshProUGUI playersBoardText;
     public TextMeshProUGUI scoreBoardText;
 
-    private List<ScoreBoardDto> scoreBoardList = new List<ScoreBoardDto>();
+    public static List<ScoreBoardDto> scoreBoardList = new List<ScoreBoardDto>();
 
     public void GetScoreBoard()
     {
+        // Con la api
         StartCoroutine(SetScoreBoard());
+        
+        /*// Sin la api, para cuando no se use la api (puntuación en local)
+        ShowScoreBoard();*/
     }
 
     
@@ -57,6 +62,11 @@ public class ScoreBoard : MonoBehaviour
     
     private void ShowScoreBoard()
     {
+        /*// Sin la api: (Ordenar de mayor a menor las puntuaciones)
+        scoreBoardList = scoreBoardList
+            .OrderByDescending(s => s.Puntuacion)
+            .ToList();*/
+        
         playersBoardText.text = "";
         scoreBoardText.text = "";
         int count = 0;
